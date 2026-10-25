@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101827">
+<title>Resolve Fácil IA</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#182235;
+}
+header{
+  background:#101827;
+  color:white;
+  padding:25px 20px;
+}
+header h1{margin:0;font-size:25px}
+header p{color:#b9c5d8;margin-bottom:0}
+main{max-width:650px;margin:auto;padding:18px}
+.card{
+  background:white;
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:16px;
+  box-shadow:0 3px 15px #00000008;
+}
+h2{font-size:19px;margin-top:0}
+label{
+  display:block;
+  font-size:14px;
+  font-weight:bold;
+  margin:14px 0 6px;
+}
+input,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d5dce6;
+  border-radius:9px;
+  font-size:16px;
+  background:white;
+}
+button{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  padding:14px;
+  margin-top:15px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#16a36a;
+  color:white;
+}
+button.secondary{background:#e7edf5;color:#182235}
+.result{
+  background:#e8f8ef;
+  border-radius:12px;
+  padding:16px;
+  margin-top:16px;
+  line-height:1.8;
+  display:none;
+}
+.price{font-size:27px;font-weight:bold;color:#087b49}
+nav{
+  display:flex;
+  gap:8px;
+  padding:12px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+nav button{
+  margin:0;
+  padding:12px 5px;
+  font-size:13px;
+  background:#e7edf5;
+  color:#182235;
+}
+nav button.active{background:#101827;color:white}
+section{display:none}
+section.active{display:block}
+.small{font-size:13px;color:#64748b;line-height:1.5}
+footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>⚡ Resolve Fácil IA</h1>
+  <p>Seu negócio mais organizado. Seu lucro sob controle.</p>
+</header>
+
+<nav>
+  <button class="active" onclick="abrir('inicio',this)">Início</button>
+  <button onclick="abrir('lucro',this)">Meu lucro</button>
+  <button onclick="abrir('orcamento',this)">Orçamentos</button>
+</nav>
+
+<main>
+
+<section id="inicio" class="active">
+  <div class="card">
+    <h2>Bem-vindo ao Resolve Fácil!</h2>
+    <p>Ferramentas simples para ajudar você a administrar seu negócio.</p>
+  </div>
+
+  <div class="card">
+    <h2>💰 Descubra quanto cobrar</h2>
+    <p>Calcule seus custos e encontre um preço de venda que considere seu lucro.</p>
+    <button onclick="ir('lucro')">Calcular meu preço</button>
+  </div>
+
+  <div class="card">
+    <h2>📄 Faça um orçamento</h2>
+    <p>Monte uma proposta comercial e gere um documento para seu cliente.</p>
+    <button onclick="ir('orcamento')">Criar orçamento</button>
+  </div>
+
+  <div class="card">
+    <h2>🚀 Nosso objetivo</h2>
+    <p>Reunir ferramentas úteis para autônomos, MEIs e pequenas empresas em um só lugar.</p>
+    <p class="small">Esta é a primeira versão do aplicativo. Novas funções serão adicionadas aos poucos.</p>
+  </div>
+</section>
+
+<section id="lucro">
+  <div class="card">
+    <h2>💰 Calculadora de preços</h2>
+    <p class="small">Informe seus custos e a margem que deseja acrescentar sobre eles.</p>
+
+    <label>Custo de materiais (R$)</label>
+    <input id="materiais" type="number" min="0" step="0.01" placeholder="Ex.: 150">
+
+    <label>Mão de obra (R$)</label>
+    <input id="mao" type="number" min="0" step="0.01" placeholder="Ex.: 200">
+
+    <label>Transporte (R$)</label>
+    <input id="transporte" type="number" min="0" step="0.01" placeholder="Ex.: 30">
+
+    <label>Outras despesas (R$)</label>
+    <input id="outros" type="number" min="0" step="0.01" placeholder="Ex.: 20">
+
+    <label>Lucro desejado sobre os custos (%)</label>
+    <input id="margem" type="number" min="0" max="10000" step="1" value="30">
+
+    <button onclick="calcular()">Calcular preço sugerido</button>
+
+    <div id="resultado" class="result" aria-live="polite"></div>
+
+    <p class="small">
+      Atenção: este cálculo acrescenta um percentual sobre os custos.
+      Não é a mesma coisa que margem de lucro sobre o preço de venda.
+      Considere também impostos e outros custos que não foram informados.
+    </p>
+  </div>
+</section>
+
+<section id="orcamento">
+  <div class="card">
+    <h2>📄 Criar orçamento</h2>
+
+    <label>Nome da sua empresa</label>
+    <input id="empresa" placeholder="Nome da empresa">
+
+    <label>Seu CNPJ (opcional)</label>
+    <input id="cnpj" placeholder="CNPJ">
+
+    <label>Nome do cliente</label>
+    <input id="cliente" placeholder="Nome do cliente">
+
+    <label>Serviço oferecido</label>
+    <input id="servico" placeholder="Ex.: Limpeza e conservação">
+
+    <label>Descrição do serviço</label>
+    <textarea id="descricao" rows="4" placeholder="Descreva o serviço, o prazo e as condições."></textarea>
+
+    <label>Valor do orçamento (R$)</label>
+    <input id="valor" type="number" min="0.01" step="0.01" placeholder="Ex.: 1500">
+
+    <button onclick="gerarOrcamento()">Gerar orçamento em PDF</button>
+    <p class="small">O documento será aberto para impressão. No iPhone, você poderá salvá-lo em PDF pelo menu de compartilhamento.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Resolve Fácil IA © 2026 · Ferramentas para seu negócio
+</footer>
+
+<script>
+function abrir(id,botao){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(botao) botao.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function ir(id){
+  const botoes=document.querySelectorAll('nav button');
+  const indice=id==='lucro'?1:2;
+  abrir(id,botoes[indice]);
+}
+
+function dinheiro(valor){
+  return valor.toLocaleString('pt-BR',{
+    style:'currency',currency:'BRL'
+  });
+}
+
+function calcular(){
+  const ids=['materiais','mao','transporte','outros'];
+  const valores=ids.map(id=>{
+    const campo=document.getElementById(id);
+    return campo.value===''?0:Number(campo.value);
+  });
+  const margemCampo=document.getElementById('margem');
+  const margem=margemCampo.value===''?0:Number(margemCampo.value);
+
+  if(valores.some(v=>!Number.isFinite(v)||v<0)||
+     !Number.isFinite(margem)||margem<0||margem>10000){
+    alert('Confira os valores informados.');
+    return;
+  }
+
+  const custo=valores.reduce((a,b)=>a+b,0);
+  const lucro=custo*margem/100;
+  const preco=custo+lucro;
+
+  const resultado=document.getElementById('resultado');
+  resultado.style.display='block';
+  resultado.innerHTML=`
+    <strong>Custo total:</strong> ${dinheiro(custo)}<br>
+    <strong>Lucro estimado:</strong> ${dinheiro(lucro)}<br>
+    <strong>Preço sugerido:</strong>
+    <div class="price">${dinheiro(preco)}</div>
+  `;
+}
+
+function escapar(texto){
+  return String(texto).replace(/[&<>"']/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;',
+    '"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+
+function gerarOrcamento(){
+  const empresa=document.getElementById('empresa').value.trim();
+  const cliente=document.getElementById('cliente').value.trim();
+  const servico=document.getElementById('servico').value.trim();
+  const descricao=document.getElementById('descricao').value.trim();
+  const cnpj=document.getElementById('cnpj').value.trim();
+  const valorTexto=document.getElementById('valor').value;
+  const valor=Number(valorTexto);
+
+  if(!empresa||!cliente||!servico||!valorTexto||
+     !Number.isFinite(valor)||valor<=0){
+    alert('Preencha a empresa, o cliente, o serviço e um valor válido.');
+    return;
+  }
+
+  const janela=window.open('','_blank');
+  if(!janela){
+    alert('O navegador bloqueou a nova janela. Permita a abertura de janelas para este site e tente novamente.');
+    return;
+  }
+
+  janela.document.write(`<!DOCTYPE html>
+  <html lang="pt-BR"><head><meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orçamento comercial</title>
+  <style>
+  body{font-family:Arial,sans-serif;max-width:750px;margin:40px auto;padding:25px;color:#182235;line-height:1.6}
+  h1{color:#087b49}hr{border:0;border-top:1px solid #ddd;margin:25px 0}
+  .valor{font-size:26px;font-weight:bold;margin:25px 0}
+  button{padding:14px 22px;background:#087b49;color:white;border:0;border-radius:8px;font-size:16px}
+  @media print{button{display:none}body{margin:0}}
+  </style></head><body>
+  <h1>ORÇAMENTO COMERCIAL</h1>
+  <p><strong>Empresa:</strong> ${escapar(empresa)}</p>
+  ${cnpj?`<p><strong>CNPJ:</strong> ${escapar(cnpj)}</p>`:''}
+  <p><strong>Cliente:</strong> ${escapar(cliente)}</p>
+  <hr>
+  <h3>Serviço: ${escapar(servico)}</h3>
+  <p>${escapar(descricao).replace(/\n/g,'<br>')}</p>
+  <div class="valor">Valor total: ${dinheiro(valor)}</div>
+  <p>Este orçamento está sujeito à confirmação das condições e do prazo entre as partes.</p>
+  <hr>
+  <p>Data: ${new Date().toLocaleDateString('pt-BR')}</p>
+  <br><br>
+  <p>____________________________________</p>
+  <p>Assinatura / Responsável</p>
+  <button onclick="window.print()">Imprimir ou salvar em PDF</button>
+  </body></html>`);
+
+  janela.document.close();
+}
+</script>
+
+</body>
+</html>
