@@ -8,807 +8,303 @@
 <title>Resolve Fácil IA</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#182235}
+header{background:#101827;color:white;padding:25px 20px}
+header h1{margin:0;font-size:25px}
+header p{color:#b9c5d8;margin-bottom:0;line-height:1.5}
+main{max-width:720px;margin:auto;padding:18px}
+.card{background:white;padding:20px;border-radius:16px;margin-bottom:16px;box-shadow:0 3px 15px #00000008}
+h2{font-size:19px;margin-top:0}
+label{display:block;font-size:14px;font-weight:bold;margin:14px 0 6px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #d5dce6;border-radius:9px;font-size:16px;background:white;color:#182235}
+textarea{resize:vertical}
+button{width:100%;border:0;border-radius:10px;padding:14px;margin-top:15px;font-size:16px;font-weight:bold;cursor:pointer;background:#16a36a;color:white}
+button:active{transform:scale(.99)}
+button.secondary{background:#e7edf5;color:#182235}
+button.premium-button{background:#fbbf24;color:#172033}
+.result{background:#e8f8ef;border-radius:12px;padding:16px;margin-top:16px;line-height:1.8;display:none;overflow-wrap:anywhere}
+.price{font-size:27px;font-weight:bold;color:#087b49}
+nav{display:flex;gap:8px;padding:12px;background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #00000008}
+nav button{margin:0;padding:12px 5px;font-size:13px;background:#e7edf5;color:#182235;flex:1}
+nav button.active{background:#101827;color:white}
+section{display:none}
+section.active{display:block}
+.small{font-size:13px;color:#64748b;line-height:1.6}
+footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
+.badge{display:inline-block;background:#e8f8ef;color:#087b49;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.service-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:13px 10px}
+.service-item strong{display:block;margin-bottom:5px;font-size:14px}
+.service-item span{display:block;color:#64748b;font-size:12px;line-height:1.5}
+.premium-card{background:linear-gradient(135deg,#101827,#243b64);color:white}
+.premium-card h2,.premium-card h3{color:white}
+.premium-card p{line-height:1.6}
+.premium-plan{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:15px;margin-top:12px}
+.premium-price{font-size:29px;font-weight:bold;margin:10px 0}
+.premium-price span{font-size:14px;font-weight:normal}
+.check-list{padding-left:0;list-style:none;line-height:2;font-size:14px}
+.dashboard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.metric-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:15px 12px;box-shadow:0 3px 15px #00000008;min-width:0}
+.metric-card span{display:block;font-size:12px;color:#64748b;line-height:1.4;margin-bottom:9px}
+.metric-card strong{display:block;font-size:18px;color:#087b49;overflow-wrap:anywhere}
+.progress-track{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:16px}
+.progress-fill{width:0;height:100%;background:#16a36a;border-radius:999px;transition:width .25s ease}
+.movement-row{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e2e8f0;font-size:13px;line-height:1.5}
+.movement-row:last-child{border-bottom:0}
+.movement-row strong{white-space:nowrap}
+.amount-in{color:#087b49}
+.amount-out{color:#b91c1c}
+@media(max-width:380px){
+.metric-card strong{font-size:16px}
+.metric-card{padding:13px 10px}
+main{padding:12px}
+.card{padding:16px}
+nav{gap:5px;padding:8px}
+nav button{font-size:12px;padding:11px 3px}
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f1f5f9;
-  color: #182235;
-}
-
-header {
-  background: #101827;
-  color: white;
-  padding: 25px 20px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 25px;
-}
-
-header p {
-  color: #b9c5d8;
-  margin-bottom: 0;
-  line-height: 1.5;
-}
-
-main {
-  max-width: 720px;
-  margin: auto;
-  padding: 18px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  margin-bottom: 16px;
-  box-shadow: 0 3px 15px #00000008;
-}
-
-h2 {
-  font-size: 19px;
-  margin-top: 0;
-}
-
-label {
-  display: block;
-  font-size: 14px;
-  font-weight: bold;
-  margin: 14px 0 6px;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #d5dce6;
-  border-radius: 9px;
-  font-size: 16px;
-  background: white;
-  color: #182235;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button {
-  width: 100%;
-  border: 0;
-  border-radius: 10px;
-  padding: 14px;
-  margin-top: 15px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #16a36a;
-  color: white;
-}
-
-button:active {
-  transform: scale(0.99);
-}
-
-button.secondary {
-  background: #e7edf5;
-  color: #182235;
-}
-
-button.premium-button {
-  background: #fbbf24;
-  color: #172033;
-}
-
-.result {
-  background: #e8f8ef;
-  border-radius: 12px;
-  padding: 16px;
-  margin-top: 16px;
-  line-height: 1.8;
-  display: none;
-  overflow-wrap: anywhere;
-}
-
-.price {
-  font-size: 27px;
-  font-weight: bold;
-  color: #087b49;
-}
-
-nav {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  box-shadow: 0 2px 8px #00000008;
-}
-
-nav button {
-  margin: 0;
-  padding: 12px 5px;
-  font-size: 13px;
-  background: #e7edf5;
-  color: #182235;
-  flex: 1;
-}
-
-nav button.active {
-  background: #101827;
-  color: white;
-}
-
-section {
-  display: none;
-}
-
-section.active {
-  display: block;
-}
-
-.small {
-  font-size: 13px;
-  color: #64748b;
-  line-height: 1.6;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #64748b;
-  font-size: 12px;
-}
-
-.badge {
-  display: inline-block;
-  background: #e8f8ef;
-  color: #087b49;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 16px;
-}
-
-.service-item {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 13px 10px;
-}
-
-.service-item strong {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.service-item span {
-  display: block;
-  color: #64748b;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.premium-card {
-  background: linear-gradient(135deg, #101827, #243b64);
-  color: white;
-}
-
-.premium-card h2,
-.premium-card h3 {
-  color: white;
-}
-
-.premium-card p {
-  line-height: 1.6;
-}
-
-.premium-plan {
-  background: #ffffff12;
-  border: 1px solid #ffffff20;
-  border-radius: 12px;
-  padding: 15px;
-  margin-top: 12px;
-}
-
-.premium-price {
-  font-size: 29px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.premium-price span {
-  font-size: 14px;
-  font-weight: normal;
-}
-
-.check-list {
-  padding-left: 0;
-  list-style: none;
-  line-height: 2;
-  font-size: 14px;
-}
-
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin-bottom: 16px;
-}
-.metric-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 15px 12px;
-  box-shadow: 0 3px 15px #00000008;
-  min-width: 0;
-}
-.metric-card span {
-  display: block;
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.4;
-  margin-bottom: 9px;
-}
-.metric-card strong {
-  display: block;
-  font-size: 18px;
-  color: #087b49;
-  overflow-wrap: anywhere;
-}
-.progress-track {
-  height: 12px;
-  background: #e2e8f0;
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 16px;
-}
-.progress-fill {
-  width: 0;
-  height: 100%;
-  background: #16a36a;
-  border-radius: 999px;
-  transition: width .25s ease;
-}
-.movement-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 12px 0;
-  border-bottom: 1px solid #e2e8f0;
-  font-size: 13px;
-  line-height: 1.5;
-}
-.movement-row:last-child { border-bottom: 0; }
-.movement-row strong { white-space: nowrap; }
-.amount-in { color: #087b49; }
-.amount-out { color: #b91c1c; }
-@media (max-width: 380px) {
-  .metric-card strong { font-size: 16px; }
-  .metric-card { padding: 13px 10px; }
-}
-
-@media (max-width: 380px) {
-  main {
-    padding: 12px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  nav {
-    gap: 5px;
-    padding: 8px;
-  }
-
-  nav button {
-    font-size: 12px;
-    padding: 11px 3px;
-  }
-}
-
-@media print {
-  nav,
-  header,
-  footer,
-  .no-print {
-    display: none !important;
-  }
+@media print{
+nav,header,footer,.no-print{display:none!important}
 }
 </style>
 </head>
 
 <body>
-
 <header>
-  <h1>⚡ Resolve Fácil IA</h1>
-  <p>Seu negócio mais organizado. Seu lucro sob controle.</p>
+<h1>⚡ Resolve Fácil IA</h1>
+<p>Seu negócio mais organizado. Seu lucro sob controle.</p>
 </header>
 
 <nav>
-  <button class="active" onclick="abrir('painel', this)">📊 Painel</button>
-  <button onclick="abrir('inicio', this)">Início</button>
-  <button onclick="abrir('lucro', this)">Meu lucro</button>
-  <button onclick="abrir('orcamento', this)">Propostas</button>
+<button class="active" onclick="abrir('painel',this)">📊 Painel</button>
+<button onclick="abrir('inicio',this)">Início</button>
+<button onclick="abrir('lucro',this)">Meu lucro</button>
+<button onclick="abrir('orcamento',this)">Propostas</button>
 </nav>
 
 <main>
 
-<!-- CENTRAL DE COMANDO -->
-
 <section id="painel" class="active">
+<div class="card" style="background:linear-gradient(135deg,#101827,#243b64);color:white">
+<span class="badge" style="background:#dbeafe;color:#1e40af">CENTRAL DE COMANDO</span>
+<h2 style="color:white;margin-top:14px">Sua empresa em um só lugar</h2>
+<p style="color:#dbeafe;line-height:1.6">Acompanhe suas entradas, despesas e resultado mensal. Registre os movimentos para ter uma visão mais clara do negócio.</p>
+</div>
 
-  <div class="card" style="background:linear-gradient(135deg,#101827,#243b64);color:white">
-    <span class="badge" style="background:#dbeafe;color:#1e40af">CENTRAL DE COMANDO</span>
-    <h2 style="color:white;margin-top:14px">Sua empresa em um só lugar</h2>
-    <p style="color:#dbeafe;line-height:1.6">Acompanhe suas entradas, despesas e resultado mensal. Registre os movimentos para ter uma visão mais clara do negócio.</p>
-  </div>
+<div class="dashboard-grid">
+<div class="metric-card"><span>💰 Entradas do mês</span><strong id="dashEntradas">R$ 0,00</strong></div>
+<div class="metric-card"><span>💸 Despesas do mês</span><strong id="dashDespesas">R$ 0,00</strong></div>
+<div class="metric-card"><span>📈 Resultado estimado</span><strong id="dashResultado">R$ 0,00</strong></div>
+<div class="metric-card"><span>🎯 Falta para a meta</span><strong id="dashFalta">R$ 0,00</strong></div>
+</div>
 
-  <div class="dashboard-grid">
-    <div class="metric-card"><span>💰 Entradas do mês</span><strong id="dashEntradas">R$ 0,00</strong></div>
-    <div class="metric-card"><span>💸 Despesas do mês</span><strong id="dashDespesas">R$ 0,00</strong></div>
-    <div class="metric-card"><span>📈 Resultado estimado</span><strong id="dashResultado">R$ 0,00</strong></div>
-    <div class="metric-card"><span>🎯 Falta para a meta</span><strong id="dashFalta">R$ 0,00</strong></div>
-  </div>
+<div class="card">
+<h2>🎯 Sua meta mensal</h2>
+<p class="small">Defina quanto deseja faturar no mês. A barra mostra as entradas registradas em relação à meta.</p>
+<label for="metaMensal">Meta de faturamento (R$)</label>
+<input id="metaMensal" type="text" inputmode="decimal" placeholder="Ex.: 45.000" value="10000">
+<button onclick="salvarMeta()">Salvar minha meta</button>
+<div class="progress-track"><div id="metaBarra" class="progress-fill"></div></div>
+<p id="metaTexto" class="small" aria-live="polite"></p>
+</div>
 
-  <div class="card">
-    <h2>🎯 Sua meta mensal</h2>
-    <p class="small">Defina quanto deseja faturar no mês. A barra mostra as entradas registradas em relação à meta.</p>
-    <label for="metaMensal">Meta de faturamento (R$)</label>
-    <input id="metaMensal" type="number" min="0" step="0.01" placeholder="Ex.: 10000" value="10000">
-    <button onclick="salvarMeta()">Salvar minha meta</button>
-    <div class="progress-track"><div id="metaBarra" class="progress-fill"></div></div>
-    <p id="metaTexto" class="small" aria-live="polite">Você ainda não registrou entradas neste mês.</p>
-  </div>
+<div class="card">
+<h2>🧾 Registrar entrada ou despesa</h2>
+<p class="small">Anote vendas recebidas e despesas pagas. Os números do painel serão atualizados automaticamente neste aparelho e navegador.</p>
+<label for="movTipo">Tipo de movimento</label>
+<select id="movTipo"><option value="entrada">Entrada / venda recebida</option><option value="despesa">Despesa paga</option></select>
+<label for="movDescricao">Descrição</label>
+<input id="movDescricao" maxlength="100" placeholder="Ex.: serviço de limpeza ou compra de material">
+<label for="movValor">Valor (R$)</label>
+<input id="movValor" type="text" inputmode="decimal" placeholder="Ex.: 45.000,00">
+<label for="movData">Data</label>
+<input id="movData" type="date">
+<button onclick="registrarMovimento()">Adicionar ao controle</button>
+<div id="movAviso" class="result" aria-live="polite"></div>
+</div>
 
-  <div class="card">
-    <h2>🧾 Registrar entrada ou despesa</h2>
-    <p class="small">Anote vendas recebidas e despesas pagas. Os números do painel serão atualizados automaticamente neste aparelho e navegador.</p>
-    <label for="movTipo">Tipo de movimento</label>
-    <select id="movTipo"><option value="entrada">Entrada / venda recebida</option><option value="despesa">Despesa paga</option></select>
-    <label for="movDescricao">Descrição</label>
-    <input id="movDescricao" maxlength="100" placeholder="Ex.: serviço de limpeza ou compra de material">
-    <label for="movValor">Valor (R$)</label>
-    <input id="movValor" type="number" min="0.01" step="0.01" placeholder="Ex.: 450">
-    <label for="movData">Data</label>
-    <input id="movData" type="date">
-    <button onclick="registrarMovimento()">Adicionar ao controle</button>
-    <div id="movAviso" class="result" aria-live="polite"></div>
-  </div>
+<div class="card">
+<h2>📚 Últimos movimentos</h2>
+<div id="listaMovimentos"><p class="small">Nenhum movimento cadastrado ainda. Registre uma entrada ou despesa acima.</p></div>
+<button class="secondary" onclick="exportarMovimentos()">Exportar resumo em texto</button>
+<button class="secondary" onclick="limparMovimentos()">Apagar todos os movimentos</button>
+</div>
 
-  <div class="card">
-    <h2>📚 Últimos movimentos</h2>
-    <div id="listaMovimentos"><p class="small">Nenhum movimento cadastrado ainda. Registre uma entrada ou despesa acima.</p></div>
-    <button class="secondary" onclick="exportarMovimentos()">Exportar resumo em texto</button>
-    <button class="secondary" onclick="limparMovimentos()">Apagar todos os movimentos</button>
-  </div>
-
-  <div class="card">
-    <h2>🧭 O que fazer hoje?</h2>
-    <div id="dicasPainel" class="small" aria-live="polite">Registre suas entradas e despesas para receber sugestões mais úteis.</div>
-    <button onclick="ir('orcamento')">📄 Preparar uma proposta</button>
-    <button class="secondary" onclick="ir('lucro')">💰 Calcular preço de um serviço</button>
-  </div>
-
+<div class="card">
+<h2>🧭 O que fazer hoje?</h2>
+<div id="dicasPainel" class="small" aria-live="polite">Registre suas entradas e despesas para receber sugestões mais úteis.</div>
+<button onclick="ir('orcamento')">📄 Preparar uma proposta</button>
+<button class="secondary" onclick="ir('lucro')">💰 Calcular preço de um serviço</button>
+</div>
 </section>
 
 <section id="inicio">
+<div class="card">
+<span class="badge">FERRAMENTAS PARA SEU NEGÓCIO</span>
+<h2 style="margin-top:15px">Bem-vindo ao Resolve Fácil!</h2>
+<p>Organize seus serviços, calcule preços, prepare propostas profissionais e tenha mais controle sobre seu negócio.</p>
+</div>
 
+<div class="card">
+<h2>💰 Calcule seus preços</h2>
+<p>Descubra seus custos, estime seu lucro e calcule quanto cobrar pelo serviço.</p>
+<button onclick="ir('lucro')">Calcular meu preço</button>
+</div>
 
-  <div class="card">
-    <span class="badge">FERRAMENTAS PARA SEU NEGÓCIO</span>
+<div class="card">
+<h2>📄 Propostas profissionais</h2>
+<p>Prepare propostas comerciais personalizadas para apresentar seus serviços aos clientes.</p>
+<button onclick="ir('orcamento')">Criar proposta</button>
+</div>
 
-    <h2 style="margin-top:15px">
-      Bem-vindo ao Resolve Fácil!
-    </h2>
+<div class="card">
+<h2>🧰 Serviços disponíveis</h2>
+<p class="small">Escolha o tipo de trabalho que você realiza e prepare uma proposta de acordo com o serviço.</p>
+<div class="service-grid">
+<div class="service-item"><strong>🧹 Limpeza</strong><span>Limpeza, conservação e zeladoria.</span></div>
+<div class="service-item"><strong>🎨 Pintura</strong><span>Pintura residencial e comercial.</span></div>
+<div class="service-item"><strong>🌿 Jardinagem</strong><span>Jardins, podas e manutenção.</span></div>
+<div class="service-item"><strong>🔧 Reparos</strong><span>Manutenção e pequenos consertos.</span></div>
+<div class="service-item"><strong>🏗️ Construção</strong><span>Obras e reformas.</span></div>
+<div class="service-item"><strong>⚡ Elétrica</strong><span>Serviços e instalações elétricas.</span></div>
+<div class="service-item"><strong>🚿 Hidráulica</strong><span>Instalações e reparos hidráulicos.</span></div>
+<div class="service-item"><strong>🚚 Fretes</strong><span>Transporte de cargas e mudanças.</span></div>
+<div class="service-item"><strong>❄️ Ar-condicionado</strong><span>Instalação e manutenção.</span></div>
+<div class="service-item"><strong>🔐 Segurança</strong><span>Monitoramento e serviços relacionados.</span></div>
+<div class="service-item"><strong>🏢 Portaria</strong><span>Portaria e controle de acesso.</span></div>
+<div class="service-item"><strong>💻 Tecnologia</strong><span>Informática e suporte técnico.</span></div>
+<div class="service-item"><strong>📊 Consultoria</strong><span>Serviços profissionais.</span></div>
+<div class="service-item"><strong>📣 Marketing</strong><span>Publicidade e divulgação.</span></div>
+<div class="service-item"><strong>🚗 Automotivo</strong><span>Serviços para veículos.</span></div>
+<div class="service-item"><strong>💄 Beleza</strong><span>Beleza e estética.</span></div>
+<div class="service-item"><strong>📷 Fotografia</strong><span>Fotografia e filmagem.</span></div>
+<div class="service-item"><strong>📚 Aulas</strong><span>Aulas particulares e treinamento.</span></div>
+<div class="service-item"><strong>🎉 Eventos</strong><span>Organização de eventos.</span></div>
+<div class="service-item"><strong>📝 Outros serviços</strong><span>Personalize sua proposta.</span></div>
+</div>
+<button onclick="ir('orcamento')">Criar orçamento de um serviço</button>
+</div>
 
-    <p>
-      Organize seus serviços, calcule preços, prepare propostas
-      profissionais e tenha mais controle sobre seu negócio.
-    </p>
-  </div>
+<div class="card premium-card">
+<span class="badge" style="background:#fef3c7;color:#92400e">⭐ CONHEÇA O PREMIUM</span>
+<h2 style="margin-top:16px">Seu negócio pode ir mais longe!</h2>
+<p style="color:#dbeafe">Estamos preparando ferramentas avançadas para ajudar pequenos empresários e profissionais a organizar seus negócios.</p>
+<ul class="check-list">
+<li>✅ Mais modelos de propostas</li>
+<li>✅ Histórico de orçamentos</li>
+<li>✅ Organização de clientes</li>
+<li>✅ Controle de despesas</li>
+<li>✅ Relatórios de resultados</li>
+<li>✅ Ferramentas avançadas para empresas</li>
+</ul>
+<div class="premium-plan">
+<h3>Plano mensal</h3>
+<div class="premium-price">R$ 19,90 <span>/ mês</span></div>
+<p class="small" style="color:#dbeafe">Preço sugerido para o futuro plano Premium.</p>
+</div>
+<div class="premium-plan">
+<h3>Plano anual</h3>
+<div class="premium-price">R$ 149,90 <span>/ ano</span></div>
+<p class="small" style="color:#dbeafe">Opção anual com preço inicial sugerido.</p>
+</div>
+<button class="premium-button" onclick="mostrarPremium()">Conhecer o plano Premium</button>
+<p style="font-size:12px;color:#dbeafe">Os planos estão em preparação. A cobrança e a liberação dos recursos Premium ainda não estão ativadas.</p>
+</div>
 
-  <div class="card">
-    <h2>💰 Calcule seus preços</h2>
-
-    <p>
-      Descubra seus custos, estime seu lucro e calcule
-      quanto cobrar pelo serviço.
-    </p>
-
-    <button onclick="ir('lucro')">
-      Calcular meu preço
-    </button>
-  </div>
-
-  <div class="card">
-    <h2>📄 Propostas profissionais</h2>
-
-    <p>
-      Prepare propostas comerciais personalizadas para apresentar
-      seus serviços aos clientes.
-    </p>
-
-    <button onclick="ir('orcamento')">
-      Criar proposta
-    </button>
-  </div>
-
-  <div class="card">
-    <h2>🧰 Serviços disponíveis</h2>
-
-    <p class="small">
-      Escolha o tipo de trabalho que você realiza e prepare
-      uma proposta de acordo com o serviço.
-    </p>
-
-    <div class="service-grid">
-
-      <div class="service-item">
-        <strong>🧹 Limpeza</strong>
-        <span>Limpeza, conservação e zeladoria.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🎨 Pintura</strong>
-        <span>Pintura residencial e comercial.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🌿 Jardinagem</strong>
-        <span>Jardins, podas e manutenção.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🔧 Reparos</strong>
-        <span>Manutenção e pequenos consertos.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🏗️ Construção</strong>
-        <span>Obras e reformas.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>⚡ Elétrica</strong>
-        <span>Serviços e instalações elétricas.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🚿 Hidráulica</strong>
-        <span>Instalações e reparos hidráulicos.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🚚 Fretes</strong>
-        <span>Transporte de cargas e mudanças.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>❄️ Ar-condicionado</strong>
-        <span>Instalação e manutenção.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🔐 Segurança</strong>
-        <span>Monitoramento e serviços relacionados.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🏢 Portaria</strong>
-        <span>Portaria e controle de acesso.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>💻 Tecnologia</strong>
-        <span>Informática e suporte técnico.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>📊 Consultoria</strong>
-        <span>Serviços profissionais.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>📣 Marketing</strong>
-        <span>Publicidade e divulgação.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🚗 Automotivo</strong>
-        <span>Serviços para veículos.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>💄 Beleza</strong>
-        <span>Beleza e estética.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>📷 Fotografia</strong>
-        <span>Fotografia e filmagem.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>📚 Aulas</strong>
-        <span>Aulas particulares e treinamento.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>🎉 Eventos</strong>
-        <span>Organização de eventos.</span>
-      </div>
-
-      <div class="service-item">
-        <strong>📝 Outros serviços</strong>
-        <span>Personalize sua proposta.</span>
-      </div>
-
-    </div>
-
-    <button onclick="ir('orcamento')">
-      Criar orçamento de um serviço
-    </button>
-  </div>
-
-  <!-- PREMIUM -->
-
-  <div class="card premium-card">
-
-    <span class="badge"
-      style="background:#fef3c7;color:#92400e">
-      ⭐ CONHEÇA O PREMIUM
-    </span>
-
-    <h2 style="margin-top:16px">
-      Seu negócio pode ir mais longe!
-    </h2>
-
-    <p style="color:#dbeafe">
-      Estamos preparando ferramentas avançadas para ajudar
-      pequenos empresários e profissionais a organizar
-      seus negócios.
-    </p>
-
-    <ul class="check-list">
-      <li>✅ Mais modelos de propostas</li>
-      <li>✅ Histórico de orçamentos</li>
-      <li>✅ Organização de clientes</li>
-      <li>✅ Controle de despesas</li>
-      <li>✅ Relatórios de resultados</li>
-      <li>✅ Ferramentas avançadas para empresas</li>
-    </ul>
-
-    <div class="premium-plan">
-      <h3>Plano mensal</h3>
-
-      <div class="premium-price">
-        R$ 19,90 <span>/ mês</span>
-      </div>
-
-      <p class="small" style="color:#dbeafe">
-        Preço sugerido para o futuro plano Premium.
-      </p>
-    </div>
-
-    <div class="premium-plan">
-      <h3>Plano anual</h3>
-
-      <div class="premium-price">
-        R$ 149,90 <span>/ ano</span>
-      </div>
-
-      <p class="small" style="color:#dbeafe">
-        Opção anual com preço inicial sugerido.
-      </p>
-    </div>
-
-    <button class="premium-button" onclick="mostrarPremium()">
-      Conhecer o plano Premium
-    </button>
-
-    <p style="font-size:12px;color:#dbeafe">
-      Os planos estão em preparação. A cobrança e a liberação
-      dos recursos Premium ainda não estão ativadas.
-    </p>
-
-  </div>
-
-  <div class="card">
-    <h2>🤝 Feito para pequenos negócios</h2>
-
-    <p>
-      Uma ferramenta prática para prestadores de serviços,
-      autônomos, MEIs e pequenas empresas.
-    </p>
-
-    <p class="small">
-      Esta versão utiliza modelos e cálculos executados
-      no próprio aplicativo. Ela ainda não está conectada
-      a uma inteligência artificial externa.
-    </p>
-  </div>
-
+<div class="card">
+<h2>🤝 Feito para pequenos negócios</h2>
+<p>Uma ferramenta prática para prestadores de serviços, autônomos, MEIs e pequenas empresas.</p>
+<p class="small">Esta versão utiliza modelos e cálculos executados no próprio aplicativo. Ela ainda não está conectada a uma inteligência artificial externa.</p>
+</div>
 </section>
-
-<!-- CALCULADORA DE LUCRO -->
 
 <section id="lucro">
-
-  <div class="card">
-    <h2>💰 Calculadora de preços e lucros</h2>
-
-    <p class="small">
-      Informe os custos do serviço e o percentual que deseja
-      acrescentar sobre esses custos.
-    </p>
-
-    <label for="materiais">Materiais (R$)</label>
-    <input id="materiais" type="number" min="0" step="0.01"
-      placeholder="Ex.: 150">
-
-    <label for="mao">Mão de obra (R$)</label>
-    <input id="mao" type="number" min="0" step="0.01"
-      placeholder="Ex.: 200">
-
-    <label for="transporte">Transporte (R$)</label>
-    <input id="transporte" type="number" min="0" step="0.01"
-      placeholder="Ex.: 30">
-
-    <label for="outros">Outras despesas (R$)</label>
-    <input id="outros" type="number" min="0" step="0.01"
-      placeholder="Ex.: 20">
-
-    <label for="margem">Acréscimo sobre os custos (%)</label>
-    <input id="margem" type="number" min="0" max="10000"
-      step="1" value="30">
-
-    <button onclick="calcular()">
-      Calcular preço sugerido
-    </button>
-
-    <div id="resultado" class="result" aria-live="polite"></div>
-
-    <p class="small">
-      O percentual é acrescentado sobre os custos. Isso não
-      equivale à margem de lucro sobre o preço de venda.
-      Para uma estimativa mais completa, inclua impostos,
-      encargos e outras despesas.
-    </p>
-  </div>
-
+<div class="card">
+<h2>💰 Calculadora de preços e lucros</h2>
+<p class="small">Informe os custos do serviço e o percentual que deseja acrescentar sobre esses custos.</p>
+<label for="materiais">Materiais (R$)</label>
+<input id="materiais" type="text" inputmode="decimal" placeholder="Ex.: 150">
+<label for="mao">Mão de obra (R$)</label>
+<input id="mao" type="text" inputmode="decimal" placeholder="Ex.: 200">
+<label for="transporte">Transporte (R$)</label>
+<input id="transporte" type="text" inputmode="decimal" placeholder="Ex.: 30">
+<label for="outros">Outras despesas (R$)</label>
+<input id="outros" type="text" inputmode="decimal" placeholder="Ex.: 20">
+<label for="margem">Acréscimo sobre os custos (%)</label>
+<input id="margem" type="number" min="0" max="10000" step="1" value="30">
+<button onclick="calcular()">Calcular preço sugerido</button>
+<div id="resultado" class="result" aria-live="polite"></div>
+<p class="small">O percentual é acrescentado sobre os custos. Isso não equivale à margem de lucro sobre o preço de venda. Para uma estimativa mais completa, inclua impostos, encargos e outras despesas.</p>
+</div>
 </section>
 
-<!-- PROPOSTAS COMERCIAIS -->
-
 <section id="orcamento">
+<div class="card">
+<h2>✨ Proposta comercial inteligente</h2>
+<p class="small">Preencha os dados para preparar uma proposta profissional. Confira as informações antes de enviar ao cliente.</p>
 
-  <div class="card">
+<label for="empresa">Nome da sua empresa</label>
+<input id="empresa" placeholder="Ex.: Clean Zeladoria">
+<label for="cnpj">CNPJ (opcional)</label>
+<input id="cnpj" placeholder="CNPJ da empresa">
+<label for="cliente">Nome do cliente</label>
+<input id="cliente" placeholder="Ex.: Residencial Jardim">
+<label for="tipo">Tipo de serviço</label>
+<select id="tipo">
+<option value="geral">Outro serviço</option>
+<option value="limpeza">Limpeza e zeladoria</option>
+<option value="pintura">Pintura residencial e comercial</option>
+<option value="jardinagem">Jardinagem e paisagismo</option>
+<option value="manutencao">Manutenção e reparos</option>
+<option value="construcao">Obras e construção</option>
+<option value="tecnologia">Informática e tecnologia</option>
+<option value="consultoria">Consultoria profissional</option>
+<option value="eletrica">Serviços elétricos</option>
+<option value="hidraulica">Serviços hidráulicos</option>
+<option value="frete">Fretes e mudanças</option>
+<option value="lavagem">Lavagem e higienização</option>
+<option value="ar">Ar-condicionado</option>
+<option value="seguranca">Segurança e monitoramento</option>
+<option value="portaria">Portaria e controle de acesso</option>
+<option value="administrativo">Serviços administrativos</option>
+<option value="marketing">Marketing e publicidade</option>
+<option value="eventos">Organização de eventos</option>
+<option value="automotivo">Serviços automotivos</option>
+<option value="transporte">Transporte de passageiros</option>
+<option value="aulas">Aulas particulares e treinamento</option>
+<option value="beleza">Beleza e estética</option>
+<option value="fotografia">Fotografia e filmagem</option>
+<option value="contabilidade">Serviços contábeis</option>
+<option value="personalizado">Serviço personalizado</option>
+</select>
 
-    <h2>✨ Proposta comercial inteligente</h2>
+<label for="servico">Nome do serviço</label>
+<input id="servico" placeholder="Ex.: Limpeza das áreas comuns">
+<label for="descricao">O que será feito?</label>
+<textarea id="descricao" rows="4" placeholder="Descreva o trabalho que será realizado."></textarea>
+<label for="frequencia">Frequência ou duração</label>
+<input id="frequencia" placeholder="Ex.: de segunda a sexta ou serviço único">
+<label for="prazo">Prazo de início ou conclusão (opcional)</label>
+<input id="prazo" placeholder="Ex.: início após aprovação">
+<label for="pagamento">Condições de pagamento (opcional)</label>
+<input id="pagamento" placeholder="Ex.: pagamento mensal até dia 10">
+<label for="observacoes">Observações e itens não incluídos (opcional)</label>
+<textarea id="observacoes" rows="3" placeholder="Materiais, condições especiais e outras informações."></textarea>
+<label for="valor">Valor do serviço (R$)</label>
+<input id="valor" type="text" inputmode="decimal" placeholder="Ex.: 2.500,00">
+<label for="validade">Validade da proposta (opcional)</label>
+<input id="validade" placeholder="Ex.: 15 dias">
 
-    <p class="small">
-      Preencha os dados para preparar uma proposta profissional.
-      Confira as informações antes de enviar ao cliente.
-    </p>
-
-    <label for="empresa">Nome da sua empresa</label>
-    <input id="empresa" placeholder="Ex.: Clean Zeladoria">
-
-    <label for="cnpj">CNPJ (opcional)</label>
-    <input id="cnpj" placeholder="CNPJ da empresa">
-
-    <label for="cliente">Nome do cliente</label>
-    <input id="cliente" placeholder="Ex.: Residencial Jardim">
-
-    <label for="tipo">Tipo de serviço</label>
-
-    <select id="tipo">
-
-      <option value="geral">Outro serviço</option>
-      <option value="limpeza">Limpeza e zeladoria</option>
-      <option value="pintura">Pintura residencial e comercial</option>
-      <option value="jardinagem">Jardinagem e paisagismo</option>
-      <option value="manutencao">Manutenção e reparos</option>
-      <option value="construcao">Obras e construção</option>
-      <option value="tecnologia">Informática e tecnologia</option>
-      <option value="consultoria">Consultoria profissional</option>
-      <option value="eletrica">Serviços elétricos</option>
-      <option value="hidraulica">Serviços hidráulicos</option>
-      <option value="frete">Fretes e mudanças</option>
-      <option value="lavagem">Lavagem e higienização</option>
-      <option value="ar">Ar-condicionado</option>
-      <option value="seguranca">Segurança e monitoramento</option>
-      <option value="portaria">Portaria e controle de acesso</option>
-      <option value="administrativo">Serviços administrativos</option>
-      <option value="marketing">Marketing e publicidade</option>
-      <option value="eventos">Organização de eventos</option>
-      <option value="automotivo">Serviços automotivos</option>
-      <option value="transporte">Transporte de passageiros</option>
-      <option value="aulas">Aulas particulares e treinamento</option>
-      <option value="beleza">Beleza e estética</option>
-      <option value="fotografia">Fotografia e filmagem</option>
-      <option value="contabilidade">Serviços contábeis</option>
-      <option value="personalizado">Serviço personalizado</option>
-
-    </select>
-
-    <label for="servico">Nome do serviço</label>
-    <input id="servico" placeholder="Ex.: Limpeza das áreas comuns">
-
-    <label for="descricao">O que será feito?</label>
-    <textarea id="descricao" rows="4"
-      placeholder="Descreva o trabalho que será realizado."></textarea>
-
-    <label for="frequencia">Frequência ou duração</label>
-    <input id="frequencia"
-      placeholder="Ex.: de segunda a sexta ou serviço único">
-
-    <label for="prazo">Prazo de início ou conclusão (opcional)</label>
-    <input id="prazo" placeholder="Ex.: início após aprovação">
-
-    <label for="pagamento">Condições de pagamento (opcional)</label>
-    <input id="pagamento"
-      placeholder="Ex.: pagamento mensal até dia 10">
-
-    <label for="observacoes">
-      Observações e itens não incluídos (opcional)
-    </label>
-
-    <textarea id="observacoes" rows="3"
-      placeholder="Materiais, condições especiais e outras informações."></textarea>
-
-    <label for="valor">Valor do serviço (R$)</label>
-    <input id="valor" type="number" min="0.01" step="0.01"
-      placeholder="Ex.: 2500">
-
-    <label for="validade">Validade da proposta (opcional)</label>
-    <input id="validade" placeholder="Ex.: 15 dias">
-
-    <button onclick="gerarProposta()">
-      Gerar proposta completa
-    </button>
-
-    <div id="preview" class="result"
-      style="background:#f8fafc;border:1px solid #dce4ee"
-      aria-live="polite"></div>
-
-    <button id="pdfBtn" class="secondary"
-      style="display:none" onclick="abrirPDF()">
-      Imprimir ou salvar proposta em PDF
-    </button>
-
-    <button id="whatsBtn" class="secondary"
-      style="display:none" onclick="compartilharWhatsApp()">
-      Preparar mensagem para WhatsApp
-    </button>
-
-  </div>
-
+<button onclick="gerarProposta()">Gerar proposta completa</button>
+<div id="preview" class="result" style="background:#f8fafc;border:1px solid #dce4ee" aria-live="polite"></div>
+<button id="pdfBtn" class="secondary" style="display:none" onclick="abrirPDF()">Imprimir ou salvar proposta em PDF</button>
+<button id="whatsBtn" class="secondary" style="display:none" onclick="compartilharWhatsApp()">Preparar mensagem para WhatsApp</button>
+</div>
 </section>
 
 </main>
 
-<footer>
-  Resolve Fácil IA © 2026 · Ferramentas para seu negócio
-</footer>
+<footer>Resolve Fácil IA © 2026 · Ferramentas para seu negócio</footer>
 
 <script>
 'use strict';
@@ -821,21 +317,17 @@ function abrir(id, botao) {
   });
 
   const destino = document.getElementById(id);
-
   if (!destino) return;
-
   destino.classList.add('active');
 
   document.querySelectorAll('nav button').forEach(function(b) {
     b.classList.remove('active');
   });
 
-  const botoes = document.querySelectorAll('nav button');
-
   if (botao) {
     botao.classList.add('active');
   } else {
-    const correspondente = Array.from(botoes).find(function(b) {
+    const correspondente = Array.from(document.querySelectorAll('nav button')).find(function(b) {
       return (b.getAttribute('onclick') || '').includes("'" + id + "'");
     });
     if (correspondente) correspondente.classList.add('active');
@@ -850,10 +342,55 @@ function ir(id) {
 }
 
 function dinheiro(valor) {
-  return valor.toLocaleString('pt-BR', {
+  return Number(valor || 0).toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
   });
+}
+
+/* LEITOR INTELIGENTE DE VALORES */
+function lerValor(campo) {
+  let texto = String(campo.value || '').trim();
+
+  if (!texto) return NaN;
+
+  texto = texto.replace(/\s/g, '').replace(/R\$/gi, '');
+
+  const temVirgula = texto.includes(',');
+  const temPonto = texto.includes('.');
+
+  if (temVirgula && temPonto) {
+    if (texto.lastIndexOf(',') > texto.lastIndexOf('.')) {
+      texto = texto.replace(/\./g, '').replace(',', '.');
+    } else {
+      texto = texto.replace(/,/g, '');
+    }
+  } else if (temVirgula) {
+    const partes = texto.split(',');
+
+    if (partes.length > 2) {
+      const ultima = partes.pop();
+      texto = partes.join('') +
+        (ultima.length === 3 ? ultima : '.' + ultima);
+    } else if (partes[1].length === 3) {
+      texto = partes.join('');
+    } else {
+      texto = texto.replace(',', '.');
+    }
+  } else if (temPonto) {
+    const partes = texto.split('.');
+
+    if (partes.length > 2) {
+      const ultima = partes.pop();
+      texto = partes.join('') +
+        (ultima.length === 3 ? ultima : '.' + ultima);
+    } else if (partes[1].length === 3) {
+      texto = partes.join('');
+    }
+  }
+
+  const numero = Number(texto);
+  return Number.isFinite(numero) ? numero : NaN;
 }
 
 const CHAVE_MOVIMENTOS = 'resolveFacilMovimentosV1';
@@ -869,11 +406,13 @@ function carregarMovimentos() {
 }
 
 function salvarMeta() {
-  const meta = Number(document.getElementById('metaMensal').value);
+  const meta = lerValor(document.getElementById('metaMensal'));
+
   if (!Number.isFinite(meta) || meta < 0) {
     alert('Informe uma meta válida, igual ou maior que zero.');
     return;
   }
+
   localStorage.setItem(CHAVE_META, String(meta));
   atualizarPainel();
   alert('Meta mensal salva neste aparelho e navegador.');
@@ -882,7 +421,7 @@ function salvarMeta() {
 function registrarMovimento() {
   const tipo = document.getElementById('movTipo').value;
   const descricao = document.getElementById('movDescricao').value.trim();
-  const valor = Number(document.getElementById('movValor').value);
+  const valor = lerValor(document.getElementById('movValor'));
   const data = document.getElementById('movData').value;
 
   if (!descricao || !Number.isFinite(valor) || valor <= 0 || !data) {
@@ -891,6 +430,7 @@ function registrarMovimento() {
   }
 
   const movimentos = carregarMovimentos();
+
   movimentos.unshift({
     id: Date.now().toString() + Math.random().toString(16).slice(2),
     tipo: tipo,
@@ -908,6 +448,7 @@ function registrarMovimento() {
 
   document.getElementById('movDescricao').value = '';
   document.getElementById('movValor').value = '';
+
   const aviso = document.getElementById('movAviso');
   aviso.style.display = 'block';
   aviso.textContent = 'Movimento registrado com sucesso.';
@@ -919,6 +460,7 @@ function atualizarPainel() {
   if (!metaCampo) return;
 
   let metaSalva = 10000;
+
   try {
     const guardada = localStorage.getItem(CHAVE_META);
     if (guardada !== null && Number.isFinite(Number(guardada)) && Number(guardada) >= 0) {
@@ -926,22 +468,29 @@ function atualizarPainel() {
     }
   } catch (erro) {}
 
-  if (document.activeElement !== metaCampo) metaCampo.value = String(metaSalva);
+  if (document.activeElement !== metaCampo) {
+    metaCampo.value = String(metaSalva);
+  }
 
   const movimentos = carregarMovimentos();
   const agora = new Date();
   const anoMes = agora.getFullYear() + '-' + String(agora.getMonth() + 1).padStart(2, '0');
+
   const desteMes = movimentos.filter(function(m) {
     return typeof m.data === 'string' && m.data.slice(0, 7) === anoMes;
   });
 
   const entradas = desteMes.filter(m => m.tipo === 'entrada')
     .reduce((soma, m) => soma + Number(m.valor || 0), 0);
+
   const despesas = desteMes.filter(m => m.tipo === 'despesa')
     .reduce((soma, m) => soma + Number(m.valor || 0), 0);
+
   const resultado = entradas - despesas;
   const falta = Math.max(0, metaSalva - entradas);
-  const percentual = metaSalva > 0 ? Math.min(100, entradas / metaSalva * 100) : (entradas > 0 ? 100 : 0);
+  const percentual = metaSalva > 0
+    ? Math.min(100, entradas / metaSalva * 100)
+    : (entradas > 0 ? 100 : 0);
 
   document.getElementById('dashEntradas').textContent = dinheiro(entradas);
   document.getElementById('dashDespesas').textContent = dinheiro(despesas);
@@ -949,16 +498,19 @@ function atualizarPainel() {
   document.getElementById('dashResultado').style.color = resultado < 0 ? '#b91c1c' : '#087b49';
   document.getElementById('dashFalta').textContent = dinheiro(falta);
   document.getElementById('metaBarra').style.width = percentual + '%';
+
   document.getElementById('metaTexto').textContent = metaSalva === 0
     ? 'Meta definida como zero. Se quiser acompanhar o progresso, informe uma meta maior que zero.'
     : dinheiro(entradas) + ' de ' + dinheiro(metaSalva) + ' (' + percentual.toFixed(0) + '% da meta de faturamento).';
 
   const lista = document.getElementById('listaMovimentos');
+
   if (movimentos.length === 0) {
     lista.innerHTML = '<p class="small">Nenhum movimento cadastrado ainda. Registre uma entrada ou despesa acima.</p>';
   } else {
     lista.innerHTML = movimentos.slice(0, 12).map(function(m) {
       const entrada = m.tipo === 'entrada';
+
       return '<div class="movement-row"><div><strong>' + escapar(m.descricao) +
         '</strong><br><span class="small">' + escapar(formatarData(m.data)) +
         ' · ' + (entrada ? 'Entrada' : 'Despesa') + '</span></div><strong class="' +
@@ -968,17 +520,28 @@ function atualizarPainel() {
   }
 
   const dicas = [];
+
   if (movimentos.length === 0) {
     dicas.push('Registre as entradas recebidas e as despesas pagas para começar a enxergar os números da empresa.');
     dicas.push('Use a calculadora de preços antes de enviar um orçamento para conferir seus custos.');
   } else {
-    if (falta > 0) dicas.push('Ainda faltam ' + dinheiro(falta) + ' em entradas registradas para alcançar sua meta mensal.');
-    else dicas.push('Meta de faturamento atingida ou superada com base nas entradas registradas. Parabéns!');
-    if (despesas > entradas) dicas.push('Atenção: as despesas registradas neste mês estão maiores que as entradas. Revise os custos e os recebimentos.');
-    else dicas.push('Continue registrando cada entrada e despesa para manter seu painel atualizado.');
+    if (falta > 0) {
+      dicas.push('Ainda faltam ' + dinheiro(falta) + ' em entradas registradas para alcançar sua meta mensal.');
+    } else {
+      dicas.push('Meta de faturamento atingida ou superada com base nas entradas registradas. Parabéns!');
+    }
+
+    if (despesas > entradas) {
+      dicas.push('Atenção: as despesas registradas neste mês estão maiores que as entradas. Revise os custos e os recebimentos.');
+    } else {
+      dicas.push('Continue registrando cada entrada e despesa para manter seu painel atualizado.');
+    }
+
     dicas.push('Revise propostas em aberto e entre em contato com clientes que ainda não responderam.');
   }
-  document.getElementById('dicasPainel').innerHTML = dicas.map(t => '<p>• ' + escapar(t) + '</p>').join('');
+
+  document.getElementById('dicasPainel').innerHTML =
+    dicas.map(t => '<p>• ' + escapar(t) + '</p>').join('');
 }
 
 function formatarData(data) {
@@ -989,18 +552,21 @@ function formatarData(data) {
 
 function exportarMovimentos() {
   const movimentos = carregarMovimentos();
+
   if (!movimentos.length) {
     alert('Ainda não há movimentos para exportar.');
     return;
   }
 
   const linhas = ['RESOLVE FÁCIL IA - RESUMO DE MOVIMENTOS', ''];
+
   movimentos.forEach(function(m) {
-    linhas.push(formatarData(m.data) + ' | ' + (m.tipo === 'entrada' ? 'ENTRADA' : 'DESPESA') +
+    linhas.push(formatarData(m.data) + ' | ' +
+      (m.tipo === 'entrada' ? 'ENTRADA' : 'DESPESA') +
       ' | ' + m.descricao + ' | ' + dinheiro(Number(m.valor)));
   });
 
-  const blob = new Blob([linhas.join('\n')], { type: 'text/plain;charset=utf-8' });
+  const blob = new Blob([linhas.join('\n')], {type: 'text/plain;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -1019,36 +585,32 @@ function limparMovimentos() {
 
 function inicializarPainel() {
   const dataCampo = document.getElementById('movData');
+
   if (dataCampo && !dataCampo.value) {
     const hoje = new Date();
     dataCampo.value = hoje.getFullYear() + '-' +
       String(hoje.getMonth() + 1).padStart(2, '0') + '-' +
       String(hoje.getDate()).padStart(2, '0');
   }
+
   atualizarPainel();
 }
-document.addEventListener('DOMContentLoaded', inicializarPainel);
 
+document.addEventListener('DOMContentLoaded', inicializarPainel);
 
 function calcular() {
   const ids = ['materiais', 'mao', 'transporte', 'outros'];
 
   const valores = ids.map(function(id) {
     const campo = document.getElementById(id);
-
-    return campo.value === '' ? 0 : Number(campo.value);
+    return campo.value.trim() === '' ? 0 : lerValor(campo);
   });
 
   const margemCampo = document.getElementById('margem');
-
-  const margem = margemCampo.value === ''
-    ? 0
-    : Number(margemCampo.value);
+  const margem = margemCampo.value === '' ? 0 : Number(margemCampo.value);
 
   if (
-    valores.some(function(v) {
-      return !Number.isFinite(v) || v < 0;
-    }) ||
+    valores.some(v => !Number.isFinite(v) || v < 0) ||
     !Number.isFinite(margem) ||
     margem < 0 ||
     margem > 10000
@@ -1057,27 +619,19 @@ function calcular() {
     return;
   }
 
-  const custo = valores.reduce(function(a, b) {
-    return a + b;
-  }, 0);
-
+  const custo = valores.reduce((a, b) => a + b, 0);
   const lucro = custo * margem / 100;
   const preco = custo + lucro;
-
   const resultado = document.getElementById('resultado');
 
   resultado.style.display = 'block';
-
   resultado.innerHTML =
     '<strong>Custo total:</strong> ' + dinheiro(custo) +
     '<br><strong>Lucro estimado:</strong> ' + dinheiro(lucro) +
     '<br><strong>Preço sugerido:</strong>' +
     '<div class="price">' + dinheiro(preco) + '</div>';
 
-  resultado.scrollIntoView({
-    behavior: 'smooth',
-    block: 'nearest'
-  });
+  resultado.scrollIntoView({behavior: 'smooth', block: 'nearest'});
 }
 
 function valorCampo(id) {
@@ -1098,80 +652,31 @@ function escapar(texto) {
 
 function textoTipo(tipo) {
   const textos = {
-    limpeza:
-      'serviços de limpeza, conservação e zeladoria, com atenção à higiene e à organização dos ambientes',
-
-    pintura:
-      'serviços de pintura, com preparação das superfícies e execução conforme o escopo combinado',
-
-    jardinagem:
-      'serviços de jardinagem e cuidado das áreas verdes, conforme as atividades combinadas',
-
-    manutencao:
-      'serviços de manutenção e reparos, conforme os itens descritos nesta proposta',
-
-    construcao:
-      'serviços de obras ou construção, limitados às etapas e atividades descritas nesta proposta',
-
-    tecnologia:
-      'serviços de tecnologia, informática e suporte técnico, conforme as necessidades descritas',
-
-    consultoria:
-      'serviços profissionais de consultoria, conforme o objetivo e o escopo descritos',
-
-    eletrica:
-      'serviços elétricos, conforme as atividades descritas e respeitando as normas aplicáveis',
-
-    hidraulica:
-      'serviços hidráulicos e reparos, conforme o escopo definido entre as partes',
-
-    frete:
-      'serviços de frete e mudanças, conforme os itens, o trajeto e as condições combinadas',
-
-    lavagem:
-      'serviços de lavagem e higienização, conforme as atividades descritas',
-
-    ar:
-      'serviços de instalação ou manutenção de ar-condicionado, conforme o escopo acordado',
-
-    seguranca:
-      'serviços relacionados à segurança e ao monitoramento, conforme o escopo contratado',
-
-    portaria:
-      'serviços de portaria e controle de acesso, conforme as condições acordadas',
-
-    administrativo:
-      'serviços administrativos, conforme as atividades e os resultados definidos',
-
-    marketing:
-      'serviços de marketing e publicidade, conforme o planejamento e o escopo acordados',
-
-    eventos:
-      'serviços de organização de eventos, conforme as necessidades e atividades descritas',
-
-    automotivo:
-      'serviços automotivos, conforme os reparos ou atividades descritos nesta proposta',
-
-    transporte:
-      'serviços de transporte, conforme o trajeto e as condições acordadas',
-
-    aulas:
-      'serviços de aulas particulares e treinamento, conforme o conteúdo e a duração acordados',
-
-    beleza:
-      'serviços de beleza e estética, conforme as atividades descritas',
-
-    fotografia:
-      'serviços de fotografia e filmagem, conforme o trabalho e as entregas acordadas',
-
-    contabilidade:
-      'serviços contábeis, conforme o escopo acordado e as habilitações profissionais aplicáveis',
-
-    personalizado:
-      'serviços personalizados, conforme o escopo e as condições descritas nesta proposta',
-
-    geral:
-      'prestação de serviços conforme o escopo e as condições descritas nesta proposta'
+    limpeza: 'serviços de limpeza, conservação e zeladoria, com atenção à higiene e à organização dos ambientes',
+    pintura: 'serviços de pintura, com preparação das superfícies e execução conforme o escopo combinado',
+    jardinagem: 'serviços de jardinagem e cuidado das áreas verdes, conforme as atividades combinadas',
+    manutencao: 'serviços de manutenção e reparos, conforme os itens descritos nesta proposta',
+    construcao: 'serviços de obras ou construção, limitados às etapas e atividades descritas nesta proposta',
+    tecnologia: 'serviços de tecnologia, informática e suporte técnico, conforme as necessidades descritas',
+    consultoria: 'serviços profissionais de consultoria, conforme o objetivo e o escopo descritos',
+    eletrica: 'serviços elétricos, conforme as atividades descritas e respeitando as normas aplicáveis',
+    hidraulica: 'serviços hidráulicos e reparos, conforme o escopo definido entre as partes',
+    frete: 'serviços de frete e mudanças, conforme os itens, o trajeto e as condições combinadas',
+    lavagem: 'serviços de lavagem e higienização, conforme as atividades descritas',
+    ar: 'serviços de instalação ou manutenção de ar-condicionado, conforme o escopo acordado',
+    seguranca: 'serviços relacionados à segurança e ao monitoramento, conforme o escopo contratado',
+    portaria: 'serviços de portaria e controle de acesso, conforme as condições acordadas',
+    administrativo: 'serviços administrativos, conforme as atividades e os resultados definidos',
+    marketing: 'serviços de marketing e publicidade, conforme o planejamento e o escopo acordados',
+    eventos: 'serviços de organização de eventos, conforme as necessidades e atividades descritas',
+    automotivo: 'serviços automotivos, conforme os reparos ou atividades descritos nesta proposta',
+    transporte: 'serviços de transporte, conforme o trajeto e as condições acordadas',
+    aulas: 'serviços de aulas particulares e treinamento, conforme o conteúdo e a duração acordados',
+    beleza: 'serviços de beleza e estética, conforme as atividades descritas',
+    fotografia: 'serviços de fotografia e filmagem, conforme o trabalho e as entregas acordadas',
+    contabilidade: 'serviços contábeis, conforme o escopo acordado e as habilitações profissionais aplicáveis',
+    personalizado: 'serviços personalizados, conforme o escopo e as condições descritas nesta proposta',
+    geral: 'prestação de serviços conforme o escopo e as condições descritas nesta proposta'
   };
 
   return textos[tipo] || textos.geral;
@@ -1188,26 +693,14 @@ function montarTexto() {
   const pagamento = valorCampo('pagamento');
   const obs = valorCampo('observacoes');
   const validade = valorCampo('validade');
-
   const tipo = document.getElementById('tipo').value;
-  const valorCampoTexto = valorCampo('valor');
-  const valor = Number(valorCampoTexto);
-
+  const valorTexto = valorCampo('valor');
+  const valor = lerValor(document.getElementById('valor'));
   const data = new Date().toLocaleDateString('pt-BR');
 
-  if (
-    !empresa ||
-    !cliente ||
-    !servico ||
-    !valorCampoTexto ||
-    !Number.isFinite(valor) ||
-    valor <= 0
-  ) {
-    alert(
-      'Preencha a empresa, o cliente, o nome do serviço ' +
-      'e um valor válido.'
-    );
-
+  if (!empresa || !cliente || !servico || !valorTexto ||
+      !Number.isFinite(valor) || valor <= 0) {
+    alert('Preencha a empresa, o cliente, o nome do serviço e um valor válido.');
     return null;
   }
 
@@ -1216,48 +709,31 @@ function montarTexto() {
     ', conforme o escopo a ser alinhado e aprovado pelas partes.';
 
   let t = 'PROPOSTA COMERCIAL DE PRESTAÇÃO DE SERVIÇOS\n\n';
-
   t += 'Data: ' + data + '\n\n';
+  t += 'PRESTADORA\n' + empresa;
 
-  t += 'PRESTADORA\n';
-  t += empresa;
-
-  if (cnpj) {
-    t += '\nCNPJ: ' + cnpj;
-  }
+  if (cnpj) t += '\nCNPJ: ' + cnpj;
 
   t += '\n\nCLIENTE\n' + cliente + '\n\n';
-
   t += '1. APRESENTAÇÃO\n\n';
   t += 'Prezados(as), ' + cliente + '.\n\n';
-
   t += 'A ' + empresa + ' apresenta esta proposta para ' +
     textoTipo(tipo) +
-    '. Nosso objetivo é oferecer um atendimento organizado ' +
-    'e alinhado às necessidades do cliente, respeitando ' +
-    'o escopo e as condições definidos entre as partes.\n\n';
+    '. Nosso objetivo é oferecer um atendimento organizado e alinhado às necessidades do cliente, respeitando o escopo e as condições definidos entre as partes.\n\n';
 
   t += '2. OBJETO DA PROPOSTA\n\n';
   t += 'Serviço: ' + servico + '.\n\n';
-
-  t += 'Descrição das atividades:\n';
-  t += resumo + '\n\n';
-
+  t += 'Descrição das atividades:\n' + resumo + '\n\n';
   t += '3. FREQUÊNCIA E PRAZO\n\n';
 
   t += frequencia
     ? 'Frequência ou duração: ' + frequencia + '.\n'
-    : 'A frequência e a duração serão definidas e confirmadas ' +
-      'entre as partes antes do início dos serviços.\n';
+    : 'A frequência e a duração serão definidas e confirmadas entre as partes antes do início dos serviços.\n';
 
-  if (prazo) {
-    t += 'Prazo ou previsão de início: ' + prazo + '.\n';
-  }
+  if (prazo) t += 'Prazo ou previsão de início: ' + prazo + '.\n';
 
   t += '\n4. INVESTIMENTO\n\n';
-
-  t += 'O valor proposto para o serviço descrito é de ' +
-    dinheiro(valor) + '.\n';
+  t += 'O valor proposto para o serviço descrito é de ' + dinheiro(valor) + '.\n';
 
   if (frequencia.toLowerCase().includes('mensal')) {
     t += 'O valor informado refere-se ao período mensal indicado.\n';
@@ -1266,35 +742,21 @@ function montarTexto() {
   if (pagamento) {
     t += 'Condições de pagamento: ' + pagamento + '.\n';
   } else {
-    t += 'A forma e a data de pagamento deverão ser acordadas ' +
-      'entre as partes antes da contratação.\n';
+    t += 'A forma e a data de pagamento deverão ser acordadas entre as partes antes da contratação.\n';
   }
 
   t += '\n5. CONDIÇÕES E OBSERVAÇÕES\n\n';
-
   t += obs
     ? obs + '\n'
-    : 'Qualquer atividade adicional, alteração de escopo, ' +
-      'fornecimento de materiais ou despesa não descrita ' +
-      'deverá ser combinada previamente entre as partes.\n';
+    : 'Qualquer atividade adicional, alteração de escopo, fornecimento de materiais ou despesa não descrita deverá ser combinada previamente entre as partes.\n';
 
-  if (validade) {
-    t += '\nValidade desta proposta: ' + validade + '.\n';
-  }
+  if (validade) t += '\nValidade desta proposta: ' + validade + '.\n';
 
   t += '\n6. CONSIDERAÇÕES FINAIS\n\n';
-
-  t += 'Permanecemos à disposição para esclarecer dúvidas ' +
-    'e alinhar os detalhes necessários. A execução dos serviços ' +
-    'dependerá da aprovação desta proposta e da confirmação ' +
-    'das condições acordadas.\n\n';
-
-  t += 'Agradecemos a oportunidade e esperamos estabelecer ' +
-    'uma parceria profissional.\n\n';
-
+  t += 'Permanecemos à disposição para esclarecer dúvidas e alinhar os detalhes necessários. A execução dos serviços dependerá da aprovação desta proposta e da confirmação das condições acordadas.\n\n';
+  t += 'Agradecemos a oportunidade e esperamos estabelecer uma parceria profissional.\n\n';
   t += 'Atenciosamente,\n' + empresa + '\n\n';
-
-  t += '____________________________________\n';
+  t += '________________________________________\n';
   t += 'Assinatura do responsável\n';
 
   return t;
@@ -1302,7 +764,6 @@ function montarTexto() {
 
 function gerarProposta() {
   const texto = montarTexto();
-
   if (!texto) return;
 
   propostaAtual = texto;
@@ -1312,14 +773,10 @@ function gerarProposta() {
 
   preview.innerHTML = '<strong>Prévia da proposta</strong><hr>' + html;
   preview.style.display = 'block';
-
   document.getElementById('pdfBtn').style.display = 'block';
   document.getElementById('whatsBtn').style.display = 'block';
 
-  preview.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
+  preview.scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
 function abrirPDF() {
@@ -1331,47 +788,30 @@ function abrirPDF() {
   const janela = window.open('', '_blank');
 
   if (!janela) {
-    alert(
-      'O navegador bloqueou a nova janela. Permita pop-ups ' +
-      'para este site e tente novamente.'
-    );
-
+    alert('O navegador bloqueou a nova janela. Permita pop-ups para este site e tente novamente.');
     return;
   }
 
   const corpo = escapar(propostaAtual).replace(/\n/g, '<br>');
 
   janela.document.write(
-    '<!DOCTYPE html>' +
-    '<html lang="pt-BR">' +
-    '<head>' +
+    '<!DOCTYPE html><html lang="pt-BR"><head>' +
     '<meta charset="UTF-8">' +
     '<meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>Proposta comercial</title>' +
     '<style>' +
-    'body{font-family:Arial,sans-serif;max-width:800px;' +
-    'margin:35px auto;padding:28px;color:#182235;' +
-    'line-height:1.65;font-size:14px}' +
+    'body{font-family:Arial,sans-serif;max-width:800px;margin:35px auto;padding:28px;color:#182235;line-height:1.65;font-size:14px}' +
     'h1{color:#087b49}' +
-    '.topo{border-bottom:3px solid #087b49;padding-bottom:15px;' +
-    'margin-bottom:25px}' +
-    'button{padding:13px 20px;background:#087b49;color:white;' +
-    'border:0;border-radius:8px;font-size:16px;margin-bottom:25px}' +
+    '.topo{border-bottom:3px solid #087b49;padding-bottom:15px;margin-bottom:25px}' +
+    'button{padding:13px 20px;background:#087b49;color:white;border:0;border-radius:8px;font-size:16px;margin-bottom:25px}' +
     '@media print{button{display:none}body{margin:0;padding:10mm}}' +
-    '</style>' +
-    '</head>' +
-    '<body>' +
+    '</style></head><body>' +
     '<button onclick="window.print()">Imprimir / Salvar em PDF</button>' +
-    '<div class="topo">' +
-    '<h1>PROPOSTA COMERCIAL</h1>' +
-    '<p>Documento preparado com o Resolve Fácil IA</p>' +
-    '</div>' +
+    '<div class="topo"><h1>PROPOSTA COMERCIAL</h1>' +
+    '<p>Documento preparado com o Resolve Fácil IA</p></div>' +
     '<div>' + corpo + '</div>' +
-    '<script>' +
-    'window.onload=function(){setTimeout(function(){window.print()},400)};' +
-    '<\/script>' +
-    '</body>' +
-    '</html>'
+    '<script>window.onload=function(){setTimeout(function(){window.print()},400)};<\/script>' +
+    '</body></html>'
   );
 
   janela.document.close();
@@ -1386,17 +826,14 @@ function compartilharWhatsApp() {
   const empresa = valorCampo('empresa');
   const cliente = valorCampo('cliente');
   const servico = valorCampo('servico');
-  const valor = Number(valorCampo('valor'));
+  const valor = lerValor(document.getElementById('valor'));
 
-  const mensagem =
-    'Olá, ' + cliente + '! Tudo bem? A ' + empresa +
+  const mensagem = 'Olá, ' + cliente + '! Tudo bem? A ' + empresa +
     ' preparou uma proposta para ' + servico +
     ', no valor de ' + dinheiro(valor) +
-    '. Estou enviando os detalhes para sua avaliação. ' +
-    'Fico à disposição para esclarecer dúvidas.';
+    '. Estou enviando os detalhes para sua avaliação. Fico à disposição para esclarecer dúvidas.';
 
   const url = 'https://wa.me/?text=' + encodeURIComponent(mensagem);
-
   window.open(url, '_blank');
 }
 
@@ -1404,8 +841,7 @@ function mostrarPremium() {
   alert(
     'Obrigado pelo seu interesse no Resolve Fácil Premium!\n\n' +
     'Os planos mensal e anual estão em preparação.\n\n' +
-    'A cobrança e a liberação dos recursos Premium ainda não ' +
-    'estão ativadas. Nenhum pagamento será realizado por este botão.'
+    'A cobrança e a liberação dos recursos Premium ainda não estão ativadas. Nenhum pagamento será realizado por este botão.'
   );
 }
 </script>
