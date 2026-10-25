@@ -1,1039 +1,1276 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101827">
-<meta name="description" content="Resolve Fácil IA: ferramentas inteligentes para MEIs e pequenos negócios.">
 <title>Resolve Fácil IA</title>
 
 <style>
 :root{
-  --bg:#101827;
-  --card:#182437;
-  --card2:#202f45;
-  --text:#f4f7fb;
-  --muted:#a8b5c8;
-  --green:#20c997;
-  --blue:#4da3ff;
-  --border:#34445b;
-  --danger:#ff7373;
+--bg:#0c1422;--panel:#162236;--panel2:#202f45;
+--border:#304158;--text:#f3f6fc;--muted:#a6b5c9;
+--green:#28d7a0;--blue:#4b91ff;--red:#ff6978;
+--yellow:#ffcc66;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-header{
-  padding:22px 16px;
-  text-align:center;
-  background:linear-gradient(135deg,#101827,#203c5a);
-  border-bottom:1px solid var(--border);
-}
-header h1{margin:0;font-size:26px}
-header p{color:var(--muted);margin:8px 0 0;font-size:14px}
-.container{max-width:1000px;margin:auto;padding:16px}
-.notice{
-  background:#163b38;
-  border:1px solid #247d69;
-  padding:14px;
-  border-radius:12px;
-  margin-bottom:16px;
-  font-size:14px;
-  line-height:1.6;
-}
-.tabs{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:8px;
-  margin-bottom:18px;
-}
-button,.tab{
-  cursor:pointer;
-  border:0;
-  border-radius:10px;
-  padding:12px;
-  font-weight:bold;
-  font-size:14px;
-}
-.tab{
-  background:var(--card2);
-  color:var(--text);
-}
-.tab.active{background:var(--green);color:#062b24}
-.panel{
-  display:none;
-  background:var(--card);
-  padding:18px;
-  border:1px solid var(--border);
-  border-radius:15px;
-  margin-bottom:18px;
-}
-.panel.active{display:block}
-h2{font-size:21px;margin-top:0}
-h3{font-size:16px;margin-top:22px}
-label{
-  display:block;
-  color:#dbe5f2;
-  font-size:13px;
-  margin:13px 0 6px;
-}
-input,select,textarea{
-  width:100%;
-  background:#0f1928;
-  color:white;
-  border:1px solid var(--border);
-  padding:12px;
-  border-radius:9px;
-  font:inherit;
-  font-size:16px;
-}
-textarea{min-height:90px;resize:vertical}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-}
-.btn{
-  width:100%;
-  margin-top:12px;
-  background:var(--green);
-  color:#062b24;
-}
-.btn-blue{background:var(--blue);color:#071b30}
-.btn-secondary{
-  background:var(--card2);
-  color:white;
-  border:1px solid var(--border);
-}
-.btn-danger{background:#562b35;color:white}
-.small{font-size:12px;color:var(--muted);line-height:1.6}
-.result{
-  background:#0f1928;
-  border:1px solid var(--border);
-  padding:15px;
-  border-radius:12px;
-  margin-top:15px;
-  line-height:1.7;
-  overflow-wrap:anywhere;
-}
-.metric{
-  background:var(--card2);
-  border:1px solid var(--border);
-  padding:15px;
-  border-radius:12px;
-}
-.metric strong{display:block;font-size:21px;margin-top:8px}
-.money{color:var(--green)}
+body{margin:0;background:var(--bg);color:var(--text);
+font:15px Arial,sans-serif;line-height:1.5}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 14px;font-weight:bold}
+button:disabled{opacity:.5;cursor:not-allowed}
+.primary{background:var(--green);color:#08251c}
+.secondary{background:var(--blue);color:white}
+.neutral{background:var(--panel2);color:white}
+.danger{background:#612b39;color:white}
+header{padding:17px;background:#08101d;border-bottom:1px solid var(--border)}
+.header-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-size:22px;font-weight:800}.logo span{color:var(--green)}
+.status{font-size:11px;color:var(--green);border:1px solid var(--green);padding:5px 9px;border-radius:20px}
+main{max-width:1200px;margin:auto;padding:16px}
+.hero{background:linear-gradient(130deg,#183b50,#19243a);padding:22px;border-radius:16px;margin-bottom:16px}
+.hero h1{margin:0 0 7px;font-size:25px}
+.hero p{margin:0;color:var(--muted)}
+.nav{display:flex;gap:7px;overflow-x:auto;padding:5px 0 15px}
+.nav button{white-space:nowrap;background:var(--panel);border:1px solid var(--border);color:white}
+.nav button.active{background:var(--green);color:#08251c}
+.page{display:none}.page.active{display:block}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:17px;margin-bottom:15px;min-width:0}
+h2{font-size:20px;margin:0 0 8px}
+h3{font-size:16px;margin:18px 0 8px}
+.muted,.hint{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric{background:var(--panel2);border-radius:11px;padding:14px;min-width:0}
+.metric small{display:block;color:var(--muted);margin-bottom:6px}
+.metric strong{font-size:19px;overflow-wrap:anywhere}
+label{display:block;margin:12px 0 5px;font-size:13px;color:#dce6f4}
+input,select,textarea{width:100%;background:#0c1728;border:1px solid var(--border);border-radius:8px;padding:11px;color:white;min-width:0}
+textarea{min-height:85px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr;gap:10px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.list{display:grid;gap:9px;margin-top:13px}
+.item{border:1px solid var(--border);background:#101b2c;padding:13px;border-radius:10px;overflow-wrap:anywhere}
+.item strong{display:block;font-size:15px}
+.item small{color:var(--muted)}
+.item .actions{margin-top:10px}
+.tag{display:inline-block;padding:4px 8px;border-radius:6px;background:var(--panel2);font-size:11px}
+.good{color:var(--green)}.bad{color:var(--red)}.warning{color:var(--yellow)}
+.notice{padding:13px;background:#102b2b;border:1px solid #276454;border-radius:9px;font-size:13px;margin-top:12px}
+.empty{color:var(--muted);padding:15px 0}
+hr{border:0;border-top:1px solid var(--border);margin:17px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:9px;border-bottom:1px solid var(--border)}
+.table-wrap{overflow-x:auto}
+.preview{background:white;color:#243044;border-radius:10px;padding:22px;overflow-wrap:anywhere}
+.preview h2,.preview h3{color:#173657}
+.preview hr{border-color:#ddd}
+.preview .muted{color:#667085}
+.preview .value{font-size:24px;font-weight:bold;color:#13765b}
+footer{text-align:center;padding:25px 12px;color:var(--muted);font-size:12px}
 .hidden{display:none!important}
-hr{border:0;border-top:1px solid var(--border);margin:20px 0}
-footer{text-align:center;color:var(--muted);padding:25px;font-size:12px}
-@media(max-width:560px){
-  .grid{grid-template-columns:1fr}
-  .container{padding:12px}
-  .panel{padding:14px}
+@media(min-width:650px){
+.grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.row.two{grid-template-columns:1fr 1fr}
+.row.three{grid-template-columns:repeat(3,1fr)}
 }
 @media print{
-  body{background:white;color:#111}
-  header,.tabs,.notice,.no-print,footer{display:none!important}
-  .container{max-width:none;padding:0}
-  .panel{display:none!important}
-  #documentoArea{display:block!important;background:white;color:#111;border:0;padding:0}
-  #documentoArea *{color:#111!important}
-  #documentoArea .result{background:white;border:0}
+body{background:white;color:#111}
+header,footer,.hero,.nav,.no-print{display:none!important}
+main{padding:0;max-width:none}
+.page{display:none!important}
+#documentPage.active{display:block!important}
+#documentPage .card{background:white;color:#111;border:0;padding:0}
+#documentPreview{display:block!important;background:white;color:#111;padding:10px}
+#documentPreview h2,#documentPreview h3{color:#173657}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>🚀 Resolve Fácil IA</h1>
-  <p>Seu negócio mais organizado, profissional e preparado para crescer.</p>
+<div class="header-inner">
+<div class="logo">Resolve Fácil <span>IA</span></div>
+<div class="status">GESTÃO DO SEU NEGÓCIO</div>
+</div>
 </header>
 
-<div class="container">
+<main>
+<section class="hero">
+<h1>Seu negócio, mais profissional. 🚀</h1>
+<p>Clientes, serviços, orçamentos, propostas, financeiro e relatórios em um só lugar.</p>
+</section>
 
-  <div class="notice">
-    <strong>👋 Bem-vindo!</strong><br>
-    Prepare orçamentos, organize seus serviços e crie propostas comerciais
-    com uma apresentação profissional, mesmo sem experiência administrativa.
-  </div>
+<nav class="nav no-print" id="navigation">
+<button class="active" data-page="dashboard">🏠 Início</button>
+<button data-page="clients">👥 Clientes</button>
+<button data-page="services">🛠️ Serviços</button>
+<button data-page="quotes">🧮 Orçamentos</button>
+<button data-page="documentPage">📄 Propostas/PDF</button>
+<button data-page="finance">💰 Financeiro</button>
+<button data-page="sales">📈 Vendas</button>
+<button data-page="reports">📊 Relatórios</button>
+<button data-page="assistant">🤖 Assistente</button>
+<button data-page="settings">⚙️ Empresa e backup</button>
+</nav>
 
-  <nav class="tabs no-print">
-    <button class="tab active" data-tab="inicio">🏠 Início</button>
-    <button class="tab" data-tab="calculadora">🧮 Calculadora</button>
-    <button class="tab" data-tab="propostas">📄 Propostas e PDF</button>
-    <button class="tab" data-tab="clientes">👥 Clientes</button>
-    <button class="tab" data-tab="financeiro">💰 Financeiro</button>
-    <button class="tab" data-tab="premium">⭐ Premium</button>
-  </nav>
-
-  <!-- INÍCIO -->
-
-  <section id="inicio" class="panel active">
-    <h2>Seu painel de negócios</h2>
-    <p class="small">
-      Escolha uma ferramenta para organizar seu trabalho e apresentar seus serviços.
-    </p>
-
-    <div class="grid">
-      <div class="metric">
-        📄 Propostas criadas
-        <strong id="totalPropostas">0</strong>
-      </div>
-      <div class="metric">
-        👥 Clientes cadastrados
-        <strong id="totalClientes">0</strong>
-      </div>
-      <div class="metric">
-        💵 Valores das propostas
-        <strong class="money" id="valorPropostas">R$ 0,00</strong>
-      </div>
-      <div class="metric">
-        🧮 Calculadora
-        <strong>Disponível</strong>
-      </div>
-    </div>
-
-    <button class="btn" onclick="abrirAba('propostas')">
-      ✨ Criar proposta profissional
-    </button>
-
-    <button class="btn btn-blue" onclick="abrirAba('calculadora')">
-      Calcular um orçamento
-    </button>
-
-    <hr>
-    <h3>💡 Dica para vender melhor</h3>
-    <p>
-      Uma boa proposta explica o que será feito, quais benefícios o cliente
-      receberá, quanto custará e quais são as condições do serviço.
-      Você não precisa escrever difícil para transmitir profissionalismo.
-    </p>
-  </section>
-
-  <!-- CALCULADORA -->
-
-  <section id="calculadora" class="panel">
-    <h2>🧮 Calculadora de preços</h2>
-
-    <label>Nome do serviço</label>
-    <input id="calcServico" placeholder="Ex.: Limpeza comercial">
-
-    <div class="grid">
-      <div>
-        <label>Custo de materiais (R$)</label>
-        <input id="calcMateriais" type="number" min="0" step="0.01" value="0">
-      </div>
-      <div>
-        <label>Mão de obra (R$)</label>
-        <input id="calcMaoObra" type="number" min="0" step="0.01" value="0">
-      </div>
-      <div>
-        <label>Outros custos (R$)</label>
-        <input id="calcOutros" type="number" min="0" step="0.01" value="0">
-      </div>
-      <div>
-        <label>Margem desejada sobre o preço (%)</label>
-        <input id="calcMargem" type="number" min="0" max="99" step="0.1" value="20">
-      </div>
-    </div>
-
-    <button class="btn" onclick="calcularPreco()">Calcular preço sugerido</button>
-
-    <div id="resultadoCalculo" class="result hidden"></div>
-
-    <button class="btn btn-blue" onclick="usarCalculoNaProposta()">
-      Usar valor na proposta
-    </button>
-
-    <p class="small">
-      A margem é calculada sobre o preço de venda. Tributos, taxas e outros
-      custos devem ser incluídos nos custos informados. O resultado é uma
-      estimativa, não uma garantia de lucro.
-    </p>
-  </section>
-
-  <!-- PROPOSTAS -->
-
-  <section id="propostas" class="panel">
-    <h2>📄 Criador inteligente de propostas</h2>
-
-    <p class="small">
-      Escolha o modo mais confortável para você. O Modo Fácil ajuda a organizar
-      suas informações. O Modo Profissional permite personalizar mais detalhes.
-    </p>
-
-    <div class="grid no-print">
-      <button class="btn" onclick="selecionarModo('facil')">😊 Modo Fácil</button>
-      <button class="btn btn-blue" onclick="selecionarModo('profissional')">
-        💼 Modo Profissional
-      </button>
-    </div>
-
-    <div id="formProposta">
-
-      <label>Nome da sua empresa ou MEI</label>
-      <input id="empresa" placeholder="Ex.: Minha Empresa Serviços">
-
-      <div class="grid">
-        <div>
-          <label>CNPJ (opcional)</label>
-          <input id="cnpj" placeholder="00.000.000/0000-00">
-        </div>
-        <div>
-          <label>Telefone da empresa</label>
-          <input id="telefoneEmpresa" placeholder="DDD + telefone">
-        </div>
-      </div>
-
-      <label>Nome do cliente ou empresa contratante</label>
-      <input id="clienteProposta" placeholder="Nome do cliente">
-
-      <div class="grid">
-        <div>
-          <label>Telefone do cliente (opcional)</label>
-          <input id="telefoneCliente" placeholder="DDD + telefone">
-        </div>
-        <div>
-          <label>Tipo de serviço</label>
-          <select id="tipoServico">
-            <option value="geral">Serviços em geral</option>
-            <option value="limpeza">Limpeza e zeladoria</option>
-            <option value="manutencao">Manutenção e reparos</option>
-            <option value="construcao">Construção e reformas</option>
-            <option value="jardinagem">Jardinagem</option>
-            <option value="tecnologia">Tecnologia e informática</option>
-            <option value="transporte">Transporte e entregas</option>
-            <option value="consultoria">Consultoria</option>
-            <option value="alimentacao">Alimentação</option>
-            <option value="outros">Outros serviços</option>
-          </select>
-        </div>
-      </div>
-
-      <label>O que você vai fazer para o cliente?</label>
-      <textarea id="descricaoServico" placeholder="Explique com suas palavras. Ex.: limpeza diária de escritórios, banheiros e áreas comuns."></textarea>
-
-      <label>Quais benefícios o cliente terá?</label>
-      <textarea id="beneficios" placeholder="Opcional. Ex.: ambientes limpos, organização e melhor conservação dos espaços."></textarea>
-
-      <div class="grid">
-        <div>
-          <label>Valor total (R$)</label>
-          <input id="valorProposta" type="number" min="0" step="0.01" placeholder="0,00">
-        </div>
-        <div>
-          <label>Frequência do serviço</label>
-          <select id="frequencia">
-            <option>Serviço único</option>
-            <option>Diário</option>
-            <option>Semanal</option>
-            <option>Quinzenal</option>
-            <option>Mensal</option>
-            <option>Conforme combinado</option>
-          </select>
-        </div>
-        <div>
-          <label>Prazo de execução</label>
-          <input id="prazo" placeholder="Ex.: 5 dias úteis">
-        </div>
-        <div>
-          <label>Validade da proposta</label>
-          <select id="validade">
-            <option>7 dias</option>
-            <option selected>15 dias</option>
-            <option>30 dias</option>
-            <option>45 dias</option>
-            <option>60 dias</option>
-          </select>
-        </div>
-      </div>
-
-      <label>Condições de pagamento</label>
-      <input id="pagamento" placeholder="Ex.: pagamento mensal por PIX ou transferência">
-
-      <div id="camposProfissionais" class="hidden">
-        <hr>
-        <h3>Personalização profissional</h3>
-
-        <label>Apresentação da empresa</label>
-        <textarea id="apresentacaoEmpresa" placeholder="Conte brevemente sobre sua empresa e sua experiência real."></textarea>
-
-        <label>Materiais e equipamentos incluídos</label>
-        <textarea id="materiais" placeholder="Informe o que está incluído no valor."></textarea>
-
-        <label>O que não está incluído</label>
-        <textarea id="naoIncluido" placeholder="Informe itens ou serviços que serão cobrados à parte, se houver."></textarea>
-
-        <label>Observações e condições adicionais</label>
-        <textarea id="observacoes" placeholder="Outras condições que o cliente precisa conhecer."></textarea>
-
-        <label>Nome do responsável pela proposta</label>
-        <input id="responsavel" placeholder="Seu nome">
-      </div>
-
-      <button class="btn" onclick="gerarProposta()">
-        ✨ Melhorar texto e gerar proposta
-      </button>
-
-      <button class="btn btn-secondary" onclick="limparProposta()">
-        Limpar formulário
-      </button>
-    </div>
-
-    <div id="documentoArea" class="result hidden">
-      <div id="documento"></div>
-
-      <div class="no-print">
-        <button class="btn" onclick="salvarPDF()">
-          📥 Imprimir / Salvar como PDF
-        </button>
-
-        <button class="btn btn-blue" onclick="compartilharWhatsApp()">
-          📲 Enviar proposta pelo WhatsApp
-        </button>
-
-        <button class="btn btn-secondary" onclick="salvarProposta()">
-          💾 Salvar no histórico
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTES -->
-
-  <section id="clientes" class="panel">
-    <h2>👥 Cadastro de clientes</h2>
-    <p class="small">Organize os contatos dos seus clientes neste aparelho.</p>
-
-    <label>Nome do cliente</label>
-    <input id="novoClienteNome" placeholder="Nome ou empresa">
-
-    <label>Telefone / WhatsApp</label>
-    <input id="novoClienteTelefone" placeholder="DDD + telefone">
-
-    <label>CNPJ ou identificação (opcional)</label>
-    <input id="novoClienteDocumento" placeholder="Documento do cliente">
-
-    <label>Observações</label>
-    <textarea id="novoClienteObs" placeholder="Informações úteis sobre o cliente"></textarea>
-
-    <button class="btn" onclick="cadastrarCliente()">Cadastrar cliente</button>
-
-    <div id="listaClientes" class="result"></div>
-  </section>
-
-  <!-- FINANCEIRO -->
-
-  <section id="financeiro" class="panel">
-    <h2>💰 Painel financeiro</h2>
-    <p class="small">
-      Registre entradas e despesas para acompanhar seus resultados.
-      Os registros ficam armazenados localmente neste navegador.
-    </p>
-
-    <div class="grid">
-      <div class="metric">
-        Entradas
-        <strong id="totalEntradas" class="money">R$ 0,00</strong>
-      </div>
-      <div class="metric">
-        Despesas
-        <strong id="totalDespesas">R$ 0,00</strong>
-      </div>
-      <div class="metric">
-        Saldo registrado
-        <strong id="saldoFinanceiro">R$ 0,00</strong>
-      </div>
-    </div>
-
-    <label>Descrição</label>
-    <input id="movDescricao" placeholder="Ex.: pagamento de cliente">
-
-    <div class="grid">
-      <div>
-        <label>Tipo de movimentação</label>
-        <select id="movTipo">
-          <option value="entrada">Entrada</option>
-          <option value="despesa">Despesa</option>
-        </select>
-      </div>
-      <div>
-        <label>Valor (R$)</label>
-        <input id="movValor" type="number" min="0.01" step="0.01" placeholder="0,00">
-      </div>
-    </div>
-
-    <button class="btn" onclick="registrarMovimentacao()">Registrar movimentação</button>
-
-    <div id="listaMovimentacoes" class="result"></div>
-
-    <p class="small">
-      Este painel é um controle básico, não uma integração bancária nem um
-      sistema de contabilidade. Faça cópias dos registros importantes.
-    </p>
-  </section>
-
-  <!-- PREMIUM -->
-
-  <section id="premium" class="panel">
-    <h2>⭐ Área Premium</h2>
-
-    <div class="result">
-      <h3>Mais organização para o seu negócio</h3>
-      <p>
-        Esta área pode receber futuramente recursos extras, como modelos
-        avançados de propostas, relatórios e personalizações.
-      </p>
-      <p class="small">
-        A área demonstrativa não ativa uma assinatura nem realiza pagamentos.
-      </p>
-    </div>
-  </section>
-
+<!-- PAINEL PRINCIPAL -->
+<section id="dashboard" class="page active">
+<div class="card">
+<h2>Painel de controle</h2>
+<p class="muted">Visão geral dos dados registrados neste navegador.</p>
+<div class="grid">
+<div class="metric"><small>Clientes</small><strong id="mClients">0</strong></div>
+<div class="metric"><small>Serviços</small><strong id="mServices">0</strong></div>
+<div class="metric"><small>Propostas</small><strong id="mQuotes">0</strong></div>
+<div class="metric"><small>Vendas concluídas</small><strong id="mSales">R$ 0,00</strong></div>
+<div class="metric"><small>Receitas registradas</small><strong id="mIncome">R$ 0,00</strong></div>
+<div class="metric"><small>Despesas registradas</small><strong id="mExpenses">R$ 0,00</strong></div>
+<div class="metric"><small>Saldo financeiro</small><strong id="mBalance">R$ 0,00</strong></div>
+<div class="metric"><small>Contas pendentes</small><strong id="mPending">0</strong></div>
+</div>
 </div>
 
+<div class="card">
+<h2>Acesso rápido</h2>
+<div class="actions">
+<button class="primary" onclick="go('clients')">Cadastrar cliente</button>
+<button class="primary" onclick="newQuote()">Novo orçamento</button>
+<button class="secondary" onclick="go('documentPage')">Criar proposta</button>
+<button class="neutral" onclick="go('finance')">Registrar movimentação</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Últimas movimentações</h2>
+<div id="recentActivity" class="list"></div>
+</div>
+
+<div class="card">
+<h2>💡 Dica para melhorar suas vendas</h2>
+<p id="dailyTip">Apresente o que está incluído no serviço, o preço, o prazo e as condições de pagamento.</p>
+<button class="neutral" onclick="changeTip()">Outra dica</button>
+</div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clients" class="page">
+<div class="card">
+<h2>Cadastro de clientes</h2>
+<p class="muted">Registre os contatos para reutilizar nos orçamentos e nas propostas.</p>
+<input type="hidden" id="clientId">
+<div class="row two">
+<div><label>Nome ou empresa *</label><input id="clientName" placeholder="Nome do cliente"></div>
+<div><label>Telefone/WhatsApp</label><input id="clientPhone" placeholder="(51) 99999-9999"></div>
+<div><label>E-mail</label><input id="clientEmail" type="email" placeholder="cliente@exemplo.com"></div>
+<div><label>CNPJ/CPF (opcional)</label><input id="clientDoc" placeholder="Documento do cliente"></div>
+</div>
+<label>Observações</label><textarea id="clientNotes" placeholder="Informações úteis sobre o cliente"></textarea>
+<div class="actions">
+<button class="primary" onclick="saveClient()">Salvar cliente</button>
+<button class="neutral" onclick="resetClient()">Limpar</button>
+</div>
+</div>
+<div class="card">
+<h2>Clientes cadastrados</h2>
+<input id="clientSearch" placeholder="Pesquisar cliente..." oninput="renderClients()">
+<div id="clientList" class="list"></div>
+</div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="services" class="page">
+<div class="card">
+<h2>Catálogo de serviços</h2>
+<p class="muted">Cadastre serviços e seus preços para preencher os orçamentos rapidamente.</p>
+<input type="hidden" id="serviceId">
+<label>Nome do serviço *</label><input id="serviceName" placeholder="Ex.: Limpeza comercial">
+<label>Descrição</label><textarea id="serviceDesc" placeholder="O que está incluído no serviço?"></textarea>
+<div class="row two">
+<div><label>Preço padrão (R$)</label><input id="servicePrice" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Unidade</label><select id="serviceUnit"><option>Serviço</option><option>Hora</option><option>Diária</option><option>Unidade</option><option>Mensal</option></select></div>
+</div>
+<div class="actions">
+<button class="primary" onclick="saveService()">Salvar serviço</button>
+<button class="neutral" onclick="resetService()">Limpar</button>
+</div>
+</div>
+<div class="card">
+<h2>Meus serviços</h2>
+<div id="serviceList" class="list"></div>
+</div>
+</section>
+
+<!-- ORÇAMENTOS -->
+<section id="quotes" class="page">
+<div class="card">
+<h2>Novo orçamento</h2>
+<p class="muted">Monte um orçamento, calcule o preço e acompanhe sua negociação.</p>
+<input type="hidden" id="quoteId">
+<label>Cliente *</label><select id="quoteClient"><option value="">Selecione um cliente</option></select>
+<label>Serviço cadastrado (opcional)</label><select id="quoteService" onchange="fillQuoteService()"><option value="">Escolher serviço</option></select>
+<label>Título do orçamento *</label><input id="quoteTitle" placeholder="Ex.: Proposta de limpeza mensal">
+<label>Descrição do serviço *</label><textarea id="quoteDesc" placeholder="Descreva o serviço, materiais e entregas"></textarea>
+<div class="row two">
+<div><label>Custos estimados (R$)</label><input id="quoteCosts" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Preço proposto (R$) *</label><input id="quoteValue" type="number" min="0" step="0.01" value="0"></div>
+<div><label>Prazo</label><input id="quoteDeadline" placeholder="Ex.: 10 dias ou mensal"></div>
+<div><label>Pagamento</label><input id="quotePayment" placeholder="Ex.: 50% na entrada"></div>
+</div>
+<label>Validade</label><input id="quoteValidity" value="15 dias">
+<label>Status</label>
+<select id="quoteStatus">
+<option value="Rascunho">Rascunho</option>
+<option value="Enviado">Enviado ao cliente</option>
+<option value="Em negociação">Em negociação</option>
+<option value="Aprovado">Aprovado</option>
+<option value="Recusado">Recusado</option>
+</select>
+<div class="actions">
+<button class="primary" onclick="saveQuote()">Salvar orçamento</button>
+<button class="secondary" onclick="quoteToDocument()">Criar proposta em PDF</button>
+<button class="neutral" onclick="resetQuote()">Novo orçamento</button>
+</div>
+</div>
+<div class="card">
+<h2>Orçamentos cadastrados</h2>
+<div id="quoteList" class="list"></div>
+</div>
+</section>
+
+<!-- DOCUMENTOS -->
+<section id="documentPage" class="page">
+<div class="card no-print">
+<h2>Proposta comercial profissional</h2>
+<p class="muted">Preencha os dados e gere uma proposta pronta para imprimir ou salvar em PDF.</p>
+<label>Usar orçamento existente</label>
+<select id="documentQuote" onchange="loadQuoteDocument()"><option value="">Preencher manualmente</option></select>
+<label>Nome da empresa</label><input id="docCompany" placeholder="Nome da sua empresa">
+<label>CNPJ</label><input id="docCnpj" placeholder="CNPJ da empresa">
+<label>Telefone/WhatsApp</label><input id="docPhone" placeholder="Telefone comercial">
+<label>Cidade</label><input id="docCity" placeholder="Cidade - Estado">
+<label>Nome do cliente</label><input id="docClient" placeholder="Cliente ou empresa">
+<label>Título da proposta</label><input id="docTitle" placeholder="Proposta comercial">
+<label>Apresentação da empresa</label><textarea id="docIntro" placeholder="Apresente sua empresa, sua experiência e seus diferenciais."></textarea>
+<label>Descrição do serviço</label><textarea id="docDescription" placeholder="Explique o que será feito, como será realizado e o que está incluído."></textarea>
+<div class="row two">
+<div><label>Valor total (R$)</label><input id="docValue" type="number" min="0" step="0.01"></div>
+<div><label>Prazo</label><input id="docDeadline" placeholder="Prazo de execução"></div>
+</div>
+<label>Condições de pagamento</label><input id="docPayment" placeholder="Forma e prazo de pagamento">
+<label>Validade da proposta</label><input id="docValidity" value="15 dias">
+<div class="actions">
+<button class="primary" onclick="generateDocument()">✨ Gerar apresentação</button>
+<button class="neutral" onclick="clearDocument()">Limpar</button>
+</div>
+</div>
+
+<div class="card">
+<div class="no-print"><h2>Prévia do documento</h2><p class="muted">Confira os dados antes de imprimir.</p></div>
+<div id="documentPreview" class="preview">
+<h2>Sua proposta comercial aparecerá aqui.</h2>
+<p>Preencha os dados e clique em gerar apresentação.</p>
+</div>
+<div class="actions no-print">
+<button class="primary" onclick="printDocument()">📄 Imprimir / Salvar PDF</button>
+<button class="secondary" onclick="shareDocument()">📲 WhatsApp</button>
+<button class="neutral" onclick="copyDocument()">Copiar texto</button>
+</div>
+<p class="hint no-print">No menu de impressão do celular, escolha a opção de salvar como PDF, se disponível.</p>
+</div>
+</section>
+
+<!-- FINANCEIRO -->
+<section id="finance" class="page">
+<div class="card">
+<h2>Controle financeiro</h2>
+<p class="muted">Registre receitas e despesas e acompanhe o saldo dos lançamentos.</p>
+<div class="grid">
+<div class="metric"><small>Receitas pagas</small><strong id="fIncome">R$ 0,00</strong></div>
+<div class="metric"><small>Despesas pagas</small><strong id="fExpense">R$ 0,00</strong></div>
+<div class="metric"><small>Saldo realizado</small><strong id="fBalance">R$ 0,00</strong></div>
+<div class="metric"><small>Valores pendentes</small><strong id="fPending">R$ 0,00</strong></div>
+</div>
+<hr>
+<h3>Novo lançamento</h3>
+<input type="hidden" id="entryId">
+<label>Tipo</label><select id="entryType"><option value="entrada">Receita / Entrada</option><option value="saida">Despesa / Saída</option></select>
+<label>Descrição *</label><input id="entryDesc" placeholder="Ex.: Pagamento do cliente">
+<div class="row two">
+<div><label>Valor (R$) *</label><input id="entryValue" type="number" min="0.01" step="0.01"></div>
+<div><label>Vencimento ou data</label><input id="entryDate" type="date"></div>
+</div>
+<label>Status</label><select id="entryStatus"><option value="Pendente">Pendente</option><option value="Pago">Pago</option></select>
+<label>Cliente relacionado (opcional)</label><select id="entryClient"><option value="">Nenhum</option></select>
+<div class="actions">
+<button class="primary" onclick="saveEntry()">Salvar lançamento</button>
+<button class="neutral" onclick="resetEntry()">Limpar</button>
+</div>
+</div>
+<div class="card">
+<h2>Histórico financeiro</h2>
+<div class="row two">
+<div><label>Filtrar por tipo</label><select id="financeFilter" onchange="renderFinance()"><option value="">Todos</option><option value="entrada">Receitas</option><option value="saida">Despesas</option></select></div>
+<div><label>Filtrar por status</label><select id="financeStatusFilter" onchange="renderFinance()"><option value="">Todos</option><option value="Pago">Pagos</option><option value="Pendente">Pendentes</option></select></div>
+</div>
+<div id="financeList" class="list"></div>
+<div class="actions"><button class="secondary" onclick="exportFinance()">Exportar financeiro CSV</button></div>
+</div>
+</section>
+
+<!-- VENDAS -->
+<section id="sales" class="page">
+<div class="card">
+<h2>Pipeline comercial</h2>
+<p class="muted">Acompanhe propostas enviadas, negociações e vendas aprovadas.</p>
+<div class="grid">
+<div class="metric"><small>Rascunhos</small><strong id="sDraft">0</strong></div>
+<div class="metric"><small>Em negociação</small><strong id="sNegotiation">0</strong></div>
+<div class="metric"><small>Aprovadas</small><strong id="sApproved">0</strong></div>
+<div class="metric"><small>Valor aprovado</small><strong id="sValue">R$ 0,00</strong></div>
+</div>
+</div>
+<div class="card">
+<h2>Acompanhar propostas</h2>
+<div id="salesList" class="list"></div>
+</div>
+</section>
+
+<!-- RELATÓRIOS -->
+<section id="reports" class="page">
+<div class="card">
+<h2>Relatórios gerenciais</h2>
+<p class="muted">Resumo baseado nos dados registrados no aplicativo.</p>
+<div class="grid">
+<div class="metric"><small>Clientes ativos no cadastro</small><strong id="rClients">0</strong></div>
+<div class="metric"><small>Propostas aprovadas</small><strong id="rApproved">0</strong></div>
+<div class="metric"><small>Taxa de aprovação</small><strong id="rRate">0%</strong></div>
+<div class="metric"><small>Ticket médio aprovado</small><strong id="rTicket">R$ 0,00</strong></div>
+<div class="metric"><small>Receitas pagas</small><strong id="rIncome">R$ 0,00</strong></div>
+<div class="metric"><small>Despesas pagas</small><strong id="rExpense">R$ 0,00</strong></div>
+<div class="metric"><small>Saldo realizado</small><strong id="rBalance">R$ 0,00</strong></div>
+<div class="metric"><small>Contas pendentes</small><strong id="rPending">R$ 0,00</strong></div>
+</div>
+<div class="actions">
+<button class="primary" onclick="exportBackup()">Baixar cópia de segurança</button>
+<button class="secondary" onclick="exportFinance()">Exportar financeiro</button>
+</div>
+</div>
+</section>
+
+<!-- ASSISTENTE -->
+<section id="assistant" class="page">
+<div class="card">
+<h2>🤖 Assistente de negócios</h2>
+<p class="muted">Ferramenta local para estruturar textos comerciais. Esta versão utiliza modelos e regras automáticas, não uma IA generativa conectada.</p>
+<label>O que você deseja preparar?</label>
+<select id="assistType">
+<option value="apresentacao">Apresentação da empresa</option>
+<option value="servico">Descrição de serviço</option>
+<option value="cobranca">Mensagem de cobrança cordial</option>
+<option value="whatsapp">Mensagem para conquistar clientes</option>
+<option value="orcamento">Explicação de orçamento</option>
+<option value="melhoria">Melhorar um texto comercial</option>
+</select>
+<label>Informações para elaborar o texto</label>
+<textarea id="assistInput" placeholder="Conte o que sua empresa faz, o serviço, o público ou o texto que deseja melhorar."></textarea>
+<div class="actions">
+<button class="primary" onclick="runAssistant()">Preparar texto</button>
+</div>
+<div id="assistResult" class="result hidden"></div>
+<div class="actions"><button class="neutral" onclick="copyAssistant()">Copiar resultado</button></div>
+</div>
+<div class="card">
+<h2>Como evoluir a inteligência artificial</h2>
+<p>Uma IA capaz de entender perguntas abertas e produzir respostas originais precisa de uma integração com um modelo de IA. A chave de acesso deve ficar protegida no servidor, nunca exposta neste arquivo público.</p>
+</div>
+</section>
+
+<!-- CONFIGURAÇÕES -->
+<section id="settings" class="page">
+<div class="card">
+<h2>Dados da empresa</h2>
+<p class="muted">Essas informações podem ser usadas nos documentos comerciais.</p>
+<label>Nome da empresa</label><input id="setCompany" placeholder="Nome empresarial">
+<label>CNPJ</label><input id="setCnpj" placeholder="CNPJ">
+<label>Telefone</label><input id="setPhone" placeholder="Telefone comercial">
+<label>E-mail</label><input id="setEmail" type="email" placeholder="E-mail comercial">
+<label>Cidade</label><input id="setCity" placeholder="Cidade - Estado">
+<label>Apresentação da empresa</label><textarea id="setAbout" placeholder="Apresente sua empresa e seus diferenciais."></textarea>
+<div class="actions"><button class="primary" onclick="saveSettings()">Salvar configurações</button></div>
+</div>
+
+<div class="card">
+<h2>Backup e restauração</h2>
+<p>Faça cópias periódicas dos dados. Eles ficam neste navegador e podem ser perdidos se os dados locais forem apagados.</p>
+<div class="actions">
+<button class="primary" onclick="exportBackup()">Exportar todos os dados</button>
+<button class="secondary" onclick="document.getElementById('backupFile').click()">Restaurar backup JSON</button>
+<input class="hidden" id="backupFile" type="file" accept=".json,application/json" onchange="importBackup(event)">
+</div>
+<div class="notice">Importante: o backup pode conter informações comerciais e contatos de clientes. Guarde-o em local seguro.</div>
+<hr>
+<h3>Limpar dados</h3>
+<p class="hint">Essa operação apaga os registros locais do aplicativo. Exporte um backup antes de continuar.</p>
+<button class="danger" onclick="clearAll()">Apagar todos os dados</button>
+</div>
+
+<div class="card">
+<h2>Sobre a plataforma</h2>
+<p>Resolve Fácil IA — ferramenta de apoio à gestão de pequenos negócios.</p>
+<p class="muted">Esta versão funciona no navegador. Não possui autenticação, sincronização entre dispositivos, emissão fiscal oficial ou integração de pagamentos. Esses recursos exigem serviços adicionais.</p>
+</div>
+</section>
+
+</main>
+
 <footer>
-  Resolve Fácil IA · Ferramentas para MEIs e pequenos negócios.
-  <br>Seus dados são armazenados neste navegador.
+Resolve Fácil IA © 2026<br>
+Gestão simplificada para MEIs e pequenos negócios.
 </footer>
 
 <script>
 "use strict";
 
-const CHAVE = "resolveFacilIA_v2";
+/* ==========================
+   BASE DE DADOS LOCAL
+========================== */
 
-let estado = carregarEstado();
-let modoAtual = "facil";
-let ultimaProposta = null;
-let ultimoCalculo = null;
+const DBKEY="resolve_facil_ia_completo_v1";
 
-function carregarEstado(){
-  try{
-    const salvo = localStorage.getItem(CHAVE);
-    if(salvo){
-      const obj = JSON.parse(salvo);
-      return {
-        clientes: Array.isArray(obj.clientes) ? obj.clientes : [],
-        propostas: Array.isArray(obj.propostas) ? obj.propostas : [],
-        movimentos: Array.isArray(obj.movimentos) ? obj.movimentos : []
-      };
-    }
-  }catch(e){}
-  return {clientes:[],propostas:[],movimentos:[]};
+function emptyDB(){
+return {
+clients:[],services:[],quotes:[],entries:[],
+settings:{company:"",cnpj:"",phone:"",email:"",city:"",about:""}
+};
 }
 
-function persistir(){
-  try{
-    localStorage.setItem(CHAVE,JSON.stringify(estado));
-  }catch(e){
-    alert("Não foi possível salvar os dados. Verifique o espaço disponível no navegador.");
-  }
+function loadDB(){
+try{
+const raw=localStorage.getItem(DBKEY);
+if(!raw)return emptyDB();
+const d=JSON.parse(raw);
+const base=emptyDB();
+return {
+clients:Array.isArray(d.clients)?d.clients:[],
+services:Array.isArray(d.services)?d.services:[],
+quotes:Array.isArray(d.quotes)?d.quotes:[],
+entries:Array.isArray(d.entries)?d.entries:[],
+settings:{...base.settings,...(d.settings||{})}
+};
+}catch(e){
+return emptyDB();
+}
 }
 
-function dinheiro(valor){
-  return Number(valor || 0).toLocaleString("pt-BR",{
-    style:"currency",
-    currency:"BRL"
-  });
+let db=loadDB();
+
+function persist(){
+try{
+localStorage.setItem(DBKEY,JSON.stringify(db));
+return true;
+}catch(e){
+alert("Não foi possível salvar. Exporte um backup e verifique o espaço disponível no navegador.");
+return false;
+}
 }
 
-function numero(id){
-  const el = document.getElementById(id);
-  const n = Number(el ? el.value : 0);
-  return Number.isFinite(n) ? n : 0;
+function id(){
+return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 }
 
-function texto(id){
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : "";
+function el(id){return document.getElementById(id)}
+function val(id){return el(id).value.trim()}
+function num(id){return Number(el(id).value||0)}
+function fmt(n){
+return Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+function esc(s){
+return String(s??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+})[c]);
+}
+function multiline(s){
+return esc(s).replace(/\n/g,"<br>");
+}
+function dateToday(){
+const d=new Date();
+return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function findById(collection,key){
+return collection.find(x=>x.id===key);
+}
+function total(list,fn){
+return list.reduce((s,x)=>s+fn(x),0);
 }
 
-function escapar(valor){
-  return String(valor ?? "").replace(/[&<>"']/g,function(c){
-    return {
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#39;"
-    }[c];
-  });
+/* ==========================
+   NAVEGAÇÃO
+========================== */
+
+function go(page){
+document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===page));
+document.querySelectorAll("#navigation button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function textoHTML(valor){
-  return escapar(valor).replace(/\n/g,"<br>");
-}
-
-function abrirAba(id){
-  document.querySelectorAll(".panel").forEach(p=>{
-    p.classList.toggle("active",p.id===id);
-  });
-
-  document.querySelectorAll(".tab").forEach(b=>{
-    b.classList.toggle("active",b.dataset.tab===id);
-  });
-
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-document.querySelectorAll("[data-tab]").forEach(b=>{
-  b.addEventListener("click",()=>abrirAba(b.dataset.tab));
+el("navigation").addEventListener("click",e=>{
+const b=e.target.closest("button[data-page]");
+if(b)go(b.dataset.page);
 });
 
-function selecionarModo(modo){
-  modoAtual = modo;
+/* ==========================
+   CLIENTES
+========================== */
 
-  document.getElementById("camposProfissionais")
-    .classList.toggle("hidden",modo!=="profissional");
-
-  alert(modo==="facil"
-    ? "Modo Fácil ativado! Responda com suas próprias palavras."
-    : "Modo Profissional ativado! Você pode personalizar os detalhes da proposta.");
+function resetClient(){
+["clientId","clientName","clientPhone","clientEmail","clientDoc","clientNotes"].forEach(k=>el(k).value="");
 }
 
-function calcularPreco(){
-  const materiais = Math.max(0,numero("calcMateriais"));
-  const maoObra = Math.max(0,numero("calcMaoObra"));
-  const outros = Math.max(0,numero("calcOutros"));
-  const margem = numero("calcMargem");
+function saveClient(){
+const name=val("clientName");
+if(!name)return alert("Informe o nome do cliente.");
 
-  if(margem<0 || margem>=100){
-    alert("Informe uma margem entre 0% e 99,9%.");
-    return;
-  }
+const key=val("clientId");
+const old=findById(db.clients,key);
+const item={
+id:key||id(),
+name,
+phone:val("clientPhone"),
+email:val("clientEmail"),
+doc:val("clientDoc"),
+notes:val("clientNotes"),
+created:old?.created||new Date().toISOString()
+};
 
-  const custos = materiais + maoObra + outros;
-  const preco = custos/(1-margem/100);
-  const lucroEstimado = preco-custos;
+if(old)db.clients=db.clients.map(x=>x.id===key?item:x);
+else db.clients.push(item);
 
-  ultimoCalculo = {
-    servico:texto("calcServico"),
-    custos,
-    preco,
-    lucroEstimado
-  };
-
-  const resultado = document.getElementById("resultadoCalculo");
-  resultado.classList.remove("hidden");
-  resultado.innerHTML = `
-    <h3>Resultado estimado</h3>
-    <p>Serviço: ${escapar(ultimoCalculo.servico || "Não informado")}</p>
-    <p>Custos informados: <strong>${dinheiro(custos)}</strong></p>
-    <p>Preço sugerido: <strong class="money">${dinheiro(preco)}</strong></p>
-    <p>Diferença estimada após os custos informados:
-    <strong>${dinheiro(lucroEstimado)}</strong></p>
-    <p class="small">Estimativa antes de despesas ou tributos que não tenham sido incluídos.</p>
-  `;
+persist();
+resetClient();
+refresh();
+alert("Cliente salvo com sucesso.");
 }
 
-function usarCalculoNaProposta(){
-  if(!ultimoCalculo){
-    calcularPreco();
-  }
-  if(!ultimoCalculo) return;
-
-  document.getElementById("valorProposta").value =
-    ultimoCalculo.preco.toFixed(2);
-
-  if(ultimoCalculo.servico){
-    document.getElementById("descricaoServico").value =
-      ultimoCalculo.servico;
-  }
-
-  abrirAba("propostas");
+function editClient(key){
+const c=findById(db.clients,key);
+if(!c)return;
+el("clientId").value=c.id;
+el("clientName").value=c.name;
+el("clientPhone").value=c.phone;
+el("clientEmail").value=c.email;
+el("clientDoc").value=c.doc;
+el("clientNotes").value=c.notes;
+go("clients");
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function melhorarDescricao(tipo,descricao,beneficios){
-  let d = descricao.trim();
-
-  if(!d){
-    return "Prestação de serviços conforme escopo e condições definidos nesta proposta.";
-  }
-
-  const inicio = {
-    limpeza:"Prestação de serviços de limpeza e conservação",
-    manutencao:"Prestação de serviços de manutenção e reparos",
-    construcao:"Execução de serviços de construção ou reforma",
-    jardinagem:"Prestação de serviços de jardinagem e conservação de áreas verdes",
-    tecnologia:"Prestação de serviços de tecnologia e informática",
-    transporte:"Prestação de serviços de transporte e entregas",
-    consultoria:"Prestação de serviços de consultoria",
-    alimentacao:"Prestação de serviços de alimentação",
-    outros:"Prestação de serviços especializados",
-    geral:"Prestação de serviços"
-  };
-
-  // Organiza o texto sem inventar capacidades ou serviços.
-  if(d.length<160 && !/^(prestação|execução|fornecimento|serviço)/i.test(d)){
-    d = inicio[tipo] + ": " + d.charAt(0).toLowerCase() + d.slice(1);
-  }
-
-  if(!/[.!?]$/.test(d)) d += ".";
-
-  if(beneficios){
-    let b = beneficios.trim();
-    if(!/[.!?]$/.test(b)) b += ".";
-    d += "\n\nBenefícios e resultados esperados: " + b;
-  }
-
-  return d;
+function deleteClient(key){
+if(db.quotes.some(q=>q.clientId===key)||db.entries.some(x=>x.clientId===key)){
+return alert("Este cliente está ligado a orçamentos ou lançamentos. Mantenha o cadastro para preservar o histórico.");
+}
+if(!confirm("Excluir este cliente?"))return;
+db.clients=db.clients.filter(x=>x.id!==key);
+persist();refresh();
 }
 
-function gerarProposta(){
-  const empresa = texto("empresa");
-  const cliente = texto("clienteProposta");
-  const descricaoOriginal = texto("descricaoServico");
-  const valor = numero("valorProposta");
-
-  if(!empresa){
-    alert("Informe o nome da sua empresa.");
-    return;
-  }
-  if(!cliente){
-    alert("Informe o nome do cliente.");
-    return;
-  }
-  if(!descricaoOriginal){
-    alert("Descreva o serviço que será prestado.");
-    return;
-  }
-  if(valor<=0){
-    alert("Informe um valor maior que zero.");
-    return;
-  }
-
-  const tipo = texto("tipoServico");
-  const descricao = melhorarDescricao(
-    tipo,
-    descricaoOriginal,
-    texto("beneficios")
-  );
-
-  const data = new Date().toLocaleDateString("pt-BR");
-  const frequencia = texto("frequencia");
-  const prazo = texto("prazo") || "A combinar entre as partes";
-  const validade = texto("validade");
-  const pagamento = texto("pagamento") || "A combinar entre as partes";
-
-  const apresentacao = texto("apresentacaoEmpresa");
-  const materiais = texto("materiais");
-  const naoIncluido = texto("naoIncluido");
-  const observacoes = texto("observacoes");
-  const responsavel = texto("responsavel");
-
-  let conteudo = `
-    <div style="font-family:Arial,sans-serif;line-height:1.65">
-      <div style="text-align:center;border-bottom:2px solid #20a67d;padding-bottom:15px">
-        <h1 style="margin-bottom:5px">${escapar(empresa)}</h1>
-        <h2 style="margin:0">PROPOSTA COMERCIAL</h2>
-        <p>Data de emissão: ${data}</p>
-      </div>
-
-      <h3>1. Apresentação</h3>
-      <p>Prezado(a) ${escapar(cliente)},</p>
-      <p>
-        Apresentamos esta proposta comercial para a prestação dos serviços
-        descritos abaixo. Nosso objetivo é oferecer uma solução organizada,
-        com escopo e condições apresentados de forma clara.
-      </p>
-      ${apresentacao ? `<p>${textoHTML(apresentacao)}</p>` : ""}
-
-      <h3>2. Descrição dos serviços</h3>
-      <p>${textoHTML(descricao)}</p>
-
-      <h3>3. Prazo e frequência</h3>
-      <p><strong>Frequência:</strong> ${escapar(frequencia)}</p>
-      <p><strong>Prazo previsto:</strong> ${escapar(prazo)}</p>
-
-      <h3>4. Investimento</h3>
-      <p style="font-size:22px;font-weight:bold">
-        Valor total: ${dinheiro(valor)}
-      </p>
-      <p><strong>Condições de pagamento:</strong> ${escapar(pagamento)}</p>
-
-      ${materiais ? `
-        <h3>5. Materiais e equipamentos</h3>
-        <p>${textoHTML(materiais)}</p>
-      ` : ""}
-
-      ${naoIncluido ? `
-        <h3>Itens não incluídos</h3>
-        <p>${textoHTML(naoIncluido)}</p>
-      ` : ""}
-
-      ${observacoes ? `
-        <h3>Observações e condições adicionais</h3>
-        <p>${textoHTML(observacoes)}</p>
-      ` : ""}
-
-      <h3>Validade da proposta</h3>
-      <p>Esta proposta é válida por ${escapar(validade)}, contados a partir da emissão.</p>
-
-      <p>
-        A execução dos serviços dependerá da aprovação desta proposta e
-        do alinhamento das condições entre as partes.
-      </p>
-
-      <div style="margin-top:45px">
-        <p>Atenciosamente,</p>
-        <p><strong>${escapar(empresa)}</strong></p>
-        ${responsavel ? `<p>Responsável: ${escapar(responsavel)}</p>` : ""}
-        ${texto("cnpj") ? `<p>CNPJ: ${escapar(texto("cnpj"))}</p>` : ""}
-        ${texto("telefoneEmpresa") ? `<p>Telefone: ${escapar(texto("telefoneEmpresa"))}</p>` : ""}
-      </div>
-
-      <div style="margin-top:55px">
-        <p>________________________________________</p>
-        <p>Assinatura do cliente</p>
-        <p>${escapar(cliente)}</p>
-      </div>
-    </div>
-  `;
-
-  ultimaProposta = {
-    id:Date.now(),
-    empresa,
-    cliente,
-    telefoneCliente:texto("telefoneCliente"),
-    descricao,
-    valor,
-    data,
-    html:conteudo
-  };
-
-  document.getElementById("documento").innerHTML = conteudo;
-  document.getElementById("documentoArea").classList.remove("hidden");
-
-  document.getElementById("documentoArea").scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+function renderClients(){
+const search=val("clientSearch").toLowerCase();
+const list=db.clients.filter(c=>(c.name+" "+c.phone+" "+c.email).toLowerCase().includes(search));
+el("clientList").innerHTML=list.length?list.map(c=>`
+<div class="item">
+<strong>${esc(c.name)}</strong>
+<small>${esc(c.phone||"Sem telefone")} · ${esc(c.email||"Sem e-mail")}</small>
+${c.doc?`<p class="muted">Documento: ${esc(c.doc)}</p>`:""}
+${c.notes?`<p>${multiline(c.notes)}</p>`:""}
+<div class="actions">
+<button class="neutral" onclick="editClient('${c.id}')">Editar</button>
+<button class="danger" onclick="deleteClient('${c.id}')">Excluir</button>
+<button class="secondary" onclick="newQuoteFor('${c.id}')">Novo orçamento</button>
+</div>
+</div>`).join(""):'<p class="empty">Nenhum cliente cadastrado.</p>';
 }
 
-function salvarPDF(){
-  if(!ultimaProposta){
-    alert("Gere uma proposta primeiro.");
-    return;
-  }
+/* ==========================
+   SERVIÇOS
+========================== */
 
-  document.title = "Proposta - " + ultimaProposta.cliente;
-  window.print();
-  setTimeout(()=>document.title="Resolve Fácil IA",1000);
+function resetService(){
+["serviceId","serviceName","serviceDesc"].forEach(k=>el(k).value="");
+el("servicePrice").value="0";
+el("serviceUnit").value="Serviço";
 }
 
-function compartilharWhatsApp(){
-  if(!ultimaProposta){
-    alert("Gere uma proposta primeiro.");
-    return;
-  }
+function saveService(){
+const name=val("serviceName"),price=num("servicePrice");
+if(!name)return alert("Informe o nome do serviço.");
+if(!Number.isFinite(price)||price<0)return alert("Informe um preço válido.");
 
-  const p = ultimaProposta;
-  const mensagem =
-`Olá, ${p.cliente}!
+const key=val("serviceId");
+const item={id:key||id(),name,desc:val("serviceDesc"),price,unit:val("serviceUnit")};
+if(key)db.services=db.services.map(x=>x.id===key?item:x);
+else db.services.push(item);
 
-Segue nossa proposta comercial.
-
-Empresa: ${p.empresa}
-
-Serviço:
-${p.descricao}
-
-Valor total: ${dinheiro(p.valor)}
-
-Data: ${p.data}
-
-A proposta completa pode ser enviada em PDF.
-
-Ficamos à disposição para esclarecer dúvidas e alinhar os detalhes.
-
-Atenciosamente,
-${p.empresa}`;
-
-  const telefone = p.telefoneCliente.replace(/\D/g,"");
-  const url = "https://wa.me/" + telefone +
-    "?text=" + encodeURIComponent(mensagem);
-
-  if(telefone.length>=10){
-    window.open(url,"_blank","noopener");
-  }else{
-    window.open(
-      "https://wa.me/?text="+encodeURIComponent(mensagem),
-      "_blank",
-      "noopener"
-    );
-  }
+persist();resetService();refresh();
+alert("Serviço salvo.");
 }
 
-function salvarProposta(){
-  if(!ultimaProposta){
-    alert("Gere uma proposta primeiro.");
-    return;
-  }
-
-  estado.propostas.unshift({
-    id:ultimaProposta.id,
-    empresa:ultimaProposta.empresa,
-    cliente:ultimaProposta.cliente,
-    valor:ultimaProposta.valor,
-    data:ultimaProposta.data,
-    descricao:ultimaProposta.descricao
-  });
-
-  persistir();
-  atualizarPainel();
-
-  alert("Proposta salva no histórico deste navegador.");
+function editService(key){
+const s=findById(db.services,key);
+if(!s)return;
+el("serviceId").value=s.id;
+el("serviceName").value=s.name;
+el("serviceDesc").value=s.desc;
+el("servicePrice").value=s.price;
+el("serviceUnit").value=s.unit;
+go("services");
 }
 
-function limparProposta(){
-  if(!confirm("Deseja limpar os campos da proposta?")) return;
-
-  [
-    "empresa","cnpj","telefoneEmpresa","clienteProposta",
-    "telefoneCliente","descricaoServico","beneficios",
-    "valorProposta","prazo","pagamento","apresentacaoEmpresa",
-    "materiais","naoIncluido","observacoes","responsavel"
-  ].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.value="";
-  });
-
-  document.getElementById("documentoArea").classList.add("hidden");
-  ultimaProposta=null;
+function deleteService(key){
+if(!confirm("Excluir este serviço do catálogo? Os orçamentos já criados serão preservados."))return;
+db.services=db.services.filter(s=>s.id!==key);
+persist();refresh();
 }
 
-function cadastrarCliente(){
-  const nome = texto("novoClienteNome");
-  const telefone = texto("novoClienteTelefone");
-
-  if(!nome){
-    alert("Informe o nome do cliente.");
-    return;
-  }
-
-  estado.clientes.unshift({
-    id:Date.now(),
-    nome,
-    telefone,
-    documento:texto("novoClienteDocumento"),
-    observacoes:texto("novoClienteObs")
-  });
-
-  persistir();
-
-  ["novoClienteNome","novoClienteTelefone","novoClienteDocumento","novoClienteObs"]
-    .forEach(id=>document.getElementById(id).value="");
-
-  atualizarPainel();
+function renderServices(){
+el("serviceList").innerHTML=db.services.length?db.services.map(s=>`
+<div class="item">
+<strong>${esc(s.name)}</strong>
+<small>${esc(s.unit)} · ${fmt(s.price)}</small>
+${s.desc?`<p>${multiline(s.desc)}</p>`:""}
+<div class="actions">
+<button class="neutral" onclick="editService('${s.id}')">Editar</button>
+<button class="secondary" onclick="newQuoteForService('${s.id}')">Usar no orçamento</button>
+<button class="danger" onclick="deleteService('${s.id}')">Excluir</button>
+</div>
+</div>`).join(""):'<p class="empty">Cadastre seus serviços para agilizar os orçamentos.</p>';
 }
 
-function excluirCliente(id){
-  if(!confirm("Deseja excluir este cliente?")) return;
+/* ==========================
+   ORÇAMENTOS
+========================== */
 
-  estado.clientes=estado.clientes.filter(c=>c.id!==id);
-  persistir();
-  atualizarPainel();
+function resetQuote(){
+["quoteId","quoteTitle","quoteDesc","quoteDeadline","quotePayment"].forEach(k=>el(k).value="");
+el("quoteClient").value="";
+el("quoteService").value="";
+el("quoteCosts").value="0";
+el("quoteValue").value="0";
+el("quoteValidity").value="15 dias";
+el("quoteStatus").value="Rascunho";
 }
 
-function registrarMovimentacao(){
-  const descricao = texto("movDescricao");
-  const valor = numero("movValor");
-  const tipo = texto("movTipo");
-
-  if(!descricao || valor<=0){
-    alert("Informe uma descrição e um valor maior que zero.");
-    return;
-  }
-
-  estado.movimentos.unshift({
-    id:Date.now(),
-    descricao,
-    valor,
-    tipo,
-    data:new Date().toLocaleDateString("pt-BR")
-  });
-
-  persistir();
-
-  document.getElementById("movDescricao").value="";
-  document.getElementById("movValor").value="";
-
-  atualizarPainel();
+function newQuote(){
+resetQuote();go("quotes");
 }
 
-function excluirMovimentacao(id){
-  if(!confirm("Deseja excluir esta movimentação?")) return;
-
-  estado.movimentos=estado.movimentos.filter(m=>m.id!==id);
-  persistir();
-  atualizarPainel();
+function newQuoteFor(clientId){
+resetQuote();
+el("quoteClient").value=clientId;
+go("quotes");
 }
 
-function atualizarPainel(){
-  document.getElementById("totalPropostas").textContent =
-    estado.propostas.length;
-
-  document.getElementById("totalClientes").textContent =
-    estado.clientes.length;
-
-  const somaPropostas = estado.propostas.reduce((s,p)=>s+Number(p.valor||0),0);
-
-  document.getElementById("valorPropostas").textContent =
-    dinheiro(somaPropostas);
-
-  const entradas=estado.movimentos
-    .filter(m=>m.tipo==="entrada")
-    .reduce((s,m)=>s+m.valor,0);
-
-  const despesas=estado.movimentos
-    .filter(m=>m.tipo==="despesa")
-    .reduce((s,m)=>s+m.valor,0);
-
-  document.getElementById("totalEntradas").textContent=dinheiro(entradas);
-  document.getElementById("totalDespesas").textContent=dinheiro(despesas);
-  document.getElementById("saldoFinanceiro").textContent=dinheiro(entradas-despesas);
-
-  const listaClientes=document.getElementById("listaClientes");
-
-  listaClientes.innerHTML=estado.clientes.length
-    ? estado.clientes.map(c=>`
-      <div style="padding:12px 0;border-bottom:1px solid #34445b">
-        <strong>${escapar(c.nome)}</strong><br>
-        <span>${escapar(c.telefone||"Sem telefone")}</span>
-        ${c.documento ? `<br><span>${escapar(c.documento)}</span>` : ""}
-        ${c.observacoes ? `<p>${textoHTML(c.observacoes)}</p>` : ""}
-        <button class="btn btn-danger" onclick="excluirCliente(${Number(c.id)})">
-          Excluir cliente
-        </button>
-      </div>
-    `).join("")
-    : "<p>Nenhum cliente cadastrado ainda.</p>";
-
-  const listaMov=document.getElementById("listaMovimentacoes");
-
-  listaMov.innerHTML=estado.movimentos.length
-    ? estado.movimentos.map(m=>`
-      <div style="padding:12px 0;border-bottom:1px solid #34445b">
-        <strong>${escapar(m.descricao)}</strong><br>
-        ${escapar(m.data)} · ${m.tipo==="entrada"?"Entrada":"Despesa"}:
-        <strong>${dinheiro(m.valor)}</strong>
-        <button class="btn btn-danger" onclick="excluirMovimentacao(${Number(m.id)})">
-          Excluir
-        </button>
-      </div>
-    `).join("")
-    : "<p>Nenhuma movimentação registrada.</p>";
+function newQuoteForService(serviceId){
+resetQuote();
+el("quoteService").value=serviceId;
+fillQuoteService();
+go("quotes");
 }
 
-atualizarPainel();
+function fillQuoteService(){
+const s=findById(db.services,val("quoteService"));
+if(!s)return;
+el("quoteTitle").value=s.name;
+el("quoteDesc").value=s.desc;
+el("quoteValue").value=s.price;
+}
+
+function saveQuote(){
+const clientId=val("quoteClient");
+const title=val("quoteTitle");
+const desc=val("quoteDesc");
+const value=num("quoteValue");
+const costs=num("quoteCosts");
+
+if(!findById(db.clients,clientId))return alert("Cadastre e selecione um cliente.");
+if(!title||!desc)return alert("Preencha o título e a descrição.");
+if(!Number.isFinite(value)||value<0||!Number.isFinite(costs)||costs<0)return alert("Confira os valores informados.");
+
+const key=val("quoteId");
+const old=findById(db.quotes,key);
+const client=findById(db.clients,clientId);
+
+const q={
+id:key||id(),
+clientId,
+clientName:client.name,
+serviceId:val("quoteService"),
+title,desc,costs,value,
+deadline:val("quoteDeadline"),
+payment:val("quotePayment"),
+validity:val("quoteValidity"),
+status:val("quoteStatus"),
+created:old?.created||new Date().toISOString(),
+updated:new Date().toISOString()
+};
+
+if(key)db.quotes=db.quotes.map(x=>x.id===key?q:x);
+else db.quotes.unshift(q);
+
+persist();resetQuote();refresh();
+alert("Orçamento salvo com sucesso.");
+}
+
+function editQuote(key){
+const q=findById(db.quotes,key);
+if(!q)return;
+el("quoteId").value=q.id;
+el("quoteClient").value=q.clientId;
+el("quoteService").value=q.serviceId||"";
+el("quoteTitle").value=q.title;
+el("quoteDesc").value=q.desc;
+el("quoteCosts").value=q.costs;
+el("quoteValue").value=q.value;
+el("quoteDeadline").value=q.deadline;
+el("quotePayment").value=q.payment;
+el("quoteValidity").value=q.validity;
+el("quoteStatus").value=q.status;
+go("quotes");
+}
+
+function deleteQuote(key){
+if(!confirm("Excluir este orçamento?"))return;
+db.quotes=db.quotes.filter(q=>q.id!==key);
+persist();refresh();
+}
+
+function quoteToDocument(key){
+const q=findById(db.quotes,key||val("quoteId"));
+if(!q&&!val("quoteTitle"))return alert("Selecione um orçamento ou preencha os dados.");
+
+if(q){
+el("documentQuote").value=q.id;
+el("docClient").value=q.clientName;
+el("docTitle").value=q.title;
+el("docDescription").value=q.desc;
+el("docValue").value=q.value;
+el("docDeadline").value=q.deadline;
+el("docPayment").value=q.payment;
+el("docValidity").value=q.validity;
+}
+go("documentPage");
+}
+
+function renderQuotes(){
+el("quoteList").innerHTML=db.quotes.length?db.quotes.map(q=>`
+<div class="item">
+<strong>${esc(q.title)}</strong>
+<small>Cliente: ${esc(q.clientName)} · ${new Date(q.created).toLocaleDateString("pt-BR")}</small>
+<p>Valor: <strong>${fmt(q.value)}</strong></p>
+<p>Status: <span class="tag">${esc(q.status)}</span></p>
+${q.costs>0?`<p class="muted">Custo informado: ${fmt(q.costs)} · Diferença antes de outros encargos: ${fmt(q.value-q.costs)}</p>`:""}
+<div class="actions">
+<button class="neutral" onclick="editQuote('${q.id}')">Editar</button>
+<button class="secondary" onclick="quoteToDocument('${q.id}')">Criar proposta</button>
+<button class="primary" onclick="setQuoteStatus('${q.id}','Aprovado')">Aprovar</button>
+<button class="danger" onclick="deleteQuote('${q.id}')">Excluir</button>
+</div>
+</div>`).join(""):'<p class="empty">Nenhum orçamento cadastrado.</p>';
+}
+
+function setQuoteStatus(key,status){
+const q=findById(db.quotes,key);
+if(!q)return;
+q.status=status;
+q.updated=new Date().toISOString();
+persist();refresh();
+}
+
+/* ==========================
+   PROPOSTAS E PDF
+========================== */
+
+let lastDocumentText="";
+
+function loadQuoteDocument(){
+const q=findById(db.quotes,val("documentQuote"));
+if(!q)return;
+el("docClient").value=q.clientName;
+el("docTitle").value=q.title;
+el("docDescription").value=q.desc;
+el("docValue").value=q.value;
+el("docDeadline").value=q.deadline;
+el("docPayment").value=q.payment;
+el("docValidity").value=q.validity;
+}
+
+function applyCompanySettings(){
+const s=db.settings;
+el("docCompany").value=s.company;
+el("docCnpj").value=s.cnpj;
+el("docPhone").value=s.phone;
+el("docCity").value=s.city;
+el("docIntro").value=s.about;
+}
+
+function generateDocument(){
+const company=val("docCompany")||db.settings.company;
+const client=val("docClient");
+const title=val("docTitle");
+const desc=val("docDescription");
+const value=num("docValue");
+
+if(!company||!client||!title||!desc){
+return alert("Preencha a empresa, o cliente, o título e a descrição.");
+}
+if(!Number.isFinite(value)||value<0)return alert("Informe um valor válido.");
+
+const cnpj=val("docCnpj");
+const phone=val("docPhone");
+const city=val("docCity");
+const intro=val("docIntro");
+const deadline=val("docDeadline")||"A combinar";
+const payment=val("docPayment")||"A combinar";
+const validity=val("docValidity")||"15 dias";
+const date=new Date().toLocaleDateString("pt-BR");
+
+const html=`
+<div class="proposal">
+<p class="muted">${esc(city||"Proposta comercial")} · ${date}</p>
+<h2>${esc(company)}</h2>
+${cnpj?`<p>CNPJ: ${esc(cnpj)}</p>`:""}
+${phone?`<p>Contato: ${esc(phone)}</p>`:""}
+<hr>
+<h2>${esc(title)}</h2>
+<p><strong>Cliente:</strong> ${esc(client)}</p>
+<h3>Apresentação</h3>
+<p>${multiline(intro||("Apresentamos nossa proposta comercial para "+client+", com foco em qualidade, organização e transparência."))}</p>
+<h3>Escopo do serviço</h3>
+<p>${multiline(desc)}</p>
+<h3>Investimento</h3>
+<p class="value">${fmt(value)}</p>
+<h3>Condições comerciais</h3>
+<p><strong>Prazo:</strong> ${esc(deadline)}</p>
+<p><strong>Pagamento:</strong> ${esc(payment)}</p>
+<p><strong>Validade:</strong> ${esc(validity)}</p>
+<h3>Nosso compromisso</h3>
+<p>Buscamos prestar um serviço organizado, com comunicação clara e atenção às condições acordadas com o cliente.</p>
+<h3>Considerações finais</h3>
+<p>Agradecemos a oportunidade e ficamos à disposição para esclarecer dúvidas e alinhar os detalhes da contratação.</p>
+<p style="margin-top:35px">Atenciosamente,</p>
+<p><strong>${esc(company)}</strong></p>
+${phone?`<p>${esc(phone)}</p>`:""}
+<hr>
+<p class="muted">Documento comercial elaborado com os dados fornecidos pelo responsável. Confira as informações antes do envio.</p>
+</div>`;
+
+el("documentPreview").innerHTML=html;
+
+lastDocumentText=[
+company,cnpj?"CNPJ: "+cnpj:"",phone?"Contato: "+phone:"",
+city,date,"",title,"Cliente: "+client,"",
+"APRESENTAÇÃO",intro||"", "SERVIÇO",desc,"",
+"VALOR: "+fmt(value),"PRAZO: "+deadline,
+"PAGAMENTO: "+payment,"VALIDADE: "+validity,
+"", "Agradecemos a oportunidade.",company
+].filter(Boolean).join("\n");
+}
+
+function clearDocument(){
+if(!confirm("Limpar os dados da proposta?"))return;
+["documentQuote","docClient","docTitle","docDescription","docValue","docDeadline","docPayment"].forEach(k=>el(k).value="");
+el("docValidity").value="15 dias";
+el("documentPreview").innerHTML="<h2>Proposta comercial</h2><p>Preencha os campos e gere sua apresentação.</p>";
+lastDocumentText="";
+}
+
+function printDocument(){
+if(!el("documentPreview").querySelector(".proposal"))return alert("Gere a proposta antes de imprimir.");
+
+const win=window.open("","_blank");
+if(!win)return alert("O navegador bloqueou a janela. Permita pop-ups para imprimir.");
+
+win.document.open();
+win.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta Comercial</title>
+<style>
+body{font-family:Arial,sans-serif;line-height:1.6;color:#243044;margin:0}
+.proposal{padding:10mm;max-width:800px;margin:auto}
+h2,h3{color:#173657}
+hr{border:0;border-top:1px solid #ddd}
+.muted{color:#667085}
+.value{font-size:24px;font-weight:bold;color:#13765b}
+@page{size:A4;margin:10mm}
+</style></head><body>${el("documentPreview").innerHTML}
+<script>window.onload=function(){setTimeout(function(){window.print()},400)};<\/script>
+</body></html>`);
+win.document.close();
+}
+
+async function copyText(text){
+try{
+await navigator.clipboard.writeText(text);
+alert("Texto copiado.");
+}catch(e){
+const t=document.createElement("textarea");
+t.value=text;document.body.appendChild(t);t.select();
+try{document.execCommand("copy");alert("Texto copiado.");}
+catch(err){alert("Não foi possível copiar automaticamente. Selecione o texto e copie manualmente.");}
+t.remove();
+}
+}
+
+function copyDocument(){
+if(!lastDocumentText)return alert("Gere a proposta primeiro.");
+copyText(lastDocumentText);
+}
+
+function shareDocument(){
+if(!lastDocumentText)return alert("Gere a proposta primeiro.");
+window.open("https://wa.me/?text="+encodeURIComponent(lastDocumentText),"_blank");
+}
+
+/* ==========================
+   FINANCEIRO
+========================== */
+
+function resetEntry(){
+["entryId","entryDesc","entryValue","entryClient"].forEach(k=>el(k).value="");
+el("entryDate").value=dateToday();
+el("entryType").value="entrada";
+el("entryStatus").value="Pendente";
+}
+
+function saveEntry(){
+const desc=val("entryDesc"),value=num("entryValue");
+if(!desc)return alert("Informe a descrição.");
+if(!Number.isFinite(value)||value<=0)return alert("Informe um valor maior que zero.");
+
+const key=val("entryId");
+const old=findById(db.entries,key);
+const item={
+id:key||id(),type:val("entryType"),desc,value,
+date:val("entryDate")||dateToday(),
+status:val("entryStatus"),
+clientId:val("entryClient"),
+created:old?.created||new Date().toISOString()
+};
+
+if(key)db.entries=db.entries.map(x=>x.id===key?item:x);
+else db.entries.unshift(item);
+
+persist();resetEntry();refresh();
+alert("Lançamento salvo.");
+}
+
+function editEntry(key){
+const x=findById(db.entries,key);
+if(!x)return;
+el("entryId").value=x.id;
+el("entryType").value=x.type;
+el("entryDesc").value=x.desc;
+el("entryValue").value=x.value;
+el("entryDate").value=x.date;
+el("entryStatus").value=x.status;
+el("entryClient").value=x.clientId||"";
+go("finance");
+}
+
+function deleteEntry(key){
+if(!confirm("Excluir este lançamento?"))return;
+db.entries=db.entries.filter(x=>x.id!==key);
+persist();refresh();
+}
+
+function toggleEntryStatus(key){
+const x=findById(db.entries,key);
+if(!x)return;
+x.status=x.status==="Pago"?"Pendente":"Pago";
+persist();refresh();
+}
+
+function renderFinance(){
+const filter=val("financeFilter");
+const statusFilter=val("financeStatusFilter");
+const list=db.entries.filter(x=>(!filter||x.type===filter)&&(!statusFilter||x.status===statusFilter));
+
+el("financeList").innerHTML=list.length?list.map(x=>`
+<div class="item">
+<strong class="${x.type==="entrada"?"good":"bad"}">${x.type==="entrada"?"+":"−"} ${fmt(x.value)}</strong>
+<p>${esc(x.desc)}</p>
+<small>${esc(x.date)} · ${x.status} · ${x.type==="entrada"?"Receita":"Despesa"}</small>
+<div class="actions">
+<button class="neutral" onclick="editEntry('${x.id}')">Editar</button>
+<button class="secondary" onclick="toggleEntryStatus('${x.id}')">${x.status==="Pago"?"Marcar pendente":"Marcar pago"}</button>
+<button class="danger" onclick="deleteEntry('${x.id}')">Excluir</button>
+</div>
+</div>`).join(""):'<p class="empty">Nenhum lançamento encontrado.</p>';
+
+const income=total(db.entries.filter(x=>x.type==="entrada"&&x.status==="Pago"),x=>x.value);
+const expense=total(db.entries.filter(x=>x.type==="saida"&&x.status==="Pago"),x=>x.value);
+const pending=total(db.entries.filter(x=>x.status==="Pendente"),x=>x.value);
+
+el("fIncome").textContent=fmt(income);
+el("fExpense").textContent=fmt(expense);
+el("fBalance").textContent=fmt(income-expense);
+el("fPending").textContent=fmt(pending);
+}
+
+/* ==========================
+   VENDAS E RELATÓRIOS
+========================== */
+
+function renderSales(){
+const statuses=["Rascunho","Enviado","Em negociação","Aprovado","Recusado"];
+el("sDraft").textContent=db.quotes.filter(q=>q.status==="Rascunho").length;
+el("sNegotiation").textContent=db.quotes.filter(q=>q.status==="Em negociação").length;
+el("sApproved").textContent=db.quotes.filter(q=>q.status==="Aprovado").length;
+el("sValue").textContent=fmt(total(db.quotes.filter(q=>q.status==="Aprovado"),q=>q.value));
+
+el("salesList").innerHTML=db.quotes.length?db.quotes.map(q=>`
+<div class="item">
+<strong>${esc(q.title)}</strong>
+<small>${esc(q.clientName)} · ${fmt(q.value)}</small>
+<p>Status atual: <span class="tag">${esc(q.status)}</span></p>
+<label>Atualizar etapa</label>
+<select onchange="setQuoteStatus('${q.id}',this.value)">
+${statuses.map(s=>`<option ${s===q.status?"selected":""}>${esc(s)}</option>`).join("")}
+</select>
+</div>`).join(""):'<p class="empty">Crie orçamentos para acompanhar suas vendas.</p>';
+}
+
+function renderReports(){
+const approved=db.quotes.filter(q=>q.status==="Aprovado");
+const considered=db.quotes.filter(q=>["Enviado","Em negociação","Aprovado","Recusado"].includes(q.status));
+const income=total(db.entries.filter(x=>x.type==="entrada"&&x.status==="Pago"),x=>x.value);
+const expense=total(db.entries.filter(x=>x.type==="saida"&&x.status==="Pago"),x=>x.value);
+const pending=total(db.entries.filter(x=>x.status==="Pendente"),x=>x.value);
+
+el("rClients").textContent=db.clients.length;
+el("rApproved").textContent=approved.length;
+el("rRate").textContent=considered.length?Math.round(approved.length/considered.length*100)+"%":"0%";
+el("rTicket").textContent=approved.length?fmt(total(approved,q=>q.value)/approved.length):fmt(0);
+el("rIncome").textContent=fmt(income);
+el("rExpense").textContent=fmt(expense);
+el("rBalance").textContent=fmt(income-expense);
+el("rPending").textContent=fmt(pending);
+}
+
+/* ==========================
+   ASSISTENTE LOCAL
+========================== */
+
+function runAssistant(){
+const input=val("assistInput");
+const type=val("assistType");
+if(!input)return alert("Escreva algumas informações para começar.");
+
+const company=db.settings.company||"Nossa empresa";
+const texts={
+apresentacao:`APRESENTAÇÃO DA EMPRESA\n\n${company} atua com foco na qualidade, organização e atendimento às necessidades de seus clientes.\n\nNosso compromisso é oferecer soluções adequadas a cada demanda, com comunicação transparente, responsabilidade e atenção aos detalhes.\n\nInformações fornecidas:\n${input}`,
+servico:`DESCRIÇÃO DO SERVIÇO\n\nServiço: ${input}\n\nA execução deverá seguir o escopo acordado com o cliente, com definição das atividades incluídas, dos materiais necessários, dos prazos e das condições de atendimento.\n\nAntes de enviar o orçamento, confirme quais atividades estão incluídas no valor apresentado.`,
+cobranca:`MENSAGEM DE COBRANÇA CORDIAL\n\nOlá, tudo bem?\n\nEstamos entrando em contato para verificar, por gentileza, a situação do pagamento referente a ${input}.\n\nCaso já tenha sido realizado, pedimos que desconsidere esta mensagem. Se precisar de alguma informação, estamos à disposição.\n\nAgradecemos pela atenção!\n${company}`,
+whatsapp:`MENSAGEM COMERCIAL\n\nOlá, tudo bem?\n\nMeu nome é ${company}. Trabalhamos com soluções para atender às necessidades de nossos clientes, sempre buscando qualidade, organização e um atendimento profissional.\n\nGostaria de apresentar nossos serviços e entender como podemos ajudar sua empresa.\n\nPodemos conversar?\n\nInformações dos serviços: ${input}`,
+orcamento:`APRESENTAÇÃO DO ORÇAMENTO\n\nPreparamos este orçamento considerando as informações fornecidas para o serviço: ${input}.\n\nO objetivo é apresentar com clareza o escopo, o investimento, os prazos e as condições comerciais, permitindo que o cliente avalie a proposta com segurança.\n\nAntes do envio, confirme os custos, os prazos e todos os itens incluídos.`,
+melhoria:`VERSÃO ORGANIZADA DO TEXTO\n\n${input}\n\nPara deixar esta comunicação mais profissional, confirme se estão claros o objetivo, o serviço oferecido, os benefícios para o cliente, os valores e as condições aplicáveis.`
+};
+
+el("assistResult").textContent=texts[type];
+el("assistResult").classList.remove("hidden");
+}
+
+function copyAssistant(){
+const result=el("assistResult").textContent;
+if(!result)return alert("Prepare um texto primeiro.");
+copyText(result);
+}
+
+/* ==========================
+   CONFIGURAÇÕES
+========================== */
+
+function loadSettings(){
+const s=db.settings;
+el("setCompany").value=s.company;
+el("setCnpj").value=s.cnpj;
+el("setPhone").value=s.phone;
+el("setEmail").value=s.email;
+el("setCity").value=s.city;
+el("setAbout").value=s.about;
+applyCompanySettings();
+}
+
+function saveSettings(){
+db.settings={
+company:val("setCompany"),
+cnpj:val("setCnpj"),
+phone:val("setPhone"),
+email:val("setEmail"),
+city:val("setCity"),
+about:val("setAbout")
+};
+persist();
+applyCompanySettings();
+refresh();
+alert("Configurações salvas.");
+}
+
+/* ==========================
+   EXPORTAÇÃO E BACKUP
+========================== */
+
+function downloadFile(name,content,type){
+const blob=new Blob([content],{type});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download=name;
+document.body.appendChild(a);a.click();a.remove();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function exportBackup(){
+const payload={
+app:"Resolve Fácil IA",
+version:1,
+exportedAt:new Date().toISOString(),
+data:db
+};
+downloadFile("resolve-facil-backup.json",JSON.stringify(payload,null,2),"application/json");
+}
+
+function importBackup(event){
+const file=event.target.files?.[0];
+if(!file)return;
+
+const reader=new FileReader();
+reader.onload=()=>{
+try{
+const parsed=JSON.parse(reader.result);
+const d=parsed.data||parsed;
+if(!d||!Array.isArray(d.clients)||!Array.isArray(d.services)||!Array.isArray(d.quotes)||!Array.isArray(d.entries)){
+throw new Error("Formato inválido");
+}
+if(!confirm("Restaurar este backup substituirá os dados atuais. Deseja continuar?"))return;
+
+db={
+clients:d.clients,
+services:d.services,
+quotes:d.quotes,
+entries:d.entries,
+settings:{...emptyDB().settings,...(d.settings||{})}
+};
+persist();loadSettings();refresh();
+alert("Backup restaurado.");
+}catch(e){
+alert("Arquivo inválido ou incompatível. Nenhum backup foi restaurado.");
+}finally{
+event.target.value="";
+}
+};
+reader.readAsText(file);
+}
+
+function csvCell(value){
+return '"'+String(value??"").replace(/"/g,'""')+'"';
+}
+
+function exportFinance(){
+const rows=[
+["Tipo","Descrição","Valor","Data","Status","Cliente"],
+...db.entries.map(x=>[
+x.type,x.desc,x.value,x.date,x.status,
+findById(db.clients,x.clientId)?.name||""
+])
+];
+const csv="\uFEFF"+rows.map(r=>r.map(csvCell).join(";")).join("\r\n");
+downloadFile("resolve-facil-financeiro.csv",csv,"text/csv;charset=utf-8");
+}
+
+function clearAll(){
+const confirmation=prompt('Para apagar todos os dados, digite APAGAR');
+if(confirmation!=="APAGAR")return;
+if(!confirm("Última confirmação: esta operação é irreversível sem backup."))return;
+
+db=emptyDB();
+persist();
+resetClient();resetService();resetQuote();resetEntry();
+loadSettings();refresh();
+alert("Dados locais apagados.");
+}
+
+/* ==========================
+   PAINEL E ATUALIZAÇÃO
+========================== */
+
+function populateSelect(id,items,placeholder,labelFn){
+const select=el(id);
+const previous=select.value;
+select.innerHTML=`<option value="">${esc(placeholder)}</option>`+
+items.map(x=>`<option value="${esc(x.id)}">${esc(labelFn(x))}</option>`).join("");
+if(items.some(x=>x.id===previous))select.value=previous;
+}
+
+function renderHome(){
+const income=total(db.entries.filter(x=>x.type==="entrada"&&x.status==="Pago"),x=>x.value);
+const expense=total(db.entries.filter(x=>x.type==="saida"&&x.status==="Pago"),x=>x.value);
+const sales=total(db.quotes.filter(q=>q.status==="Aprovado"),q=>q.value);
+
+el("mClients").textContent=db.clients.length;
+el("mServices").textContent=db.services.length;
+el("mQuotes").textContent=db.quotes.length;
+el("mSales").textContent=fmt(sales);
+el("mIncome").textContent=fmt(income);
+el("mExpenses").textContent=fmt(expense);
+el("mBalance").textContent=fmt(income-expense);
+el("mPending").textContent=db.entries.filter(x=>x.status==="Pendente").length;
+
+const activity=[
+...db.entries.map(x=>({date:x.date,title:x.desc,value:x.value,type:x.type,status:x.status})),
+...db.quotes.map(q=>({date:q.created.slice(0,10),title:q.title,value:q.value,type:"proposta",status:q.status}))
+].sort((a,b)=>String(b.date).localeCompare(String(a.date))).slice(0,6);
+
+el("recentActivity").innerHTML=activity.length?activity.map(x=>`
+<div class="item">
+<strong>${esc(x.title)}</strong>
+<small>${esc(x.date)} · ${esc(x.status)}</small>
+<p>${x.type==="saida"?"Despesa":x.type==="entrada"?"Receita": "Orçamento"}: ${fmt(x.value)}</p>
+</div>`).join(""):'<p class="empty">Suas movimentações aparecerão aqui.</p>';
+}
+
+function refresh(){
+populateSelect("quoteClient",db.clients,"Selecione um cliente",x=>x.name);
+populateSelect("quoteService",db.services,"Escolher serviço",x=>x.name);
+populateSelect("entryClient",db.clients,"Nenhum",x=>x.name);
+populateSelect("documentQuote",db.quotes,"Preencher manualmente",x=>x.title+" — "+x.clientName);
+renderClients();
+renderServices();
+renderQuotes();
+renderFinance();
+renderSales();
+renderReports();
+renderHome();
+}
+
+const tips=[
+"Calcule materiais, mão de obra, deslocamento e impostos antes de definir o preço.",
+"Descreva claramente o que está incluído no serviço e o que será cobrado separadamente.",
+"Faça acompanhamento das propostas enviadas e registre as respostas dos clientes.",
+"Apresente prazos e condições de pagamento antes de iniciar o serviço.",
+"Mantenha cópias de segurança dos dados e documentos importantes.",
+"Uma proposta profissional deve mostrar o valor, o escopo, o prazo e os dados da empresa."
+];
+let tipIndex=0;
+function changeTip(){
+tipIndex=(tipIndex+1)%tips.length;
+el("dailyTip").textContent=tips[tipIndex];
+}
+
+/* ==========================
+   INICIALIZAÇÃO
+========================== */
+
+el("entryDate").value=dateToday();
+loadSettings();
+refresh();
 </script>
 
 </body>
 </html>
-```
