@@ -5,165 +5,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#101827">
-<meta name="description" content="Resolve Fácil IA: calcule preços, organize seus serviços, prepare propostas e controle seu lucro.">
+<meta name="description" content="Resolve Fácil IA: calcule preços, organize propostas, defina metas e acompanhe o lucro do seu negócio.">
 <title>Resolve Fácil IA</title>
 
 <style>
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#182235;
-}
-header{
-  background:linear-gradient(135deg,#101827,#243b64);
-  color:white;
-  padding:25px 20px;
-}
-header h1{margin:0;font-size:26px}
-header p{color:#cbd5e1;margin-bottom:0;line-height:1.5}
-nav{
-  display:flex;
-  gap:7px;
-  padding:10px;
-  background:white;
-  position:sticky;
-  top:0;
-  z-index:10;
-  box-shadow:0 2px 8px #00000010;
-}
-nav button{
-  flex:1;
-  margin:0;
-  padding:12px 4px;
-  font-size:13px;
-  background:#e7edf5;
-  color:#182235;
-}
-nav button.active{background:#101827;color:white}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f5f9;color:#182235}
+header{background:#101827;color:white;padding:25px 20px}
+header h1{margin:0;font-size:25px}
+header p{color:#b9c5d8;margin-bottom:0;line-height:1.5}
 main{max-width:760px;margin:auto;padding:18px}
-.card{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-bottom:16px;
-  box-shadow:0 3px 15px #00000008;
-}
-h2{font-size:20px;margin-top:0}
-h3{font-size:17px}
-p{line-height:1.6}
-label{
-  display:block;
-  font-size:14px;
-  font-weight:bold;
-  margin:14px 0 6px;
-}
-input,textarea,select{
-  width:100%;
-  padding:13px;
-  border:1px solid #d5dce6;
-  border-radius:9px;
-  font-size:16px;
-  background:white;
-  color:#182235;
-}
+.card{background:white;padding:20px;border-radius:16px;margin-bottom:16px;box-shadow:0 3px 15px #00000008}
+h2{font-size:19px;margin-top:0}
+h3{font-size:16px}
+label{display:block;font-size:14px;font-weight:bold;margin:14px 0 6px}
+input,textarea,select{width:100%;padding:13px;border:1px solid #d5dce6;border-radius:9px;font-size:16px;background:white;color:#182235}
 textarea{resize:vertical}
-button{
-  width:100%;
-  border:0;
-  border-radius:10px;
-  padding:14px;
-  margin-top:15px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-  background:#16a36a;
-  color:white;
-}
+button{width:100%;border:0;border-radius:10px;padding:14px;margin-top:15px;font-size:15px;font-weight:bold;cursor:pointer;background:#16a36a;color:white}
 button:active{transform:scale(.99)}
 button.secondary{background:#e7edf5;color:#182235}
 button.premium-button{background:#fbbf24;color:#172033}
-button.dark-button{background:#101827;color:white}
+nav{display:flex;gap:6px;padding:10px;background:white;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #00000008}
+nav button{margin:0;padding:12px 4px;font-size:12px;background:#e7edf5;color:#182235;flex:1}
+nav button.active{background:#101827;color:white}
 section{display:none}
 section.active{display:block}
 .small{font-size:13px;color:#64748b;line-height:1.6}
-.badge{
-  display:inline-block;
-  background:#e8f8ef;
-  color:#087b49;
-  padding:6px 10px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-}
-.service-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
-  margin-top:16px;
-}
-.service-item{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:12px;
-  padding:13px 10px;
-}
+.badge{display:inline-block;background:#e8f8ef;color:#087b49;padding:6px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.result{background:#e8f8ef;border-radius:12px;padding:16px;margin-top:16px;line-height:1.8;display:none;overflow-wrap:anywhere}
+.price{font-size:27px;font-weight:bold;color:#087b49}
+.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.service-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:13px 10px}
 .service-item strong{display:block;margin-bottom:5px;font-size:14px}
 .service-item span{display:block;color:#64748b;font-size:12px;line-height:1.5}
-.premium-card{
-  background:linear-gradient(135deg,#101827,#243b64);
-  color:white;
-}
+.premium-card{background:linear-gradient(135deg,#101827,#243b64);color:white}
 .premium-card h2,.premium-card h3{color:white}
 .premium-card p{line-height:1.6}
-.premium-plan{
-  background:#ffffff12;
-  border:1px solid #ffffff20;
-  border-radius:12px;
-  padding:15px;
-  margin-top:12px;
-}
+.premium-plan{background:#ffffff12;border:1px solid #ffffff20;border-radius:12px;padding:15px;margin-top:12px}
 .premium-price{font-size:29px;font-weight:bold;margin:10px 0}
 .premium-price span{font-size:14px;font-weight:normal}
 .check-list{padding-left:0;list-style:none;line-height:2;font-size:14px}
-.result{
-  background:#e8f8ef;
-  border-radius:12px;
-  padding:16px;
-  margin-top:16px;
-  line-height:1.8;
-  display:none;
-  overflow-wrap:anywhere;
-}
-.price{font-size:27px;font-weight:bold;color:#087b49}
-.warning{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  color:#9a3412;
-  padding:12px;
-  border-radius:10px;
-  margin-top:12px;
-  font-size:13px;
-  line-height:1.6;
-}
-.feature-box{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:12px;
-  padding:15px;
-  margin-top:12px;
-}
+.metric{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:13px;margin:10px 0}
+.metric span{display:block;font-size:13px;color:#64748b;margin-bottom:5px}
+.metric strong{font-size:21px;color:#087b49;overflow-wrap:anywhere}
+.scenario{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #e2e8f0}
+.scenario:last-child{border-bottom:0}
+.scenario span{font-size:14px}
+.scenario strong{text-align:right;color:#087b49}
 footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
-@media(max-width:380px){
-  main{padding:12px}
-  .card{padding:16px}
-  nav{gap:4px;padding:7px}
-  nav button{font-size:11px;padding:11px 2px}
+@media(max-width:420px){
+ main{padding:12px}
+ .card{padding:16px}
+ nav{gap:4px;padding:7px}
+ nav button{font-size:11px;padding:11px 2px}
+ .service-grid{gap:7px}
 }
 @media print{
-  nav,header,footer,.no-print{display:none!important}
+ nav,header,footer,.no-print{display:none!important}
 }
 </style>
 </head>
@@ -179,7 +77,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
   <button class="active" onclick="abrir('inicio',this)">Início</button>
   <button onclick="abrir('lucro',this)">Meu lucro</button>
   <button onclick="abrir('orcamento',this)">Propostas</button>
-  <button onclick="abrir('vendas',this)">Vendas</button>
+  <button onclick="abrir('negocio',this)">Meu negócio</button>
 </nav>
 
 <main>
@@ -189,45 +87,44 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
 <section id="inicio" class="active">
 
   <div class="card">
-    <span class="badge">SEU ASSISTENTE DE NEGÓCIOS</span>
-    <h2 style="margin-top:15px">Bem-vindo ao Resolve Fácil IA!</h2>
-    <p>Uma ferramenta para ajudar você a calcular preços, preparar propostas profissionais e encontrar oportunidades para melhorar seus resultados.</p>
-    <button onclick="ir('lucro')">💰 Calcular meu preço</button>
-    <button class="secondary" onclick="ir('orcamento')">📄 Criar uma proposta</button>
-    <button class="secondary" onclick="ir('vendas')">🤝 Melhorar minhas vendas</button>
+    <span class="badge">FERRAMENTAS PARA SEU NEGÓCIO</span>
+    <h2 style="margin-top:15px">Bem-vindo ao Resolve Fácil!</h2>
+    <p>Organize seus serviços, calcule preços, prepare propostas profissionais e acompanhe suas metas financeiras.</p>
   </div>
 
   <div class="card">
-    <h2>🚀 O que você pode fazer</h2>
-    <div class="feature-box">
-      <strong>💰 Calcular preços com mais clareza</strong>
-      <p class="small">Informe os custos, estime impostos e defina a margem de lucro que deseja alcançar.</p>
-    </div>
-    <div class="feature-box">
-      <strong>📄 Apresentar propostas profissionais</strong>
-      <p class="small">Organize o escopo, os prazos, as condições e os valores dos seus serviços.</p>
-    </div>
-    <div class="feature-box">
-      <strong>💬 Responder aos clientes</strong>
-      <p class="small">Prepare mensagens para negociar, explicar seus preços e acompanhar propostas.</p>
-    </div>
+    <h2>💰 Calcule seus preços</h2>
+    <p>Descubra seus custos e calcule um preço de venda com o acréscimo desejado.</p>
+    <button onclick="ir('lucro')">Calcular meu preço</button>
+  </div>
+
+  <div class="card">
+    <h2>📄 Propostas profissionais</h2>
+    <p>Prepare propostas comerciais personalizadas para apresentar seus serviços aos clientes.</p>
+    <button onclick="ir('orcamento')">Criar proposta</button>
+  </div>
+
+  <div class="card">
+    <h2>📈 Meu Negócio Inteligente</h2>
+    <p>Planeje suas vendas, descubra quantos serviços precisa vender e simule seus resultados.</p>
+    <button onclick="ir('negocio')">Planejar minhas vendas</button>
   </div>
 
   <div class="card">
     <h2>🧰 Serviços disponíveis</h2>
-    <p class="small">O Resolve Fácil pode ser utilizado por profissionais autônomos, prestadores de serviços e pequenas empresas.</p>
+    <p class="small">O aplicativo atende diferentes tipos de prestadores de serviços e pequenos negócios.</p>
 
     <div class="service-grid">
       <div class="service-item"><strong>🧹 Limpeza</strong><span>Limpeza, conservação e zeladoria.</span></div>
       <div class="service-item"><strong>🎨 Pintura</strong><span>Pintura residencial e comercial.</span></div>
       <div class="service-item"><strong>🌿 Jardinagem</strong><span>Jardins, podas e manutenção.</span></div>
-      <div class="service-item"><strong>🔧 Reparos</strong><span>Manutenção e consertos.</span></div>
+      <div class="service-item"><strong>🔧 Reparos</strong><span>Manutenção e pequenos consertos.</span></div>
       <div class="service-item"><strong>🏗️ Construção</strong><span>Obras e reformas.</span></div>
       <div class="service-item"><strong>⚡ Elétrica</strong><span>Instalações e serviços elétricos.</span></div>
       <div class="service-item"><strong>🚿 Hidráulica</strong><span>Instalações e reparos hidráulicos.</span></div>
-      <div class="service-item"><strong>🚚 Fretes</strong><span>Transporte e mudanças.</span></div>
+      <div class="service-item"><strong>🚚 Fretes</strong><span>Transporte de cargas e mudanças.</span></div>
       <div class="service-item"><strong>❄️ Ar-condicionado</strong><span>Instalação e manutenção.</span></div>
-      <div class="service-item"><strong>🔐 Segurança</strong><span>Serviços de segurança e monitoramento.</span></div>
+      <div class="service-item"><strong>🔐 Segurança</strong><span>Segurança e monitoramento.</span></div>
       <div class="service-item"><strong>🏢 Portaria</strong><span>Portaria e controle de acesso.</span></div>
       <div class="service-item"><strong>💻 Tecnologia</strong><span>Informática e suporte técnico.</span></div>
       <div class="service-item"><strong>📊 Consultoria</strong><span>Serviços profissionais.</span></div>
@@ -235,54 +132,59 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
       <div class="service-item"><strong>🚗 Automotivo</strong><span>Serviços para veículos.</span></div>
       <div class="service-item"><strong>💄 Beleza</strong><span>Beleza e estética.</span></div>
       <div class="service-item"><strong>📷 Fotografia</strong><span>Fotografia e filmagem.</span></div>
-      <div class="service-item"><strong>📚 Aulas</strong><span>Aulas e treinamentos.</span></div>
+      <div class="service-item"><strong>📚 Aulas</strong><span>Aulas particulares e treinamento.</span></div>
       <div class="service-item"><strong>🎉 Eventos</strong><span>Organização de eventos.</span></div>
-      <div class="service-item"><strong>📝 Outros serviços</strong><span>Propostas personalizadas.</span></div>
+      <div class="service-item"><strong>📝 Outros serviços</strong><span>Serviços personalizados.</span></div>
     </div>
 
-    <button onclick="ir('orcamento')">Criar orçamento para meu serviço</button>
+    <button onclick="ir('orcamento')">Criar orçamento de um serviço</button>
   </div>
 
   <div class="card premium-card">
-    <span class="badge" style="background:#fef3c7;color:#92400e">⭐ PLANO PREMIUM</span>
+    <span class="badge" style="background:#fef3c7;color:#92400e">⭐ CONHEÇA O PREMIUM</span>
     <h2 style="margin-top:16px">Seu negócio pode ir mais longe!</h2>
-    <p style="color:#dbeafe">Estamos preparando recursos avançados para ajudar pequenos empresários a organizar e desenvolver seus negócios.</p>
+    <p style="color:#dbeafe">Estamos preparando ferramentas avançadas para ajudar pequenos empresários e profissionais a organizar seus negócios.</p>
+
     <ul class="check-list">
       <li>✅ Mais modelos de propostas</li>
       <li>✅ Histórico de orçamentos</li>
       <li>✅ Organização de clientes</li>
       <li>✅ Controle de despesas</li>
       <li>✅ Relatórios de resultados</li>
-      <li>✅ Ferramentas avançadas de vendas</li>
+      <li>✅ Ferramentas avançadas para empresas</li>
     </ul>
+
     <div class="premium-plan">
       <h3>Plano mensal</h3>
       <div class="premium-price">R$ 19,90 <span>/ mês</span></div>
       <p class="small" style="color:#dbeafe">Preço sugerido para o futuro plano Premium.</p>
     </div>
+
     <div class="premium-plan">
       <h3>Plano anual</h3>
       <div class="premium-price">R$ 149,90 <span>/ ano</span></div>
       <p class="small" style="color:#dbeafe">Preço inicial sugerido para o plano anual.</p>
     </div>
-    <button class="premium-button" onclick="mostrarPremium()">Conhecer o Premium</button>
-    <p style="font-size:12px;color:#dbeafe">Os planos estão em preparação. A cobrança e a liberação de recursos Premium ainda não estão ativadas.</p>
+
+    <button class="premium-button" onclick="mostrarPremium()">Conhecer o plano Premium</button>
+    <p style="font-size:12px;color:#dbeafe">Os planos estão em preparação. A cobrança e a liberação dos recursos Premium ainda não estão ativadas.</p>
   </div>
 
   <div class="card">
-    <h2>ℹ️ Sobre o aplicativo</h2>
-    <p class="small">Esta versão utiliza cálculos e modelos executados no próprio navegador. Ela ainda não está conectada a uma inteligência artificial externa, a uma conta de usuário ou a um sistema de pagamentos.</p>
+    <h2>🤝 Feito para pequenos negócios</h2>
+    <p>Uma ferramenta prática para prestadores de serviços, autônomos, MEIs e pequenas empresas.</p>
+    <p class="small">Esta versão utiliza modelos e cálculos executados no próprio aplicativo. Ela ainda não está conectada a uma inteligência artificial externa.</p>
   </div>
 
 </section>
 
-<!-- CALCULADORA FINANCEIRA -->
+<!-- CALCULADORA DE PREÇOS -->
 
 <section id="lucro">
 
   <div class="card">
-    <h2>💰 Calculadora inteligente de preços</h2>
-    <p class="small">Informe os custos do serviço, a estimativa de impostos e a margem de lucro que deseja obter sobre o preço de venda.</p>
+    <h2>💰 Calculadora de preços e lucros</h2>
+    <p class="small">Informe os custos e o percentual que deseja acrescentar sobre eles.</p>
 
     <label for="materiais">Materiais (R$)</label>
     <input id="materiais" type="number" min="0" step="0.01" placeholder="Ex.: 150">
@@ -293,29 +195,16 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
     <label for="transporte">Transporte (R$)</label>
     <input id="transporte" type="number" min="0" step="0.01" placeholder="Ex.: 30">
 
-    <label for="outros">Outras despesas e custos fixos atribuídos ao serviço (R$)</label>
-    <input id="outros" type="number" min="0" step="0.01" placeholder="Ex.: 50">
+    <label for="outros">Outras despesas (R$)</label>
+    <input id="outros" type="number" min="0" step="0.01" placeholder="Ex.: 20">
 
-    <label for="impostos">Impostos e taxas estimados sobre a venda (%)</label>
-    <input id="impostos" type="number" min="0" max="99.99" step="0.1" value="0" placeholder="Ex.: 6">
+    <label for="margem">Acréscimo sobre os custos (%)</label>
+    <input id="margem" type="number" min="0" max="10000" step="1" value="30">
 
-    <label for="margemLucro">Margem de lucro desejada sobre a venda (%)</label>
-    <input id="margemLucro" type="number" min="0" max="99.99" step="0.1" value="20" placeholder="Ex.: 20">
-
-    <button onclick="calcular()">Calcular preço recomendado</button>
-
+    <button onclick="calcular()">Calcular preço sugerido</button>
     <div id="resultado" class="result" aria-live="polite"></div>
 
-    <div class="warning">
-      <strong>Atenção:</strong> informe todos os custos relevantes, incluindo encargos, despesas administrativas e outros custos aplicáveis. A estimativa de impostos deve refletir sua situação tributária. Em caso de dúvida, consulte um contador.
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📘 Como funciona o cálculo?</h2>
-    <p class="small">O aplicativo divide o custo total pela parcela do preço que sobra depois de descontar os percentuais de impostos e lucro desejado.</p>
-    <p class="small"><strong>Exemplo:</strong> com R$ 1.000 de custos, 6% de impostos estimados e 20% de margem desejada, o preço recomendado será aproximadamente R$ 1.351,35.</p>
-    <p class="small">O resultado é uma estimativa matemática, não uma garantia de lucro real.</p>
+    <p class="small">Acréscimo sobre custos não é o mesmo que margem de lucro sobre o preço de venda. Inclua impostos, encargos e outras despesas nos custos quando aplicável.</p>
   </div>
 
 </section>
@@ -325,8 +214,8 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
 <section id="orcamento">
 
   <div class="card">
-    <h2>✨ Criador de propostas comerciais</h2>
-    <p class="small">Preencha os dados e prepare uma proposta organizada para seu cliente.</p>
+    <h2>✨ Proposta comercial inteligente</h2>
+    <p class="small">Preencha os dados e confira as informações antes de enviar ao cliente.</p>
 
     <label for="empresa">Nome da sua empresa</label>
     <input id="empresa" placeholder="Ex.: Clean Zeladoria">
@@ -370,7 +259,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
     <input id="servico" placeholder="Ex.: Limpeza das áreas comuns">
 
     <label for="descricao">O que será feito?</label>
-    <textarea id="descricao" rows="4" placeholder="Descreva as atividades que serão realizadas."></textarea>
+    <textarea id="descricao" rows="4" placeholder="Descreva o trabalho que será realizado."></textarea>
 
     <label for="frequencia">Frequência ou duração</label>
     <input id="frequencia" placeholder="Ex.: de segunda a sexta ou serviço único">
@@ -394,52 +283,75 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
 
     <div id="preview" class="result" style="background:#f8fafc;border:1px solid #dce4ee" aria-live="polite"></div>
 
-    <button id="pdfBtn" class="secondary" style="display:none" onclick="abrirPDF()">Imprimir ou salvar proposta em PDF</button>
-
-    <button id="whatsBtn" class="secondary" style="display:none" onclick="compartilharWhatsApp()">Preparar mensagem para WhatsApp</button>
+    <button id="pdfBtn" class="secondary no-print" style="display:none" onclick="abrirPDF()">Imprimir ou salvar proposta em PDF</button>
+    <button id="whatsBtn" class="secondary no-print" style="display:none" onclick="compartilharWhatsApp()">Preparar mensagem para WhatsApp</button>
   </div>
 
 </section>
 
-<!-- ASSISTENTE DE VENDAS -->
+<!-- MEU NEGÓCIO INTELIGENTE -->
 
-<section id="vendas">
+<section id="negocio">
 
   <div class="card">
-    <h2>🤝 Assistente de vendas</h2>
-    <p class="small">Escolha uma situação para preparar uma mensagem profissional. Este recurso usa modelos prontos; ainda não é uma IA externa.</p>
-
-    <label for="situacao">Qual é a situação?</label>
-    <select id="situacao">
-      <option value="caro">O cliente achou o preço caro</option>
-      <option value="retorno">Quero perguntar se o cliente analisou a proposta</option>
-      <option value="apresentacao">Quero apresentar minha empresa</option>
-      <option value="desconto">O cliente pediu desconto</option>
-      <option value="aprovacao">Quero confirmar a aprovação da proposta</option>
-      <option value="agradecimento">Quero agradecer ao cliente</option>
-    </select>
-
-    <label for="nomeClienteVenda">Nome do cliente (opcional)</label>
-    <input id="nomeClienteVenda" placeholder="Ex.: Carlos">
-
-    <label for="nomeEmpresaVenda">Nome da empresa (opcional)</label>
-    <input id="nomeEmpresaVenda" placeholder="Ex.: Minha Empresa">
-
-    <label for="detalhesVenda">Detalhes adicionais (opcional)</label>
-    <textarea id="detalhesVenda" rows="3" placeholder="Ex.: proposta enviada na semana passada"></textarea>
-
-    <button onclick="gerarMensagemVenda()">Preparar mensagem</button>
-
-    <div id="resultadoVenda" class="result" aria-live="polite"></div>
-
-    <button id="copiarVendaBtn" class="secondary" style="display:none" onclick="copiarMensagem()">Copiar mensagem</button>
-
-    <button id="whatsVendaBtn" style="display:none" onclick="enviarMensagemVenda()">Enviar pelo WhatsApp</button>
+    <span class="badge">PLANEJAMENTO FINANCEIRO</span>
+    <h2 style="margin-top:15px">📈 Meu Negócio Inteligente</h2>
+    <p>Defina uma meta de lucro e descubra quantas vendas precisa realizar. Os resultados são estimativas com base nos valores informados.</p>
   </div>
 
   <div class="card">
-    <h2>💡 Uma dica para negociar</h2>
-    <p class="small">Antes de oferecer desconto, confira se o preço ainda cobre seus custos e mantém uma margem adequada. Se necessário, negocie o escopo do serviço em vez de reduzir o preço sem planejamento.</p>
+    <h2>🎯 Minha meta mensal</h2>
+    <p class="small">Informe quanto deseja lucrar, quanto ganha aproximadamente em cada serviço e quantos dias úteis trabalha por mês.</p>
+
+    <label for="metaLucro">Quanto quero lucrar por mês (R$)</label>
+    <input id="metaLucro" type="number" min="0.01" step="0.01" placeholder="Ex.: 6000">
+
+    <label for="lucroVenda">Lucro estimado por serviço vendido (R$)</label>
+    <input id="lucroVenda" type="number" min="0.01" step="0.01" placeholder="Ex.: 150">
+
+    <label for="diasUteis">Dias úteis de trabalho por mês</label>
+    <input id="diasUteis" type="number" min="1" max="31" step="1" value="22">
+
+    <button onclick="calcularMeta()">Calcular minha meta</button>
+    <div id="resultadoMeta" class="result" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h2>💵 Simulador de faturamento e lucro</h2>
+    <p class="small">Informe o preço cobrado e o custo de cada serviço. Veja como os resultados mudam com diferentes quantidades de vendas.</p>
+
+    <label for="precoSim">Preço de venda por serviço (R$)</label>
+    <input id="precoSim" type="number" min="0" step="0.01" placeholder="Ex.: 300">
+
+    <label for="custoSim">Custo total por serviço (R$)</label>
+    <input id="custoSim" type="number" min="0" step="0.01" placeholder="Ex.: 180">
+
+    <button onclick="simularLucro()">Simular meus resultados</button>
+    <div id="resultadoSim" class="result" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h2>💡 Dicas para organizar seu negócio</h2>
+
+    <div class="metric">
+      <span>1. Conheça seus custos</span>
+      <p class="small">Inclua materiais, mão de obra, transporte, impostos e outras despesas antes de definir seu preço.</p>
+    </div>
+
+    <div class="metric">
+      <span>2. Acompanhe as vendas</span>
+      <p class="small">Registre suas vendas e compare o resultado real com a meta que você definiu.</p>
+    </div>
+
+    <div class="metric">
+      <span>3. Proteja sua margem</span>
+      <p class="small">Antes de oferecer descontos, calcule quanto restará depois de pagar os custos.</p>
+    </div>
+
+    <div class="metric">
+      <span>4. Planeje os próximos meses</span>
+      <p class="small">Considere períodos de menor movimento e mantenha uma reserva para despesas inesperadas.</p>
+    </div>
   </div>
 
 </section>
@@ -454,8 +366,7 @@ footer{text-align:center;padding:20px;color:#64748b;font-size:12px}
 'use strict';
 
 let propostaAtual = '';
-let precoCalculado = null;
-let mensagemVendaAtual = '';
+let ultimoPrecoCalculado = null;
 
 function abrir(id, botao) {
   document.querySelectorAll('main section').forEach(function(secao) {
@@ -474,15 +385,17 @@ function abrir(id, botao) {
   if (botao) {
     botao.classList.add('active');
   } else {
-    const mapa = {
+    const indices = {
       inicio: 0,
       lucro: 1,
       orcamento: 2,
-      vendas: 3
+      negocio: 3
     };
     const botoes = document.querySelectorAll('nav button');
-    if (botoes[mapa[id]] ) {
-      botoes[mapa[id]].classList.add('active');
+    const indice = indices[id];
+
+    if (indice !== undefined && botoes[indice]) {
+      botoes[indice].classList.add('active');
     }
   }
 
@@ -500,90 +413,13 @@ function dinheiro(valor) {
   });
 }
 
-function calcular() {
-  const ids = ['materiais','mao','transporte','outros'];
-
-  const valores = ids.map(function(id) {
-    const campo = document.getElementById(id);
-    return campo.value === '' ? 0 : Number(campo.value);
-  });
-
-  const impostosCampo = document.getElementById('impostos');
-  const margemCampo = document.getElementById('margemLucro');
-
-  const impostos = impostosCampo.value === ''
-    ? 0 : Number(impostosCampo.value);
-
-  const margem = margemCampo.value === ''
-    ? 0 : Number(margemCampo.value);
-
-  if (
-    valores.some(function(v) {
-      return !Number.isFinite(v) || v < 0;
-    }) ||
-    !Number.isFinite(impostos) ||
-    !Number.isFinite(margem) ||
-    impostos < 0 ||
-    margem < 0 ||
-    impostos >= 100 ||
-    margem >= 100 ||
-    impostos + margem >= 100
-  ) {
-    alert('Confira os valores. A soma dos impostos e da margem desejada deve ser menor que 100%.');
-    return;
-  }
-
-  const custo = valores.reduce(function(a,b) {
-    return a + b;
-  },0);
-
-  if (custo <= 0) {
-    alert('Informe pelo menos um custo maior que zero.');
-    return;
-  }
-
-  const parcelaDisponivel = 1 - (impostos + margem) / 100;
-  const preco = custo / parcelaDisponivel;
-  const valorImpostos = preco * impostos / 100;
-  const lucro = preco - custo - valorImpostos;
-  const margemReal = lucro / preco * 100;
-
-  precoCalculado = preco;
-
-  const resultado = document.getElementById('resultado');
-  resultado.style.display = 'block';
-
-  resultado.innerHTML =
-    '<strong>Custo total:</strong> ' + dinheiro(custo) +
-    '<br><strong>Impostos e taxas estimados:</strong> ' + dinheiro(valorImpostos) +
-    '<br><strong>Lucro estimado:</strong> ' + dinheiro(lucro) +
-    '<br><strong>Margem sobre a venda:</strong> ' +
-    margemReal.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:2}) + '%' +
-    '<br><strong>Preço recomendado:</strong>' +
-    '<div class="price">' + dinheiro(preco) + '</div>' +
-    '<p class="small">Estimativa com base nos valores informados. O resultado real depende de todos os custos e tributos aplicáveis.</p>' +
-    '<button type="button" onclick="usarPrecoNaProposta()">Usar este preço na proposta</button>';
-
-  resultado.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-function usarPrecoNaProposta() {
-  if (precoCalculado === null || !Number.isFinite(precoCalculado)) {
-    alert('Calcule o preço recomendado primeiro.');
-    return;
-  }
-
-  document.getElementById('valor').value = precoCalculado.toFixed(2);
-  ir('orcamento');
-  alert('Preço preenchido na proposta. Confira os dados e complete os campos restantes antes de gerar o documento.');
-}
-
-function valorCampo(id) {
-  return document.getElementById(id).value.trim();
+function numeroCampo(id) {
+  const campo = document.getElementById(id);
+  return campo.value.trim() === '' ? 0 : Number(campo.value);
 }
 
 function escapar(texto) {
-  return String(texto).replace(/[&<>"']/g,function(c) {
+  return String(texto).replace(/[&<>"']/g, function(c) {
     return {
       '&':'&amp;',
       '<':'&lt;',
@@ -594,6 +430,142 @@ function escapar(texto) {
   });
 }
 
+function calcular() {
+  const ids = ['materiais','mao','transporte','outros'];
+  const valores = ids.map(numeroCampo);
+  const margem = numeroCampo('margem');
+
+  if (
+    valores.some(function(v) {
+      return !Number.isFinite(v) || v < 0;
+    }) ||
+    !Number.isFinite(margem) ||
+    margem < 0 ||
+    margem > 10000
+  ) {
+    alert('Confira os valores informados. Use apenas números iguais ou maiores que zero.');
+    return;
+  }
+
+  const custo = valores.reduce(function(a,b) {
+    return a+b;
+  },0);
+
+  const lucro = custo*margem/100;
+  const preco = custo+lucro;
+  ultimoPrecoCalculado = preco;
+
+  const resultado = document.getElementById('resultado');
+  resultado.style.display = 'block';
+
+  resultado.innerHTML =
+    '<strong>Custo total:</strong> '+dinheiro(custo)+
+    '<br><strong>Acréscimo estimado:</strong> '+dinheiro(lucro)+
+    '<br><strong>Preço sugerido:</strong>'+
+    '<div class="price">'+dinheiro(preco)+'</div>'+
+    '<button type="button" onclick="usarPrecoNaProposta()">Usar este preço na proposta</button>';
+
+  resultado.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function usarPrecoNaProposta() {
+  if (ultimoPrecoCalculado === null || !Number.isFinite(ultimoPrecoCalculado)) {
+    alert('Calcule o preço primeiro.');
+    return;
+  }
+
+  if (ultimoPrecoCalculado <= 0) {
+    alert('O preço calculado precisa ser maior que zero.');
+    return;
+  }
+
+  document.getElementById('valor').value = ultimoPrecoCalculado.toFixed(2);
+  ir('orcamento');
+  document.getElementById('valor').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function calcularMeta() {
+  const meta = numeroCampo('metaLucro');
+  const lucroPorVenda = numeroCampo('lucroVenda');
+  const dias = numeroCampo('diasUteis');
+
+  if (
+    !Number.isFinite(meta) || meta <= 0 ||
+    !Number.isFinite(lucroPorVenda) || lucroPorVenda <= 0 ||
+    !Number.isFinite(dias) || dias < 1 || dias > 31 ||
+    !Number.isInteger(dias)
+  ) {
+    alert('Informe uma meta mensal e um lucro por serviço maiores que zero. Os dias úteis devem ser um número inteiro entre 1 e 31.');
+    return;
+  }
+
+  const vendasMes = Math.ceil(meta/lucroPorVenda);
+  const vendasDia = vendasMes/dias;
+  const lucroProjetado = vendasMes*lucroPorVenda;
+
+  const resultado = document.getElementById('resultadoMeta');
+  resultado.style.display = 'block';
+
+  resultado.innerHTML =
+    '<h3>Seu plano de vendas</h3>'+
+    '<div class="metric"><span>Meta de lucro desejada</span><strong>'+dinheiro(meta)+'</strong></div>'+
+    '<div class="metric"><span>Serviços que precisa vender no mês</span><strong>'+vendasMes+'</strong></div>'+
+    '<div class="metric"><span>Média de vendas por dia útil</span><strong>'+vendasDia.toLocaleString('pt-BR',{maximumFractionDigits:2})+'</strong></div>'+
+    '<div class="metric"><span>Lucro estimado com essa quantidade</span><strong>'+dinheiro(lucroProjetado)+'</strong></div>'+
+    '<p class="small">Para alcançar a meta, você precisa vender aproximadamente '+vendasMes+' serviço(s) no mês. A média diária é uma referência; alguns dias podem ter mais vendas e outros menos.</p>';
+
+  resultado.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function simularLucro() {
+  const preco = numeroCampo('precoSim');
+  const custo = numeroCampo('custoSim');
+
+  if (
+    !Number.isFinite(preco) || preco <= 0 ||
+    !Number.isFinite(custo) || custo < 0
+  ) {
+    alert('Informe um preço de venda maior que zero e um custo igual ou maior que zero.');
+    return;
+  }
+
+  const lucroUnitario = preco-custo;
+  const quantidades = [10,20,50,100];
+  const resultado = document.getElementById('resultadoSim');
+
+  let html = '<h3>Veja os cenários de vendas</h3>';
+
+  html += '<div class="metric"><span>Lucro ou prejuízo por serviço</span><strong style="color:'+
+    (lucroUnitario >= 0 ? '#087b49' : '#b91c1c')+'">'+dinheiro(lucroUnitario)+'</strong></div>';
+
+  if (lucroUnitario < 0) {
+    html += '<p class="small"><strong>Atenção:</strong> o custo por serviço está maior que o preço de venda. Cada venda gera prejuízo antes de considerar outras despesas.</p>';
+  }
+
+  quantidades.forEach(function(qtd) {
+    const faturamento = preco*qtd;
+    const custos = custo*qtd;
+    const lucro = lucroUnitario*qtd;
+
+    html += '<div class="scenario">'+
+      '<span><strong>'+qtd+' serviços</strong><br>'+
+      '<small>Faturamento: '+dinheiro(faturamento)+'<br>'+
+      'Custos: '+dinheiro(custos)+'</small></span>'+
+      '<strong style="color:'+(lucro >= 0 ? '#087b49' : '#b91c1c')+'">'+dinheiro(lucro)+'<br><small>lucro estimado</small></strong>'+
+      '</div>';
+  });
+
+  html += '<p class="small">A simulação considera que todas as vendas têm o mesmo preço e custo. O resultado não inclui despesas fixas ou impostos que não tenham sido incluídos no custo informado.</p>';
+
+  resultado.innerHTML = html;
+  resultado.style.display = 'block';
+  resultado.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function valorCampo(id) {
+  return document.getElementById(id).value.trim();
+}
+
 function textoTipo(tipo) {
   const textos = {
     limpeza:'serviços de limpeza, conservação e zeladoria, com atenção à higiene e à organização dos ambientes',
@@ -602,10 +574,10 @@ function textoTipo(tipo) {
     manutencao:'serviços de manutenção e reparos conforme os itens descritos',
     construcao:'serviços de obras ou construção limitados às atividades descritas',
     tecnologia:'serviços de tecnologia, informática e suporte técnico',
-    consultoria:'serviços profissionais de consultoria',
-    eletrica:'serviços elétricos respeitando as normas aplicáveis',
-    hidraulica:'serviços hidráulicos e reparos',
-    frete:'serviços de frete e mudanças conforme trajeto e condições combinadas',
+    consultoria:'serviços profissionais de consultoria conforme o escopo descrito',
+    eletrica:'serviços elétricos conforme as atividades descritas e as normas aplicáveis',
+    hidraulica:'serviços hidráulicos e reparos conforme o escopo definido',
+    frete:'serviços de frete e mudanças conforme os itens e as condições combinadas',
     lavagem:'serviços de lavagem e higienização',
     ar:'serviços de instalação ou manutenção de ar-condicionado',
     seguranca:'serviços relacionados à segurança e ao monitoramento',
@@ -613,12 +585,12 @@ function textoTipo(tipo) {
     administrativo:'serviços administrativos conforme as atividades definidas',
     marketing:'serviços de marketing e publicidade',
     eventos:'serviços de organização de eventos',
-    automotivo:'serviços automotivos conforme as atividades descritas',
+    automotivo:'serviços automotivos conforme os reparos descritos',
     transporte:'serviços de transporte conforme o trajeto e as condições acordadas',
     aulas:'serviços de aulas particulares e treinamento',
     beleza:'serviços de beleza e estética',
     fotografia:'serviços de fotografia e filmagem',
-    contabilidade:'serviços contábeis conforme o escopo e as habilitações aplicáveis',
+    contabilidade:'serviços contábeis conforme o escopo e as habilitações profissionais aplicáveis',
     personalizado:'serviços personalizados conforme o escopo descrito',
     geral:'prestação de serviços conforme o escopo e as condições descritas'
   };
@@ -640,71 +612,65 @@ function montarTexto() {
   const tipo = document.getElementById('tipo').value;
   const valorTexto = valorCampo('valor');
   const valor = Number(valorTexto);
+  const data = new Date().toLocaleDateString('pt-BR');
 
-  if (
-    !empresa ||
-    !cliente ||
-    !servico ||
-    !valorTexto ||
-    !Number.isFinite(valor) ||
-    valor <= 0
-  ) {
+  if (!empresa || !cliente || !servico || !valorTexto ||
+      !Number.isFinite(valor) || valor <= 0) {
     alert('Preencha a empresa, o cliente, o nome do serviço e um valor válido.');
     return null;
   }
 
-  const data = new Date().toLocaleDateString('pt-BR');
   const resumo = descricao ||
-    'Execução de ' + servico.toLowerCase() +
+    'Execução de '+servico.toLowerCase()+
     ', conforme o escopo a ser alinhado e aprovado pelas partes.';
 
   let t = 'PROPOSTA COMERCIAL DE PRESTAÇÃO DE SERVIÇOS\n\n';
-  t += 'Data: ' + data + '\n\n';
-  t += 'PRESTADORA\n' + empresa;
+  t += 'Data: '+data+'\n\n';
+  t += 'PRESTADORA\n'+empresa;
 
-  if (cnpj) t += '\nCNPJ: ' + cnpj;
+  if (cnpj) t += '\nCNPJ: '+cnpj;
 
-  t += '\n\nCLIENTE\n' + cliente + '\n\n';
+  t += '\n\nCLIENTE\n'+cliente+'\n\n';
   t += '1. APRESENTAÇÃO\n\n';
-  t += 'Prezados(as), ' + cliente + '.\n\n';
-  t += 'A ' + empresa + ' apresenta esta proposta para ' +
-    textoTipo(tipo) + '. Nosso objetivo é oferecer um atendimento ' +
-    'organizado e alinhado às necessidades do cliente, respeitando ' +
-    'o escopo e as condições definidos entre as partes.\n\n';
+  t += 'Prezados(as), '+cliente+'.\n\n';
+  t += 'A '+empresa+' apresenta esta proposta para '+textoTipo(tipo)+
+    '. Nosso objetivo é oferecer um atendimento organizado e alinhado '+
+    'às necessidades do cliente, respeitando o escopo e as condições '+
+    'definidos entre as partes.\n\n';
 
   t += '2. OBJETO DA PROPOSTA\n\n';
-  t += 'Serviço: ' + servico + '.\n\n';
-  t += 'Descrição das atividades:\n' + resumo + '\n\n';
+  t += 'Serviço: '+servico+'.\n\n';
+  t += 'Descrição das atividades:\n'+resumo+'\n\n';
 
   t += '3. FREQUÊNCIA E PRAZO\n\n';
   t += frequencia
-    ? 'Frequência ou duração: ' + frequencia + '.\n'
-    : 'A frequência e a duração serão definidas entre as partes antes do início dos serviços.\n';
+    ? 'Frequência ou duração: '+frequencia+'.\n'
+    : 'A frequência e a duração serão definidas e confirmadas entre as partes antes do início dos serviços.\n';
 
-  if (prazo) t += 'Prazo ou previsão de início: ' + prazo + '.\n';
+  if (prazo) t += 'Prazo ou previsão de início: '+prazo+'.\n';
 
   t += '\n4. INVESTIMENTO\n\n';
-  t += 'O valor proposto para o serviço descrito é de ' + dinheiro(valor) + '.\n';
+  t += 'O valor proposto para o serviço descrito é de '+dinheiro(valor)+'.\n';
 
   if (frequencia.toLowerCase().includes('mensal')) {
     t += 'O valor informado refere-se ao período mensal indicado.\n';
   }
 
   t += pagamento
-    ? 'Condições de pagamento: ' + pagamento + '.\n'
+    ? 'Condições de pagamento: '+pagamento+'.\n'
     : 'A forma e a data de pagamento deverão ser acordadas entre as partes antes da contratação.\n';
 
   t += '\n5. CONDIÇÕES E OBSERVAÇÕES\n\n';
   t += obs
-    ? obs + '\n'
+    ? obs+'\n'
     : 'Qualquer atividade adicional, alteração de escopo, fornecimento de materiais ou despesa não descrita deverá ser combinada previamente entre as partes.\n';
 
-  if (validade) t += '\nValidade desta proposta: ' + validade + '.\n';
+  if (validade) t += '\nValidade desta proposta: '+validade+'.\n';
 
   t += '\n6. CONSIDERAÇÕES FINAIS\n\n';
   t += 'Permanecemos à disposição para esclarecer dúvidas e alinhar os detalhes necessários. A execução dos serviços dependerá da aprovação desta proposta e da confirmação das condições acordadas.\n\n';
   t += 'Agradecemos a oportunidade e esperamos estabelecer uma parceria profissional.\n\n';
-  t += 'Atenciosamente,\n' + empresa + '\n\n';
+  t += 'Atenciosamente,\n'+empresa+'\n\n';
   t += '____________________________________\nAssinatura do responsável\n';
 
   return t;
@@ -717,8 +683,7 @@ function gerarProposta() {
   propostaAtual = texto;
 
   const preview = document.getElementById('preview');
-  preview.innerHTML = '<strong>Prévia da proposta</strong><hr>' +
-    escapar(texto).replace(/\n/g,'<br>');
+  preview.innerHTML = '<strong>Prévia da proposta</strong><hr>'+escapar(texto).replace(/\n/g,'<br>');
   preview.style.display = 'block';
 
   document.getElementById('pdfBtn').style.display = 'block';
@@ -733,7 +698,7 @@ function abrirPDF() {
     return;
   }
 
-  const janela = window.open('','_blank');
+  const janela = window.open('', '_blank');
 
   if (!janela) {
     alert('O navegador bloqueou a nova janela. Permita pop-ups para este site e tente novamente.');
@@ -743,22 +708,21 @@ function abrirPDF() {
   const corpo = escapar(propostaAtual).replace(/\n/g,'<br>');
 
   janela.document.write(
-    '<!DOCTYPE html><html lang="pt-BR"><head>' +
-    '<meta charset="UTF-8">' +
-    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-    '<title>Proposta comercial</title>' +
-    '<style>' +
-    'body{font-family:Arial,sans-serif;max-width:800px;margin:35px auto;padding:28px;color:#182235;line-height:1.65;font-size:14px}' +
-    'h1{color:#087b49}' +
-    '.topo{border-bottom:3px solid #087b49;padding-bottom:15px;margin-bottom:25px}' +
-    'button{padding:13px 20px;background:#087b49;color:white;border:0;border-radius:8px;font-size:16px;margin-bottom:25px}' +
-    '@media print{button{display:none}body{margin:0;padding:10mm}}' +
-    '</style></head><body>' +
-    '<button onclick="window.print()">Imprimir / Salvar em PDF</button>' +
-    '<div class="topo"><h1>PROPOSTA COMERCIAL</h1>' +
-    '<p>Documento preparado com o Resolve Fácil IA</p></div>' +
-    '<div>' + corpo + '</div>' +
-    '<script>window.onload=function(){setTimeout(function(){window.print()},400)};<\/script>' +
+    '<!DOCTYPE html><html lang="pt-BR"><head>'+
+    '<meta charset="UTF-8">'+
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+    '<title>Proposta comercial</title>'+
+    '<style>'+
+    'body{font-family:Arial,sans-serif;max-width:800px;margin:35px auto;padding:28px;color:#182235;line-height:1.65;font-size:14px}'+
+    'h1{color:#087b49}.topo{border-bottom:3px solid #087b49;padding-bottom:15px;margin-bottom:25px}'+
+    'button{padding:13px 20px;background:#087b49;color:white;border:0;border-radius:8px;font-size:16px;margin-bottom:25px}'+
+    '@media print{button{display:none}body{margin:0;padding:10mm}}'+
+    '</style></head><body>'+
+    '<button onclick="window.print()">Imprimir / Salvar em PDF</button>'+
+    '<div class="topo"><h1>PROPOSTA COMERCIAL</h1>'+
+    '<p>Documento preparado com o Resolve Fácil IA</p></div>'+
+    '<div>'+corpo+'</div>'+
+    '<script>window.onload=function(){setTimeout(function(){window.print()},400)};<\/script>'+
     '</body></html>'
   );
 
@@ -776,105 +740,18 @@ function compartilharWhatsApp() {
   const servico = valorCampo('servico');
   const valor = Number(valorCampo('valor'));
 
-  const mensagem =
-    'Olá, ' + cliente + '! Tudo bem? A ' + empresa +
-    ' preparou uma proposta para ' + servico +
-    ', no valor de ' + dinheiro(valor) +
-    '. Estou enviando os detalhes para sua avaliação. ' +
+  const mensagem = 'Olá, '+cliente+'! Tudo bem? A '+empresa+
+    ' preparou uma proposta para '+servico+', no valor de '+
+    dinheiro(valor)+'. Estou enviando os detalhes para sua avaliação. '+
     'Fico à disposição para esclarecer dúvidas.';
 
-  window.open(
-    'https://wa.me/?text=' + encodeURIComponent(mensagem),
-    '_blank'
-  );
-}
-
-function gerarMensagemVenda() {
-  const situacao = document.getElementById('situacao').value;
-  const cliente = valorCampo('nomeClienteVenda') || 'tudo bem';
-  const empresa = valorCampo('nomeEmpresaVenda');
-  const detalhes = valorCampo('detalhesVenda');
-  const assinatura = empresa ? '\n\nAtenciosamente,\n' + empresa : '';
-
-  const mensagens = {
-    caro:
-      'Olá, ' + cliente + '! Obrigado pelo retorno. Entendo que o investimento é um ponto importante. Nossa proposta busca oferecer qualidade, organização e um serviço alinhado ao que foi combinado. Se desejar, podemos conversar sobre o escopo para avaliar uma alternativa que faça sentido para ambas as partes.' + assinatura,
-
-    retorno:
-      'Olá, ' + cliente + '! Tudo bem? Gostaria de saber se você conseguiu analisar a proposta que encaminhei. Estou à disposição para esclarecer dúvidas e ajustar os detalhes necessários.' + assinatura,
-
-    apresentacao:
-      'Olá, ' + cliente + '! Gostaria de apresentar nossos serviços e entender melhor suas necessidades. Trabalhamos para oferecer um atendimento profissional, organizado e alinhado ao que cada cliente precisa. Se for conveniente, podemos conversar sobre uma possível parceria.' + assinatura,
-
-    desconto:
-      'Olá, ' + cliente + '! Obrigado pelo retorno. Podemos avaliar alternativas para adequar a proposta ao seu orçamento. Para manter a qualidade do serviço, podemos conversar sobre ajustes no escopo, na frequência ou nas condições de pagamento.' + assinatura,
-
-    aprovacao:
-      'Olá, ' + cliente + '! Tudo bem? Gostaria de confirmar se podemos avançar com a proposta apresentada. Após a aprovação, alinhamos os próximos passos, os prazos e as condições combinadas.' + assinatura,
-
-    agradecimento:
-      'Olá, ' + cliente + '! Agradecemos pela oportunidade e pela confiança. Ficamos à disposição para atender você e esclarecer qualquer dúvida sobre nossos serviços.' + assinatura
-  };
-
-  mensagemVendaAtual = mensagens[situacao] || mensagens.retorno;
-
-  if (detalhes) {
-    mensagemVendaAtual += '\n\nObservação: ' + detalhes;
-  }
-
-  const resultado = document.getElementById('resultadoVenda');
-  resultado.style.display = 'block';
-  resultado.innerHTML =
-    '<strong>Mensagem sugerida</strong><hr>' +
-    escapar(mensagemVendaAtual).replace(/\n/g,'<br>');
-
-  document.getElementById('copiarVendaBtn').style.display = 'block';
-  document.getElementById('whatsVendaBtn').style.display = 'block';
-
-  resultado.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-async function copiarMensagem() {
-  if (!mensagemVendaAtual) {
-    alert('Prepare uma mensagem primeiro.');
-    return;
-  }
-
-  try {
-    await navigator.clipboard.writeText(mensagemVendaAtual);
-    alert('Mensagem copiada! Você já pode colar onde desejar.');
-  } catch (erro) {
-    const area = document.createElement('textarea');
-    area.value = mensagemVendaAtual;
-    document.body.appendChild(area);
-    area.select();
-    const sucesso = document.execCommand('copy');
-    area.remove();
-
-    if (sucesso) {
-      alert('Mensagem copiada! Você já pode colar onde desejar.');
-    } else {
-      alert('Não foi possível copiar automaticamente. Selecione o texto da mensagem e copie manualmente.');
-    }
-  }
-}
-
-function enviarMensagemVenda() {
-  if (!mensagemVendaAtual) {
-    alert('Prepare uma mensagem primeiro.');
-    return;
-  }
-
-  window.open(
-    'https://wa.me/?text=' + encodeURIComponent(mensagemVendaAtual),
-    '_blank'
-  );
+  window.open('https://wa.me/?text='+encodeURIComponent(mensagem),'_blank');
 }
 
 function mostrarPremium() {
   alert(
-    'Obrigado pelo seu interesse no Resolve Fácil Premium!\n\n' +
-    'Os planos mensal e anual estão em preparação.\n\n' +
+    'Obrigado pelo seu interesse no Resolve Fácil Premium!\n\n'+
+    'Os planos mensal e anual estão em preparação.\n\n'+
     'A cobrança e a liberação dos recursos Premium ainda não estão ativadas. Nenhum pagamento será realizado por este botão.'
   );
 }
